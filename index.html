@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Count.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="container col-xxl-8 px-4">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-12 col-sm-4 col-lg-4">
+                <img src="images/hero.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="400"
+                    height="400" loading="lazy">
+            </div>
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold lh-1 mb-3 hero-title">Your Paye <span
+                        style="color: #40916c;">Counting</span> Calculator</h1>
+                <p class="lead hero-text">Calculate PAYE and More Fast and Easy.</p>
+                <a href="#incomeForm">Get started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-wrapper" id="incomeForm">
+        <section class="container my-section pt-5 pb-5">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <p>Calculate your take home pay</p>
+                    <hr>
+                    <form>
+                        <div class="d-flex align-items-center">
+                            <div class="input-group col-md-8 mr-2">
+                                <input type="text" class="form-control"
+                                    aria-label="Text input with dropdown button" id="incomeInput"
+                                    placeholder="$ Insert Income">
+                                <select class="custom-select" id="timePeriodSelect">
+                                    <option value="Year" selected>Year</option>
+                                    <option value="Hour">Hour</option>
+                                    <option value="Week">Week</option>
+                                    <option value="Fortnight">Fortnight</option>
+                                    <option value="Month">Month</option>
+                                </select>
+                            </div>
+                            <div class="form-check mr-4">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="kiwisaverCheckbox">
+                                <label class="form-check-label" for="kiwisaverCheckbox">
+                                    Kiwisaver
+                                </label>
+                            </div>
+                            <div class="form-check mr-4">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="studentLoanCheckbox">
+                                <label class="form-check-label"
+                                    for="studentLoanCheckbox">
+                                    Student Loan
+                                </label>
+                            </div>
+                            <button type="submit" class="btn custom-button">Submit</button>
+                            <a href="#table-div" id="anchorLink"></a>
+                        </div>
+                    </form>
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Warning!</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    You need to insert an income before you can calculate!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="container mt-5" id="table-div">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Hour</th>
+                    <th>Week</th>
+                    <th>Fortnight</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="circle-indicator-black"></div> Gross Pay</td>
+                    <td id="grossPayHour">…</td>
+                    <td id="grossPayWeek">…</td>
+                    <td id="grossPayFortnight">…</td>
+                    <td id="grossPayMonth">…</td>
+                    <td id="grossPayYear">…</td>
+                </tr>
+                <tr>
+                    <td><div class="circle-indicator-red"></div> PAYE</td>
+                    <td id="payePerHour">…</td>
+                    <td id="payePerWeek">…</td>
+                    <td id="payePerFortnight">…</td>
+                    <td id="payePerMonth">…</td>
+                    <td id="payePerYear">…</td>
+                </tr>
+                <tr>
+                    <td><div class="circle-indicator-orange"></div> ACC</td>
+                    <td id="accPerHour">…</td>
+                    <td id="accPerWeek">…</td>
+                    <td id="accPerFortnight">…</td>
+                    <td id="accPerMonth">…</td>
+                    <td id="accPerYear">…</td>
+                </tr>
+                <tr>
+                    <td><div class="circle-indicator-yellow"></div> KiwiSaver</td>
+                    <td id="kiwisaverPerHour">…</td>
+                    <td id="kiwisaverPerWeek">…</td>
+                    <td id="kiwisaverPerFortnight">…</td>
+                    <td id="kiwisaverPerMonth">…</td>
+                    <td id="kiwisaverPerYear">…</td>
+                </tr>
+                <tr>
+                    <td><div class="circle-indicator-green"></div> Student Loan</td>
+                    <td id="studentLoanPerHour">…</td>
+                    <td id="studentLoanPerWeek">…</td>
+                    <td id="studentLoanPerFortnight">…</td>
+                    <td id="studentLoanPerMonth">…</td>
+                    <td id="studentLoanPerYear">…</td>
+                </tr>
+                <tr>
+                    <td><div class="circle-indicator-blue"></div> Take Home Pay</td>
+                    <td id="takeHomePayPerHour">…</td>
+                    <td id="takeHomePayPerWeek">…</td>
+                    <td id="takeHomePayPerFortnight">…</td>
+                    <td id="takeHomePayPerMonth">…</td>
+                    <td id="takeHomePayPerYear">…</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="result-container">
+        <div class="container pt-5 pb-5">
+            <div class="row">
+                <div class="col-md-6"> <!-- This will take up half the container width -->
+                    <canvas id="incomeBreakdownChart" width="5" height="5"></canvas>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center"> <!-- This will also take up half the container width -->
+                    <div class="text-container">
+                        <h1 id="taxcode"></h1>
+                        <p>TAX CODE</p>
+                        <hr>
+                        <h1 id="takeHomePayGross"></h1>
+                        <p>TAKE HOME PAY / GROSS</p>
+                        <hr>
+                        <h1 id="takeHomePayWeek"></h1>
+                        <p>TAKE HOME PAY / WEEK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-3 my-4">
+        <hr>
+        <p class="text-center text-muted">&copy; 2023 Count.co.nz; Designed by <span><a
+                    href="https://nz.linkedin.com/in/jason-duong-4794b224a"
+                    style="font-family: Arial, Helvetica, sans-serif;">Jason Duong</a></span></p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

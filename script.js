@@ -1,0 +1,139 @@
+document.getElementById("incomeForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    $('#anchorLink').trigger('click');
+
+    const incomeValue = parseFloat(document.getElementById("incomeInput").value);
+    const timePeriodSelected = document.getElementById('timePeriodSelect').value;
+    const kiwisaverChecked = document.getElementById("kiwisaverCheckbox").checked;
+    const studentLoanCheckbox = document.getElementById("studentLoanCheckbox").checked;
+
+    if (isNaN(incomeValue)) {
+        $('#myModal').modal('show');
+        return;
+    }
+
+    if (timePeriodSelected == "Hour") {
+        incomeValue *= 40 * 52;
+    } else if (timePeriodSelected == "Week") {
+        incomeValue *= 52;
+    } else if (timePeriodSelected == "Fortnight") {
+        incomeValue *= 26;
+    } else if (timePeriodSelected == "Month") {
+        incomeValue *= 12;
+    }
+
+    const taxAmount = calculateIncomeTax(incomeValue);
+    const kiwiSaverDeduction = kiwisaverChecked ? incomeValue * 0.03 : 0;
+    const studentLoanRepaymentThreshold = 22828;
+    const studentLoanDeduction = studentLoanCheckbox && incomeValue > studentLoanRepaymentThreshold ? (incomeValue - studentLoanRepaymentThreshold) * 0.12 : 0;
+    const accDeduction = calculateAccDeduction(incomeValue);
+    const takeHomePay = incomeValue - taxAmount - kiwiSaverDeduction - studentLoanDeduction - accDeduction;
+
+    updateDisplayValues({
+        gross: incomeValue,
+        tax: taxAmount,
+        acc: accDeduction,
+        kiwisaver: kiwiSaverDeduction,
+        studentLoan: studentLoanDeduction,
+        takeHome: takeHomePay
+    });
+
+    const taxcode = "M";
+    const takeHomePayGross = formatNumberWithCommas((takeHomePay / incomeValue) * 100) + "%";
+    const takeHomePayWeek = "$" + formatNumberWithCommas(takeHomePay / 52);
+
+    generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay, taxcode, takeHomePayGross, takeHomePayWeek);
+});
+
+function calculateIncomeTax(income) {
+    let tax;
+    if (income <= 14000) {
+        tax = income * 0.105;
+    } else if (income <= 48000) {
+        tax = 14000 * 0.105 + (income - 14000) * 0.175;
+    } else if (income <= 70000) {
+        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (income - 48000) * 0.3;
+    } else if (income <= 180000) {
+        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (70000 - 48000) * 0.3 + (income - 70000) * 0.33;
+    } else {
+        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (70000 - 48000) * 0.3 + (180000 - 70000) * 0.33 + (income - 180000) * 0.39;
+    }
+    return tax;
+}
+
+function calculateAccDeduction(incomeValue) {
+    const accDeductionRate = 1.53;
+    const accIncomeCap = 139384;
+
+    return (Math.min(incomeValue, accIncomeCap) * accDeductionRate) / 100;
+}
+
+function formatNumberWithCommas(number, decimalPlaces = 2) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        minimumFractionDigits: decimalPlaces,
+        maximumFractionDigits: decimalPlaces
+    }).format(number);
+}
+
+function updateDisplayValues(values) {
+    const periods = {
+        hour: 52 * 40,
+        week: 52,
+        fortnight: 26,
+        month: 12,
+        year: 1,
+    };
+
+    for (let period in periods) {
+        document.getElementById(`grossPay${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.gross / periods[period]);
+        document.getElementById(`payePer${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.tax / periods[period]);
+        document.getElementById(`accPer${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.acc / periods[period]);
+        document.getElementById(`kiwisaverPer${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.kiwisaver / periods[period]);
+        document.getElementById(`studentLoanPer${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.studentLoan / periods[period]);
+        document.getElementById(`takeHomePayPer${capitalizeFirstLetter(period)}`).textContent = formatNumberWithCommas(values.takeHome / periods[period]);
+    }
+}
+
+let myPieChart;
+
+function generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay, taxcode, takeHomePayGross, takeHomePayWeek) {
+    if (myPieChart) {
+        myPieChart.destroy();
+    }
+
+    document.querySelector(".result-container").style.display = "flex";
+
+    let ctx = document.getElementById('incomeBreakdownChart').getContext('2d');
+    myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["PAYE", "Kiwisaver", "Student Loan", "ACC", "Take Home Pay"],
+            datasets: [{
+                data: [taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay],
+                backgroundColor: ["#ff5733", "#f8961e", "#f9c74f", "#90be6d", "#577590"]
+            }]
+        }
+    });
+
+    document.getElementById("taxcode").textContent = taxcode;
+    document.getElementById("takeHomePayGross").textContent = takeHomePayGross;
+    document.getElementById("takeHomePayWeek").textContent = takeHomePayWeek;
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+$(document).ready(function(){
+    $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if(target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top
+            }, 1000);
+        }
+    });
+});

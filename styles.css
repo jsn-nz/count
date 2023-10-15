@@ -1,0 +1,125 @@
+/* Global Styles */
+body {
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #40916c;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center;  
+}
+
+/* Hero Section Styles */
+.hero-title {
+    font-family: domine;
+    font-weight: bold;
+}
+
+.hero-text {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar Text Styles */
+.navbar-brand {
+    color: white !important;
+    font-size: 32px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: white !important;
+}
+
+.navbar .nav-link {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Card Styles */
+.card {
+    background-color: #f5f5f5; /* Light gray color */
+}
+
+/* Background Wrapper Styles */
+.bg-wrapper {
+    background-color: #d8f3dc; /* Soft blue color */
+}
+
+/* Custom Button Styles */
+.custom-button {
+    background-color: #40916c; /* Background color */
+    color: #ffffff; /* Text color */
+    /* Add other styles as needed */
+}
+
+.custom-button:hover {
+    background-color: #337557; /* Hover background color */
+    color: #ffffff; /* Text color on hover */
+    /* Add other styles as needed */
+}
+
+/* Custom Card Styles */
+.custom-card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+}
+
+/* Input Field Styles */
+#incomeInput {
+    width: 65%; /* Adjust the width as needed */
+}
+
+/* Circle Indicator Styles */
+.circle-indicator-black,
+.circle-indicator-red,
+.circle-indicator-orange,
+.circle-indicator-yellow,
+.circle-indicator-green,
+.circle-indicator-blue {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* Create a circle */
+    display: inline-block;
+    margin-left: 5px; /* Add space between the text and the indicator */
+}
+
+.circle-indicator-black {
+    background-color: #212529; /* Black indicator color */
+}
+
+.circle-indicator-red {
+    background-color: #ff5733; /* Red indicator color */
+}
+
+.circle-indicator-orange {
+    background-color: #f8961e; /* Orange indicator color */
+}
+
+.circle-indicator-yellow {
+    background-color: #f9c74f; /* Yellow indicator color */
+}
+
+.circle-indicator-green {
+    background-color: #90be6d; /* Green indicator color */
+}
+
+.circle-indicator-blue {
+    background-color: #577590; /* Blue indicator color */
+}
+
+/* Result Container Styles */
+.result-container {
+    display: none; /* Initially hidden */
+    flex-direction: column; /* Stack canvas above the text container */
+    align-items: center; /* Center items horizontally */
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
