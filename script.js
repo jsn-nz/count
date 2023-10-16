@@ -1,20 +1,22 @@
 document.getElementById("incomeForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    $('#anchorLink').trigger('click');
-
-    const incomeValue = parseFloat(document.getElementById("incomeInput").value);
+    incomeValue = parseFloat(document.getElementById("incomeInput").value);
     const timePeriodSelected = document.getElementById('timePeriodSelect').value;
     const kiwisaverChecked = document.getElementById("kiwisaverCheckbox").checked;
     const studentLoanCheckbox = document.getElementById("studentLoanCheckbox").checked;
+    var kiwisaverValue = document.getElementById('kiwiSaverValue').value;
+    var hoursValue = document.getElementById('hoursValue').value;
 
     if (isNaN(incomeValue)) {
         $('#myModal').modal('show');
         return;
     }
 
+    $('#anchorLink').trigger('click');
+
     if (timePeriodSelected == "Hour") {
-        incomeValue *= 40 * 52;
+        incomeValue *= hoursValue*52;
     } else if (timePeriodSelected == "Week") {
         incomeValue *= 52;
     } else if (timePeriodSelected == "Fortnight") {
@@ -24,7 +26,7 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
     }
 
     const taxAmount = calculateIncomeTax(incomeValue);
-    const kiwiSaverDeduction = kiwisaverChecked ? incomeValue * 0.03 : 0;
+    const kiwiSaverDeduction = kiwisaverChecked ? incomeValue * (kiwisaverValue * 0.01) : 0;
     const studentLoanRepaymentThreshold = 22828;
     const studentLoanDeduction = studentLoanCheckbox && incomeValue > studentLoanRepaymentThreshold ? (incomeValue - studentLoanRepaymentThreshold) * 0.12 : 0;
     const accDeduction = calculateAccDeduction(incomeValue);
@@ -137,3 +139,49 @@ $(document).ready(function(){
         }
     });
 });
+
+document.getElementById('moreLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    var moreOptions = document.getElementById('moreOptions');
+    
+    if (!moreOptions.classList.contains('visible')) {
+        moreOptions.classList.add('visible');
+    } else {
+        moreOptions.classList.remove('visible');
+        hoursOptions.classList.remove('visible');
+        kiwisaverOptions.classList.remove('visible');
+    }
+});
+
+document.getElementById('hoursLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    var hoursOptions = document.getElementById('hoursOptions');
+    var kiwisaverOptions = document.getElementById('kiwisaverOptions');
+
+    if (!hoursOptions.classList.contains('visible')) {
+        hoursOptions.classList.remove('instant-hide');
+        hoursOptions.classList.add('visible');
+    } else {
+        hoursOptions.classList.add('instant-hide');
+        hoursOptions.classList.remove('visible');
+    }
+    kiwisaverOptions.classList.add('instant-hide'); // Immediately hide without transition
+    kiwisaverOptions.classList.remove('visible');
+});
+
+document.getElementById('kiwisaverLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    var kiwisaverOptions = document.getElementById('kiwisaverOptions');
+    var hoursOptions = document.getElementById('hoursOptions');
+    
+    if (!kiwisaverOptions.classList.contains('visible')) {
+        kiwisaverOptions.classList.remove('instant-hide');
+        kiwisaverOptions.classList.add('visible');
+    } else {
+        kiwisaverOptions.classList.add('instant-hide');
+        kiwisaverOptions.classList.remove('visible');
+    }
+    hoursOptions.classList.add('instant-hide'); // Immediately hide without transition
+    hoursOptions.classList.remove('visible');
+});
+

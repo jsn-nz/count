@@ -22,11 +22,10 @@
     </nav>
 
     <div class="container col-xxl-8 px-4">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5">
             <div class="col-12 col-sm-4 col-lg-4">
-                <img src="images/hero.png" class="d-block mx-lg-auto img-fluid" width="400"
-                    height="400" loading="lazy">
-            </div>
+                <img src="images/hero.png" class="d-block mx-auto img-fluid align-items-center" loading="lazy">
+            </div> 
             <div class="col-lg-8">
                 <h1 class="display-5 fw-bold lh-1 mb-3 hero-title">Your Paye <span
                         style="color: #40916c;">Counting</span> Calculator</h1>
@@ -35,6 +34,7 @@
             </div>
         </div>
     </div>
+    
 
     <div class="bg-wrapper" id="incomeForm">
         <section class="container my-section pt-5 pb-5">
@@ -42,39 +42,63 @@
                 <div class="card-body">
                     <p>Calculate your take home pay</p>
                     <hr>
+                    
                     <form>
-                        <div class="d-flex align-items-center">
-                            <div class="input-group col-md-8 mr-2">
-                                <input type="text" class="form-control"
-                                    aria-label="Text input with dropdown button" id="incomeInput"
-                                    placeholder="$ Insert Income">
-                                <select class="custom-select" id="timePeriodSelect">
-                                    <option value="Year" selected>Year</option>
-                                    <option value="Hour">Hour</option>
-                                    <option value="Week">Week</option>
-                                    <option value="Fortnight">Fortnight</option>
-                                    <option value="Month">Month</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-12 col-lg-7 d-flex align-items-center mb-2 mb-lg-0">
+                                <div class="input-group w-100">
+                                    <input type="text" class="form-control" aria-label="Text input with dropdown button" id="incomeInput" placeholder="$ Insert Income">
+                                    <select class="custom-select" id="timePeriodSelect">
+                                        <option value="Year" selected>Year</option>
+                                        <option value="Hour">Hour</option>
+                                        <option value="Week">Week</option>
+                                        <option value="Fortnight">Fortnight</option>
+                                        <option value="Month">Month</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-check mr-4">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="kiwisaverCheckbox">
-                                <label class="form-check-label" for="kiwisaverCheckbox">
-                                    Kiwisaver
-                                </label>
+                            <div class="col-12 col-lg-5 d-flex align-items-center justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="kiwisaverCheckbox">
+                                    <label class="form-check-label" for="kiwisaverCheckbox">Kiwisaver</label>
+                                </div>
+                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="studentLoanCheckbox">
+                                    <label class="form-check-label" for="studentLoanCheckbox">Student Loan</label>
+                                </div>
+                    
+                                <button type="submit" class="btn custom-button">Submit</button>
+                                <button type="" class="btn btn-secondary" id="moreLink">More</button>
+                                
+                                <a href="#table-div" id="anchorLink"></a>
                             </div>
-                            <div class="form-check mr-4">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="studentLoanCheckbox">
-                                <label class="form-check-label"
-                                    for="studentLoanCheckbox">
-                                    Student Loan
-                                </label>
-                            </div>
-                            <button type="submit" class="btn custom-button">Submit</button>
-                            <a href="#table-div" id="anchorLink"></a>
                         </div>
                     </form>
+
+
+                       <!-- more  -->
+                       <div id="moreOptions" class="collapsible-content mb-3">
+                        <hr>
+                        <button type="" class="btn btn-secondary" id="hoursLink">Hours</button>
+                        <button type="" class="btn btn-secondary" id="kiwisaverLink">Kiwisaver</button>
+                    </div>
+
+                    <!-- hours -->
+                    <div id="hoursOptions" class="collapsible-content">
+                        <label for="hoursValue">Hours worked per week: </label>
+                        <input type="text" id="hoursValue" value="40" placeholder="Enter total hours">
+                    </div>
+
+                   <!-- kiwisaver -->
+                    <div id="kiwisaverOptions" class="collapsible-content">
+                        
+                        <label for="kiwiSaverValue">KiwiSaver Percentage: %</label>
+                        <input type="text" id="kiwiSaverValue" placeholder="Enter percentage" value="3">
+                    </div>
+                    
+                    
+                    
                     <div class="modal fade" id="myModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
