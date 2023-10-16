@@ -8,6 +8,20 @@ Welcome to the repository for the NZ PAYE Tax Calculator, a web application desi
 - Interactive charts to visualize tax breakdowns.
 - Responsive design that works on both desktop and mobile devices.
 
+## Tax Brackets (As of 2023)
+
+- **Up to $14,000:** 10.5%
+- **Over $14,000 and up to $48,000:** 17.5%
+- **Over $48,000 and up to $70,000:** 30%
+- **Over $70,000:** 33%
+
+## PAYE Component Breakdown
+
+- **ACC Levy**: Fixed at 1.46% of your income.
+- **KiwiSaver**: Default rate is 3%, but adjustable.
+- **Student Loan**: 12% repayment on income over $22,828.
+- 
+
 ## Technologies Used
 
 - **Font**: [Hammersmith One](https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap) from Google Fonts
@@ -28,4 +42,8 @@ Welcome to the repository for the NZ PAYE Tax Calculator, a web application desi
 - Data sourced from [Inland Revenue Department New Zealand](https://www.ird.govt.nz).
 - Bootstrap framework from [BootstrapCDN](https://maxcdn.bootstrapcdn.com/).
 - Charting capabilities powered by [Chart.js](https://www.chartjs.org/).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
