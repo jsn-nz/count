@@ -2,6 +2,8 @@
 
 Welcome to the repository for the NZ PAYE Tax Calculator, a web application designed to calculate New Zealand's PAYE tax. The data for this calculator is sourced from [www.ird.govt.nz](https://www.ird.govt.nz).
 
+![Uploading screencapture-count-co-nz-2023-10-17-00_59_15.png…]()
+
 ## Features
 
 - Accurate tax calculations based on NZ PAYE tax rates.
