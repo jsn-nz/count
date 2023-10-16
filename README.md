@@ -20,7 +20,6 @@ Welcome to the repository for the NZ PAYE Tax Calculator, a web application desi
 - **ACC Levy**: Fixed at 1.46% of your income.
 - **KiwiSaver**: Default rate is 3%, but adjustable.
 - **Student Loan**: 12% repayment on income over $22,828.
-- 
 
 ## Technologies Used
 
