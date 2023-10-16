@@ -184,28 +184,29 @@
             </tbody>
         </table>
     </section>
-
     <section class="result-container">
         <div class="container pt-5 pb-5">
             <div class="row">
-                <div class="col-md-6"> <!-- This will take up half the container width -->
-                    <canvas id="incomeBreakdownChart" width="5" height="5"></canvas>
-                </div>
-                <div class="col-md-6 d-flex justify-content-center align-items-center"> <!-- This will also take up half the container width -->
+                <div class="col-12 col-md-6 d-flex justify-content-center align-items-center"> 
                     <div class="text-container">
-                        <h1 id="taxcode"></h1>
-                        <p>TAX CODE</p>
+                        <h1 id="takeHomePayWeek"></h1>
+                        <p>TAKE HOME PAY / WEEK</p>
                         <hr>
                         <h1 id="takeHomePayGross"></h1>
                         <p>TAKE HOME PAY / GROSS</p>
                         <hr>
-                        <h1 id="takeHomePayWeek"></h1>
-                        <p>TAKE HOME PAY / WEEK</p>
+                        <h1 id="taxcode"></h1>
+                        <p>TAX CODE</p>
                     </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <canvas id="incomeBreakdownChart" width="5" height="5"></canvas>
                 </div>
             </div>
         </div>
     </section>
+    
 
     <footer class="py-3 my-4">
         <hr>
