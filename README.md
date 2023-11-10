@@ -4,7 +4,7 @@ Welcome to the repository for count.co.nz, a web application designed to calcula
 
 ## Features
 
-- Accurate tax calculations based on NZ PAYE tax rates.
+- Accurate PAYE calculations based on NZ PAYE tax rates.
 - Interactive charts to visualize tax breakdowns.
 - Responsive design that works on both desktop and mobile devices.
 
