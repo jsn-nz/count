@@ -114,7 +114,7 @@ function generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, a
             labels: ["PAYE", "Kiwisaver", "Student Loan", "ACC", "Take Home Pay"],
             datasets: [{
                 data: [taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay],
-                backgroundColor: ["#ff5733", "#f8961e", "#f9c74f", "#90be6d", "#577590"]
+                backgroundColor: ["#ff5733", "#f9c74f", "#90be6d", "#f8961e", "#577590"]
             }]
         }
     });
