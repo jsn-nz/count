@@ -27,7 +27,7 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
 
     const taxAmount = calculateIncomeTax(incomeValue);
     const kiwiSaverDeduction = kiwisaverChecked ? incomeValue * (kiwisaverValue * 0.01) : 0;
-    const studentLoanRepaymentThreshold = 22828;
+    const studentLoanRepaymentThreshold = 24128;
     const studentLoanDeduction = studentLoanCheckbox && incomeValue > studentLoanRepaymentThreshold ? (incomeValue - studentLoanRepaymentThreshold) * 0.12 : 0;
     const accDeduction = calculateAccDeduction(incomeValue);
     const takeHomePay = incomeValue - taxAmount - kiwiSaverDeduction - studentLoanDeduction - accDeduction;
@@ -41,7 +41,10 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
         takeHome: takeHomePay
     });
 
-    const taxcode = "M";
+    let taxcode = "M"; 
+    if (studentLoanCheckbox) {
+        taxcode = "M SL"; 
+    }
     const takeHomePayGross = formatNumberWithCommas((takeHomePay / incomeValue) * 100) + "%";
     const takeHomePayWeek = "$" + formatNumberWithCommas(takeHomePay / 52);
 
@@ -65,7 +68,7 @@ function calculateIncomeTax(income) {
 }
 
 function calculateAccDeduction(incomeValue) {
-    const accDeductionRate = 1.53;
+    const accDeductionRate = 1.6;
     const accIncomeCap = 139384;
 
     return (Math.min(incomeValue, accIncomeCap) * accDeductionRate) / 100;
