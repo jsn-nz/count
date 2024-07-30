@@ -53,16 +53,16 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
 
 function calculateIncomeTax(income) {
     let tax;
-    if (income <= 14000) {
+    if (income <= 15600) {
         tax = income * 0.105;
-    } else if (income <= 48000) {
-        tax = 14000 * 0.105 + (income - 14000) * 0.175;
-    } else if (income <= 70000) {
-        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (income - 48000) * 0.3;
+    } else if (income <= 53500) {
+        tax = 15600 * 0.105 + (income - 15600) * 0.175;
+    } else if (income <= 78100) {
+        tax = 15600 * 0.105 + (53500 - 15600) * 0.175 + (income - 53500) * 0.3;
     } else if (income <= 180000) {
-        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (70000 - 48000) * 0.3 + (income - 70000) * 0.33;
+        tax = 15600 * 0.105 + (53500 - 15600) * 0.175 + (78100 - 53500) * 0.3 + (income - 78100) * 0.33;
     } else {
-        tax = 14000 * 0.105 + (48000 - 14000) * 0.175 + (70000 - 48000) * 0.3 + (180000 - 70000) * 0.33 + (income - 180000) * 0.39;
+        tax = 15600 * 0.105 + (53500 - 15600) * 0.175 + (78100 - 53500) * 0.3 + (180000 - 78100) * 0.33 + (income - 180000) * 0.39;
     }
     return tax;
 }
