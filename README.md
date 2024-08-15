@@ -8,12 +8,14 @@ Welcome to the repository for count.co.nz, a web application designed to calcula
 - Interactive charts to visualize tax breakdowns.
 - Responsive design that works on both desktop and mobile devices.
 
-## Tax Brackets (As of 2023)
+## New Zealand Tax Brackets (As of July 31, 2024)
 
-- **Up to $14,000:** 10.5%
-- **Over $14,000 and up to $48,000:** 17.5%
-- **Over $48,000 and up to $70,000:** 30%
-- **Over $70,000:** 33%
+- $0 to $15,600: 10.5%
+- $15,601 to $53,500: 17.5%
+- $53,501 to $78,100: 30%
+- $78,101 to $180,000: 33%
+- Over $180,000: 39%
+- Source: https://www.ird.govt.nz/pages/campaigns/personal-income-tax-threshold-changes
 
 ## PAYE Component Breakdown
 
