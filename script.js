@@ -5,12 +5,23 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
     const timePeriodSelected = document.getElementById('timePeriodSelect').value;
     const kiwisaverChecked = document.getElementById("kiwisaverCheckbox").checked;
     const studentLoanCheckbox = document.getElementById("studentLoanCheckbox").checked;
+    const casualCheckbox = document.getElementById("casualCheckbox").checked;
     var kiwisaverValue = document.getElementById('kiwiSaverValue').value;
     var hoursValue = document.getElementById('hoursValue').value;
+    var holidayPayValue = document.getElementById('holidayPayValue').value;
 
     if (isNaN(incomeValue)) {
-        $('#myModal').modal('show');
+        $('#error').modal('show');
         return;
+    }
+
+    if (incomeValue < 0) {
+        $('#error').modal('show');
+        return;
+    }
+
+    if (casualCheckbox) {
+        incomeValue += incomeValue * (holidayPayValue/100);
     }
 
     $('#anchorLink').trigger('click');
@@ -51,6 +62,8 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
     generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay, taxcode, takeHomePayGross, takeHomePayWeek);
 });
 
+
+
 function calculateIncomeTax(income) {
     let tax;
     if (income <= 15600) {
@@ -84,7 +97,7 @@ function formatNumberWithCommas(number, decimalPlaces = 2) {
 
 function updateDisplayValues(values) {
     const periods = {
-        hour: 52 * 40,
+        hour: 52 * 40, // Assuming 40 hours per week
         week: 52,
         fortnight: 26,
         month: 12,
@@ -153,6 +166,7 @@ document.getElementById('moreLink').addEventListener('click', function(e) {
         moreOptions.classList.remove('visible');
         hoursOptions.classList.remove('visible');
         kiwisaverOptions.classList.remove('visible');
+        holidayPayOptions.classList.remove('visible');
     }
 });
 
@@ -160,6 +174,7 @@ document.getElementById('hoursLink').addEventListener('click', function(e) {
     e.preventDefault();
     var hoursOptions = document.getElementById('hoursOptions');
     var kiwisaverOptions = document.getElementById('kiwisaverOptions');
+    var holidayPayOptions = document.getElementById('holidayPayOptions');
 
     if (!hoursOptions.classList.contains('visible')) {
         hoursOptions.classList.remove('instant-hide');
@@ -168,14 +183,17 @@ document.getElementById('hoursLink').addEventListener('click', function(e) {
         hoursOptions.classList.add('instant-hide');
         hoursOptions.classList.remove('visible');
     }
-    kiwisaverOptions.classList.add('instant-hide'); // Immediately hide without transition
+    kiwisaverOptions.classList.add('instant-hide');
     kiwisaverOptions.classList.remove('visible');
+    holidayPayOptions.classList.add('instant-hide');
+    holidayPayOptions.classList.remove('visible');
 });
 
 document.getElementById('kiwisaverLink').addEventListener('click', function(e) {
     e.preventDefault();
     var kiwisaverOptions = document.getElementById('kiwisaverOptions');
     var hoursOptions = document.getElementById('hoursOptions');
+    var holidayPayOptions = document.getElementById('holidayPayOptions');
     
     if (!kiwisaverOptions.classList.contains('visible')) {
         kiwisaverOptions.classList.remove('instant-hide');
@@ -184,7 +202,27 @@ document.getElementById('kiwisaverLink').addEventListener('click', function(e) {
         kiwisaverOptions.classList.add('instant-hide');
         kiwisaverOptions.classList.remove('visible');
     }
-    hoursOptions.classList.add('instant-hide'); // Immediately hide without transition
+    hoursOptions.classList.add('instant-hide');
     hoursOptions.classList.remove('visible');
+    holidayPayOptions.classList.add('instant-hide');
+    holidayPayOptions.classList.remove('visible');
 });
 
+document.getElementById('holidayPayLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    var holidayPayOptions = document.getElementById('holidayPayOptions');
+    var hoursOptions = document.getElementById('hoursOptions');
+    var kiwisaverOptions = document.getElementById('kiwisaverOptions');
+    
+    if (!holidayPayOptions.classList.contains('visible')) {
+        holidayPayOptions.classList.remove('instant-hide');
+        holidayPayOptions.classList.add('visible');
+    } else {
+        holidayPayOptions.classList.add('instant-hide');
+        holidayPayOptions.classList.remove('visible');
+    }
+    hoursOptions.classList.add('instant-hide');
+    hoursOptions.classList.remove('visible');
+    kiwisaverOptions.classList.add('instant-hide');
+    kiwisaverOptions.classList.remove('visible');
+});

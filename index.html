@@ -21,7 +21,7 @@
         <a class="navbar-brand" href="#">Count.</a>
     </nav>
 
-    <div class="container col-xxl-8 px-4">
+    <div class="container col-xxl-8 px-4 mb-3">
         <div class="row flex-lg-row-reverse align-items-center g-5">
             <div class="col-12 col-sm-4 col-lg-4">
                 <img src="images/hero.png" class="d-block mx-auto img-fluid align-items-center" loading="lazy">
@@ -45,7 +45,7 @@
                     
                     <form>
                         <div class="row">
-                            <div class="col-12 col-lg-7 d-flex align-items-center mb-2 mb-lg-0">
+                            <div class="col-12 col-xl-7 col-lg-5 col-md-12 d-flex align-items-center mb-2 mb-lg-0">
                                 <div class="input-group w-100">
                                     <input type="text" class="form-control" aria-label="Text input with dropdown button" id="incomeInput" placeholder="$ Insert Income">
                                     <select class="custom-select" id="timePeriodSelect">
@@ -57,32 +57,38 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-3 d-flex align-items-center mb-2 mb-lg-0">
+                            <div></div>
+                            <div class="col-12 col-md-6 col-xl-3 col-lg-4 col-md-12 d-flex align-items-center mb-2 mb-lg-0">
+
                                 <div class="form-check mr-3">
                                     <input class="form-check-input" type="checkbox" value="" id="kiwisaverCheckbox">
                                     <label class="form-check-label" for="kiwisaverCheckbox">Kiwisaver</label>
                                 </div>
                     
-                                <div class="form-check">
+                                <div class="form-check mr-3">
                                     <input class="form-check-input" type="checkbox" value="" id="studentLoanCheckbox">
                                     <label class="form-check-label" for="studentLoanCheckbox">Student Loan</label>
                                 </div>
+
+                                
                             </div>
-                            <div class="col-12 col-lg-2 d-flex align-items-center">
+                            <div class="col-12 col-md-6 col-xl-1 col-lg-2 col-md-12 d-flex align-items-center">
                                 <button type="submit" class="btn custom-button mr-3">Submit</button>
                                 <button type="" class="btn btn-secondary" id="moreLink">More</button>
                                 <a href="#table-div" id="anchorLink"></a>
                             </div>
                         </div>
+                        <div>
+                            
+                        </div>
                     </form>
                     
-
-
-                       <!-- more  -->
-                       <div id="moreOptions" class="collapsible-content mb-3">
+                      <!-- more  -->
+                    <div id="moreOptions" class="collapsible-content mb-3">
                         <hr>
-                        <button type="" class="btn btn-secondary" id="hoursLink">Hours</button>
-                        <button type="" class="btn btn-secondary" id="kiwisaverLink">Kiwisaver</button>
+                        <button type="button" class="btn btn-secondary" id="hoursLink">Hours</button>
+                        <button type="button" class="btn btn-secondary" id="kiwisaverLink">Kiwisaver</button>
+                        <button type="button" class="btn btn-secondary" id="holidayPayLink">Holiday Pay</button>
                     </div>
 
                     <!-- hours -->
@@ -91,16 +97,23 @@
                         <input type="text" id="hoursValue" value="40" placeholder="Enter total hours">
                     </div>
 
-                   <!-- kiwisaver -->
+                    <!-- kiwisaver -->
                     <div id="kiwisaverOptions" class="collapsible-content">
-                        
                         <label for="kiwiSaverValue">KiwiSaver Percentage: %</label>
                         <input type="text" id="kiwiSaverValue" placeholder="Enter percentage" value="3">
                     </div>
+
+                    <!-- holiday pay -->
+                    <div id="holidayPayOptions" class="collapsible-content">
+                        <label for="holidayPayValue">Holiday Pay Rate Percentage: %</label>
+                        <input type="text" id="holidayPayValue" placeholder="Enter percentage" value="8">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="casualCheckbox">
+                            <label class="form-check-label" for="casualCheckbox">Include</label>
+                        </div>
+                    </div> 
                     
-                    
-                    
-                    <div class="modal fade" id="myModal">
+                    <div class="modal fade" id="error">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -108,7 +121,7 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                    You need to insert an income before you can calculate!
+                                    Please enter a valid income.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -116,6 +129,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -202,14 +216,13 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
-                    <canvas id="incomeBreakdownChart" width="5" height="5"></canvas>
+                <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                        <canvas id="incomeBreakdownChart" width="5" height="5"></canvas>
                 </div>
             </div>
         </div>
     </section>
     
-
     <footer class="py-3 my-4">
         <hr>
         <p class="text-center text-muted">&copy; 2024 Count.co.nz; Developed by <span><a
