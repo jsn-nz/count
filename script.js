@@ -1,70 +1,50 @@
 document.getElementById("incomeForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let incomeValue = parseFloat(document.getElementById("incomeInput").value);
+    incomeValue = parseFloat(document.getElementById("incomeInput").value);
     const timePeriodSelected = document.getElementById('timePeriodSelect').value;
     const kiwisaverChecked = document.getElementById("kiwisaverCheckbox").checked;
     const studentLoanCheckbox = document.getElementById("studentLoanCheckbox").checked;
     const casualCheckbox = document.getElementById("casualCheckbox").checked;
-    let kiwisaverValue = parseFloat(document.getElementById('kiwiSaverValue').value);
-    let hoursValue = parseFloat(document.getElementById('hoursValue').value); 
-    let holidayPayValue = parseFloat(document.getElementById('holidayPayValue').value);
+    var kiwisaverValue = document.getElementById('kiwiSaverValue').value;
+    var hoursValue = document.getElementById('hoursValue').value;
+    var holidayPayValue = document.getElementById('holidayPayValue').value;
 
-    // Ensure hoursValue is correctly logged to the console
-    console.log("Hours worked per week:", hoursValue);
-
-    // Error handling for invalid or negative income
-    if (isNaN(incomeValue) || incomeValue < 0) {
+    if (isNaN(incomeValue)) {
         $('#error').modal('show');
         return;
     }
 
-    // If casual worker, add holiday pay to the income
+    if (incomeValue < 0) {
+        $('#error').modal('show');
+        return;
+    }
+
     if (casualCheckbox) {
-        incomeValue += incomeValue * (holidayPayValue / 100);
+        incomeValue += incomeValue * (holidayPayValue/100);
     }
 
     $('#anchorLink').trigger('click');
 
-    // Convert income value to hourly rate depending on the selected time period
-    let hourlyRate;
-    const weeksInYear = 52;
-    const fortnightsInYear = 26;
-    const monthsInYear = 12;
-
-    switch (timePeriodSelected) {
-        case "Hour":
-            hourlyRate = incomeValue; // Income is already hourly
-            break;
-        case "Week":
-            hourlyRate = incomeValue / hoursValue;
-            break;
-        case "Fortnight":
-            hourlyRate = incomeValue / (hoursValue * 2);
-            break;
-        case "Month":
-            hourlyRate = (incomeValue * monthsInYear) / (weeksInYear * hoursValue); // Convert monthly income to weekly first
-            break;
-        case "Year":
-            hourlyRate = incomeValue / (weeksInYear * hoursValue); // Convert yearly income to hourly
-            break;
-        default:
-            hourlyRate = incomeValue; // Default to hourly if none selected
+    if (timePeriodSelected == "Hour") {
+        incomeValue *= hoursValue*52;
+    } else if (timePeriodSelected == "Week") {
+        incomeValue *= 52;
+    } else if (timePeriodSelected == "Fortnight") {
+        incomeValue *= 26;
+    } else if (timePeriodSelected == "Month") {
+        incomeValue *= 12;
     }
 
-    // Now that we have the hourly rate, convert it to annual income for tax purposes
-    const annualIncome = hourlyRate * 40 * weeksInYear;
-
-    const taxAmount = calculateIncomeTax(annualIncome);
-    const kiwiSaverDeduction = kiwisaverChecked ? annualIncome * (kiwisaverValue * 0.01) : 0;
+    const taxAmount = calculateIncomeTax(incomeValue);
+    const kiwiSaverDeduction = kiwisaverChecked ? incomeValue * (kiwisaverValue * 0.01) : 0;
     const studentLoanRepaymentThreshold = 24128;
-    const studentLoanDeduction = studentLoanCheckbox && annualIncome > studentLoanRepaymentThreshold ? (annualIncome - studentLoanRepaymentThreshold) * 0.12 : 0;
-    const accDeduction = calculateAccDeduction(annualIncome);
-    const takeHomePay = annualIncome - taxAmount - kiwiSaverDeduction - studentLoanDeduction - accDeduction;
+    const studentLoanDeduction = studentLoanCheckbox && incomeValue > studentLoanRepaymentThreshold ? (incomeValue - studentLoanRepaymentThreshold) * 0.12 : 0;
+    const accDeduction = calculateAccDeduction(incomeValue);
+    const takeHomePay = incomeValue - taxAmount - kiwiSaverDeduction - studentLoanDeduction - accDeduction;
 
-    // Display the values back to the user
     updateDisplayValues({
-        gross: annualIncome,
+        gross: incomeValue,
         tax: taxAmount,
         acc: accDeduction,
         kiwisaver: kiwiSaverDeduction,
@@ -76,13 +56,11 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
     if (studentLoanCheckbox) {
         taxcode = "M SL"; 
     }
-    const takeHomePayGross = formatNumberWithCommas((takeHomePay / annualIncome) * 100) + "%";
-    const takeHomePayWeek = "$" + formatNumberWithCommas(takeHomePay / weeksInYear);
+    const takeHomePayGross = formatNumberWithCommas((takeHomePay / incomeValue) * 100) + "%";
+    const takeHomePayWeek = "$" + formatNumberWithCommas(takeHomePay / 52);
 
-    // Generate the pie chart to visualize deductions and take-home pay
     generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay, taxcode, takeHomePayGross, takeHomePayWeek);
 });
-
 
 
 
@@ -119,7 +97,7 @@ function formatNumberWithCommas(number, decimalPlaces = 2) {
 
 function updateDisplayValues(values) {
     const periods = {
-        hour: 52 * 40,
+        hour: 52 * 40, // Assuming 40 hours per week
         week: 52,
         fortnight: 26,
         month: 12,
