@@ -1,39 +1,58 @@
+var initialHourlyRate;
+
 document.getElementById("incomeForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    incomeValue = parseFloat(document.getElementById("incomeInput").value);
+    var incomeValue = parseFloat(document.getElementById("incomeInput").value);
+    var hoursValue = parseFloat(document.getElementById('hoursValue').value);
     const timePeriodSelected = document.getElementById('timePeriodSelect').value;
     const kiwisaverChecked = document.getElementById("kiwisaverCheckbox").checked;
     const studentLoanCheckbox = document.getElementById("studentLoanCheckbox").checked;
     const casualCheckbox = document.getElementById("casualCheckbox").checked;
-    var kiwisaverValue = document.getElementById('kiwiSaverValue').value;
-    var hoursValue = document.getElementById('hoursValue').value;
-    var holidayPayValue = document.getElementById('holidayPayValue').value;
+    var kiwisaverValue = parseFloat(document.getElementById('kiwiSaverValue').value);
+    var holidayPayValue = parseFloat(document.getElementById('holidayPayValue').value);
 
-    if (isNaN(incomeValue)) {
+    if (isNaN(incomeValue) || incomeValue < 0) {
         $('#error').modal('show');
         return;
     }
 
-    if (incomeValue < 0) {
-        $('#error').modal('show');
-        return;
+    if (isNaN(hoursValue) || hoursValue <= 0) {
+        hoursValue = 40; 
     }
 
-    if (casualCheckbox) {
-        incomeValue += incomeValue * (holidayPayValue/100);
+    if (isNaN(kiwisaverValue) || kiwisaverValue < 0) {
+        kiwisaverValue = 0; 
+    }
+
+    if (isNaN(holidayPayValue) || holidayPayValue < 0) {
+        holidayPayValue = 0; 
     }
 
     $('#anchorLink').trigger('click');
 
     if (timePeriodSelected == "Hour") {
-        incomeValue *= hoursValue*52;
+        incomeValue *= hoursValue * 52;
+        initialHourlyRate = undefined; 
     } else if (timePeriodSelected == "Week") {
         incomeValue *= 52;
+        initialHourlyRate = undefined;
     } else if (timePeriodSelected == "Fortnight") {
         incomeValue *= 26;
+        initialHourlyRate = undefined;
     } else if (timePeriodSelected == "Month") {
         incomeValue *= 12;
+        initialHourlyRate = undefined;
+    } else if (timePeriodSelected == "Year") {
+        if (typeof initialHourlyRate === 'undefined') {
+            initialHourlyRate = incomeValue / (52 * hoursValue);
+        } else {
+            incomeValue = initialHourlyRate * (52 * hoursValue);
+        }
+    }
+
+    if (casualCheckbox) {
+        incomeValue += incomeValue * (holidayPayValue / 100);
     }
 
     const taxAmount = calculateIncomeTax(incomeValue);
@@ -50,18 +69,17 @@ document.getElementById("incomeForm").addEventListener("submit", function(event)
         kiwisaver: kiwiSaverDeduction,
         studentLoan: studentLoanDeduction,
         takeHome: takeHomePay
-    });
+    }, hoursValue, timePeriodSelected);
 
-    let taxcode = "M"; 
+    let taxcode = "M";
     if (studentLoanCheckbox) {
-        taxcode = "M SL"; 
+        taxcode = "M SL";
     }
     const takeHomePayGross = formatNumberWithCommas((takeHomePay / incomeValue) * 100) + "%";
     const takeHomePayWeek = "$" + formatNumberWithCommas(takeHomePay / 52);
 
     generatePieChart(taxAmount, kiwiSaverDeduction, studentLoanDeduction, accDeduction, takeHomePay, taxcode, takeHomePayGross, takeHomePayWeek);
 });
-
 
 
 function calculateIncomeTax(income) {
@@ -95,9 +113,9 @@ function formatNumberWithCommas(number, decimalPlaces = 2) {
     }).format(number);
 }
 
-function updateDisplayValues(values) {
+function updateDisplayValues(values, hoursValue) {
     const periods = {
-        hour: 52 * 40, // Assuming 40 hours per week
+        hour: 52 * hoursValue,
         week: 52,
         fortnight: 26,
         month: 12,
