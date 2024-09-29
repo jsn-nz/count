@@ -14,25 +14,24 @@ class IncomeCalculator {
     }
 
     calculateAnnualIncome() {
+        // Reset initialHourlyRate every time a new calculation starts
+        initialHourlyRate = undefined;
+    
         let incomeValue = this.incomeValue;
         let hoursValue = this.hoursValue;
-
+    
         switch (this.timePeriodSelected) {
             case "Hour":
                 incomeValue *= hoursValue * 52;
-                initialHourlyRate = undefined;
                 break;
             case "Week":
                 incomeValue *= 52;
-                initialHourlyRate = undefined;
                 break;
             case "Fortnight":
                 incomeValue *= 26;
-                initialHourlyRate = undefined;
                 break;
             case "Month":
                 incomeValue *= 12;
-                initialHourlyRate = undefined;
                 break;
             case "Year":
                 if (typeof initialHourlyRate === 'undefined') {
@@ -44,13 +43,14 @@ class IncomeCalculator {
             default:
                 break;
         }
-
+    
         if (this.casualChecked) {
             incomeValue += incomeValue * (this.holidayPayValue / 100);
         }
-
+    
         this.incomeAnnual = incomeValue;
     }
+    
 
     calculateIncomeTax() {
         let income = this.incomeAnnual;
@@ -329,10 +329,14 @@ document.getElementById("incomeForm").addEventListener("submit", function (event
         takeHome: results.takeHomePay
     }, hoursValue);
 
-    // Update additional info
+    // Update additional info before generating the chart
     let taxcode = studentLoanCheckbox ? "M SL" : "M";
     const takeHomePayGross = DisplayUpdater.formatNumberWithCommas((results.takeHomePay / calculator.incomeAnnual) * 100) + "%";
     const takeHomePayWeek = "$" + DisplayUpdater.formatNumberWithCommas(results.takeHomePay / 52);
+
+    document.getElementById("taxcode").textContent = taxcode;
+    document.getElementById("takeHomePayGross").textContent = takeHomePayGross;
+    document.getElementById("takeHomePayWeek").textContent = takeHomePayWeek;
 
     // Generate Chart
     const chartGenerator = new ChartGenerator();
