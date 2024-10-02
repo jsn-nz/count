@@ -182,6 +182,18 @@ class UIHandler {
 
         // Event listener for the dropdown
         document.getElementById('timePeriodSelect').addEventListener('change', this.handleTimePeriodChange.bind(this));
+
+        $(document).ready(() => {
+            $('a[href^="#"]').on('click', function (event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                }
+            });
+        });
     }
 
     handleTimePeriodChange(event) {
@@ -311,7 +323,9 @@ document.getElementById("incomeForm").addEventListener("submit", function (event
     }
 
     // Scroll to results
-    $('#anchorLink').trigger('click');
+    $('html, body').animate({
+        scrollTop: $('#table-div').offset().top
+    }, 1000);
 
     // Create IncomeCalculator instance
     const calculator = new IncomeCalculator({
