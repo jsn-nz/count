@@ -180,90 +180,103 @@ class UIHandler {
         document.getElementById('kiwisaverLink').addEventListener('click', this.toggleKiwiSaverOptions.bind(this));
         document.getElementById('holidayPayLink').addEventListener('click', this.toggleHolidayPayOptions.bind(this));
 
-        $(document).ready(() => {
-            $('a[href^="#"]').on('click', function (event) {
-                var target = $(this.getAttribute('href'));
-                if (target.length) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                }
-            });
-        });
+        // Event listener for the dropdown
+        document.getElementById('timePeriodSelect').addEventListener('change', this.handleTimePeriodChange.bind(this));
+    }
+
+    handleTimePeriodChange(event) {
+        const selectedValue = event.target.value;
+        const moreOptions = document.getElementById('moreOptions');
+        const hoursOptions = document.getElementById('hoursOptions');
+        const kiwisaverOptions = document.getElementById('kiwisaverOptions');
+        const holidayPayOptions = document.getElementById('holidayPayOptions');
+
+        if (selectedValue === 'Hour') {
+            // Show 'More' options
+            moreOptions.classList.add('visible');
+
+            // Show 'Hours' options
+            this.showElement(hoursOptions);
+
+            // Hide other sub-options instantly
+            this.hideElementInstantly(kiwisaverOptions);
+            this.hideElementInstantly(holidayPayOptions);
+        } else {
+            // Hide 'Hours' options instantly
+            this.hideElementInstantly(hoursOptions);
+
+            // Optionally hide 'More' options if no other sub-options are visible
+            if (!kiwisaverOptions.classList.contains('visible') && !holidayPayOptions.classList.contains('visible')) {
+                moreOptions.classList.remove('visible');
+            }
+        }
     }
 
     toggleMoreOptions(e) {
         e.preventDefault();
-        var moreOptions = document.getElementById('moreOptions');
+        const moreOptions = document.getElementById('moreOptions');
+        moreOptions.classList.toggle('visible');
 
+        // Hide all sub-options when 'More' options are hidden
         if (!moreOptions.classList.contains('visible')) {
-            moreOptions.classList.add('visible');
-        } else {
-            moreOptions.classList.remove('visible');
-            document.getElementById('hoursOptions').classList.remove('visible');
-            document.getElementById('kiwisaverOptions').classList.remove('visible');
-            document.getElementById('holidayPayOptions').classList.remove('visible');
+            this.hideAllSubOptionsInstantly();
         }
+    }
+
+    hideAllSubOptionsInstantly() {
+        const subOptions = ['hoursOptions', 'kiwisaverOptions', 'holidayPayOptions'];
+        subOptions.forEach((id) => {
+            const element = document.getElementById(id);
+            this.hideElementInstantly(element);
+        });
     }
 
     toggleHoursOptions(e) {
         e.preventDefault();
-        var hoursOptions = document.getElementById('hoursOptions');
-        var kiwisaverOptions = document.getElementById('kiwisaverOptions');
-        var holidayPayOptions = document.getElementById('holidayPayOptions');
-
-        if (!hoursOptions.classList.contains('visible')) {
-            hoursOptions.classList.remove('instant-hide');
-            hoursOptions.classList.add('visible');
-        } else {
-            hoursOptions.classList.add('instant-hide');
-            hoursOptions.classList.remove('visible');
-        }
-        kiwisaverOptions.classList.add('instant-hide');
-        kiwisaverOptions.classList.remove('visible');
-        holidayPayOptions.classList.add('instant-hide');
-        holidayPayOptions.classList.remove('visible');
+        this.toggleOption('hoursOptions');
     }
 
     toggleKiwiSaverOptions(e) {
         e.preventDefault();
-        var kiwisaverOptions = document.getElementById('kiwisaverOptions');
-        var hoursOptions = document.getElementById('hoursOptions');
-        var holidayPayOptions = document.getElementById('holidayPayOptions');
-
-        if (!kiwisaverOptions.classList.contains('visible')) {
-            kiwisaverOptions.classList.remove('instant-hide');
-            kiwisaverOptions.classList.add('visible');
-        } else {
-            kiwisaverOptions.classList.add('instant-hide');
-            kiwisaverOptions.classList.remove('visible');
-        }
-        hoursOptions.classList.add('instant-hide');
-        hoursOptions.classList.remove('visible');
-        holidayPayOptions.classList.add('instant-hide');
-        holidayPayOptions.classList.remove('visible');
+        this.toggleOption('kiwisaverOptions');
     }
 
     toggleHolidayPayOptions(e) {
         e.preventDefault();
-        var holidayPayOptions = document.getElementById('holidayPayOptions');
-        var hoursOptions = document.getElementById('hoursOptions');
-        var kiwisaverOptions = document.getElementById('kiwisaverOptions');
+        this.toggleOption('holidayPayOptions');
+    }
 
-        if (!holidayPayOptions.classList.contains('visible')) {
-            holidayPayOptions.classList.remove('instant-hide');
-            holidayPayOptions.classList.add('visible');
-        } else {
-            holidayPayOptions.classList.add('instant-hide');
-            holidayPayOptions.classList.remove('visible');
+    toggleOption(id) {
+        const element = document.getElementById(id);
+        const isCurrentlyVisible = element.classList.contains('visible');
+
+        // Hide all sub-options instantly
+        this.hideAllSubOptionsInstantly();
+
+        if (!isCurrentlyVisible) {
+            // Show the selected element with transition
+            this.showElement(element);
         }
-        hoursOptions.classList.add('instant-hide');
-        hoursOptions.classList.remove('visible');
-        kiwisaverOptions.classList.add('instant-hide');
-        kiwisaverOptions.classList.remove('visible');
+        // If it was already visible, it remains hidden
+    }
+
+    showElement(element) {
+        // Remove instant-hide class to allow transition
+        element.classList.remove('instant-hide');
+        // Force reflow to apply the class removal immediately
+        void element.offsetWidth;
+        // Add visible class to show the element
+        element.classList.add('visible');
+    }
+
+    hideElementInstantly(element) {
+        // Add instant-hide class to remove transition
+        element.classList.add('instant-hide');
+        // Remove visible class to hide the element
+        element.classList.remove('visible');
     }
 }
+
 
 // Initialize UI Handler
 const uiHandler = new UIHandler();
