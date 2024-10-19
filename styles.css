@@ -13,13 +13,13 @@ body {
 
 /* Hero Section Styles */
 .hero-title {
-    font-family: domine;
+    font-size: 75px;
     font-weight: bold;
 }
 
-.hero-text {
+/* .hero-text {
     font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 /* Navbar Text Styles */
 .navbar-brand {
