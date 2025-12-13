@@ -72,8 +72,8 @@ class IncomeCalculator {
     }
 
     calculateAccDeduction() {
-        const accDeductionRate = 1.6;
-        const accIncomeCap = 139384;
+        const accDeductionRate = 1.45;
+        const accIncomeCap = 152790;
         return (Math.min(this.incomeAnnual, accIncomeCap) * accDeductionRate) / 100;
     }
 
