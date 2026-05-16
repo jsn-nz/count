@@ -24,26 +24,42 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg:           #E4E8DF;
-    --surface:      #EDF0E9;
-    --card:         #DFE4DA;
-    --border:       #C8CEBC;
-    --border-light: #D3D9CC;
-    --accent:       #2C4A35;
-    --accent-mid:   #365A40;
-    --accent-light: #D8E5DB;
-    --accent-dim:   #6E9478;
-    --text:         #1A1814;
-    --dim:          #3B3830;
-    --muted:        #7C7669;
-    --faint:        #ABA59A;
-    --red:          #9E2F27;
-    --orange:       #9E4A18;
-    --yellow:       #836608;
-    --purple:       #5B3796;
-    --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
-    --shadow-md:    0 4px 16px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.06);
-    --shadow-lg:    0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.07);
+    --bg:           #F4F4F4;
+    --surface:      #FFFFFF;
+    --card:         #ECECEC;
+    --border:       #DEDEDE;
+    --border-light: #E8E8E8;
+    --accent:       #2C5C3C;
+    --accent-mid:   #245030;
+    --accent-light: #E6F0EA;
+    --accent-dim:   #5A8C6A;
+    --text:         #111111;
+    --dim:          #333333;
+    --muted:        #777777;
+    --faint:        #AAAAAA;
+    --red:          #C0392B;
+    --orange:       #C05C1A;
+    --yellow:       #9A7D0A;
+    --purple:       #6741B8;
+    --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md:    0 4px 16px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.05);
+    --shadow-lg:    0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  }
+
+  [data-theme="dark"] {
+    --bg:           #111111;
+    --surface:      #1A1A1A;
+    --card:         #222222;
+    --border:       #303030;
+    --border-light: #282828;
+    --accent:       #4E8C62;
+    --accent-mid:   #3D7250;
+    --accent-light: #1A261D;
+    --accent-dim:   #4E8C62;
+    --text:         #F0F0F0;
+    --dim:          #C4C4C4;
+    --muted:        #808080;
+    --faint:        #525252;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -68,9 +84,6 @@
     align-items: center;
     justify-content: center;
     background: var(--bg);
-    background-image:
-      radial-gradient(ellipse 60% 50% at 50% 54%, rgba(44,74,53,.07) 0%, transparent 68%),
-      linear-gradient(160deg, rgba(255,255,255,.06) 0%, transparent 60%);
     transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1);
     will-change: opacity, transform;
   }
@@ -81,16 +94,7 @@
   }
   .hero.gone { display: none; }
 
-  /* Subtle linen-like crosshatch */
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, rgba(0,0,0,.018) 0px, transparent 1px, transparent 28px),
-      repeating-linear-gradient(90deg, rgba(0,0,0,.018) 0px, transparent 1px, transparent 28px);
-    pointer-events: none;
-  }
+  .hero::before { display: none; }
 
   .hero-inner {
     position: relative;
@@ -278,6 +282,9 @@
     transition: color .15s;
   }
   .hero-legal-link:hover { color: var(--accent); opacity: 1; }
+
+  [data-theme="dark"] .hero { background-image: none; }
+  [data-theme="light"] .hero, :root .hero { background: var(--bg); }
 
   @keyframes heroFadeDown {
     from { opacity: 0; transform: translateY(-12px); }
@@ -526,6 +533,11 @@
     padding: .4rem .7rem;
     margin-top: .4rem;
   }
+  [data-theme="dark"] .minwage-warn {
+    color: #d4a017;
+    background: #2a2210;
+    border-color: #4a3a10;
+  }
   .minwage-warn.visible { display: flex; }
   .minwage-dot {
     width: 6px; height: 6px;
@@ -533,6 +545,25 @@
     background: #c8860a;
     flex-shrink: 0;
   }
+
+  /* Theme toggle */
+  .theme-toggle {
+    margin-left: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: .3rem .65rem;
+    font-size: .75rem;
+    font-family: inherit;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    transition: all .15s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle-icon { font-size: .85rem; line-height: 1; }
 
   /* ── Results panel ── */
   .results-panel { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -873,6 +904,10 @@
     <span class="logo">Count.</span>
     <span class="tagline">NZ PAYE Calculator</span>
     <span class="year-badge">2025–26 tax year</span>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+      <span class="theme-toggle-icon" id="themeIcon">☾</span>
+      <span id="themeLabel">Dark</span>
+    </button>
   </header>
 
   <div class="main-grid">
@@ -1059,6 +1094,32 @@
 <div class="toast" id="toast">Copied!</div>
 
 <script>
+// ── Theme ─────────────────────────────────────────────────────────────────────
+// Alt design defaults to dark unless user has explicitly chosen light
+const _savedTheme = localStorage.getItem("theme-alt");
+document.documentElement.setAttribute("data-theme", _savedTheme === "light" ? "light" : "dark");
+
+function applyTheme(dark) {
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  document.getElementById("themeIcon").textContent  = dark ? "○" : "☾";
+  document.getElementById("themeLabel").textContent = dark ? "Light" : "Dark";
+  if (chartInstance) {
+    chartInstance.data.datasets[0].borderColor = dark ? "#1A1A1A" : "#FFFFFF";
+    chartInstance.update("none");
+  }
+}
+
+function toggleTheme() {
+  const dark = document.documentElement.getAttribute("data-theme") !== "dark";
+  localStorage.setItem("theme-alt", dark ? "dark" : "light");
+  applyTheme(dark);
+}
+
+// Sync button labels once DOM is ready
+document.addEventListener("DOMContentLoaded", () =>
+  applyTheme(document.documentElement.getAttribute("data-theme") === "dark")
+);
+
 // ── Tax constants (2024–25) ──────────────────────────────────────────────────
 const BRACKETS = [
   { limit: 15600,    rate: 0.105 },
@@ -1217,7 +1278,7 @@ function render() {
       type: "doughnut",
       data: {
         labels,
-        datasets: [{ data: vals, backgroundColor: clrs, borderWidth: 3, borderColor: "#EDF0E9", hoverOffset: 5 }]
+        datasets: [{ data: vals, backgroundColor: clrs, borderWidth: 3, borderColor: document.documentElement.getAttribute("data-theme") === "dark" ? "#1A1A1A" : "#FFFFFF", hoverOffset: 5 }]
       },
       options: {
         cutout: "68%",
