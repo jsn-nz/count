@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Deep link (e.g. count.co.nz/50000): skip the hero intro with no flash
+  if (/^\/\d/.test(location.pathname) || /[?&]i=\d/.test(location.search)) {
+    document.documentElement.classList.add("deeplink");
+  }
+</script>
 <title>PAYE Calculator NZ 2026-27 — Free Take-Home Pay & Salary Calculator | Count.</title>
 <meta name="description" content="Free PAYE calculator for New Zealand. PAYE (Pay As You Earn) is the tax deducted from your wages — enter your salary or hourly rate to see your take-home pay after income tax, ACC, KiwiSaver and student loan. Updated for 2026-27.">
 <meta name="robots" content="index, follow">
@@ -395,6 +401,8 @@
     pointer-events: none;
   }
   .hero.gone { display: none; }
+  html.deeplink .hero { display: none; }
+  html.deeplink .app  { opacity: 1; transform: none; pointer-events: auto; }
 
   .hero::before { display: none; }
 
@@ -2074,6 +2082,45 @@ let toastTimer;
     });
   });
 });
+
+// ── Deep links: count.co.nz/50000 (or ?i=50000) auto-calculates ─────────────────
+(function initFromURL() {
+  function readIncome() {
+    const p = location.pathname.match(/^\/(\d+(?:\.\d+)?)\/?$/);
+    if (p) return parseFloat(p[1]);
+    const q = location.search.match(/[?&]i=(\d+(?:\.\d+)?)/);
+    return q ? parseFloat(q[1]) : NaN;
+  }
+  const val = readIncome();
+  if (!val || val <= 0) return;
+
+  const period = detectPeriod(val);
+  state.income = val;
+  state.period = period;
+  document.getElementById("heroIncome").value  = val;
+  document.getElementById("incomeInput").value = val;
+  document.querySelectorAll(".period-tab").forEach(t =>
+    t.classList.toggle("active", t.dataset.period === period));
+  document.getElementById("hoursRow").classList.toggle("visible", period === "hour");
+
+  // Skip the hero overlay and show the app immediately
+  transitioned = true;
+  clearTimeout(transitionTimer);
+  document.getElementById("hero").classList.add("gone");
+  document.getElementById("app").classList.add("visible");
+
+  // Chart.js is deferred, so render once it has loaded
+  if (window.Chart) render();
+  else document.addEventListener("DOMContentLoaded", render);
+
+  // Restore a clean URL (/50000) after any 404.html redirect. Cosmetic only —
+  // never let a browser quirk here stop the calculation above.
+  try {
+    if (location.pathname.replace(/\/+$/, "") !== "/" + val) {
+      history.replaceState(null, "", "/" + val);
+    }
+  } catch (e) {}
+})();
 </script>
 </body>
 </html>

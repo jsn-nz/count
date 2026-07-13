@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://count.co.nz/">
+<title>Count. — NZ PAYE Calculator</title>
+<script>
+  // GitHub Pages serves this for any unmatched path. If the path is a number
+  // (e.g. /50000), bounce into the calculator; otherwise go to the home page.
+  var n = location.pathname.replace(/[^0-9.]/g, "");
+  location.replace(n ? "/?i=" + n : "/");
+</script>
+</head>
+<body>
+  <p><a href="/">Go to the Count. PAYE calculator</a></p>
+</body>
+</html>
