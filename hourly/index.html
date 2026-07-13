@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-NZ" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("theme-alt")==="light"?"light":"dark");</script>
+<title>Hourly Rate to Salary NZ — After-Tax Tables (2026–27)</title>
+<meta name="description" content="What $23–$100 an hour is as a yearly salary in New Zealand, and the take-home pay after PAYE, ACC and KiwiSaver for the 2026–27 tax year.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://count.co.nz/hourly/">
+<meta property="og:title" content="Hourly Rate to Salary NZ — After-Tax Tables (2026–27)">
+<meta property="og:description" content="What $23–$100 an hour is as a yearly salary in New Zealand, and the take-home pay after PAYE, ACC and KiwiSaver for the 2026–27 tax year.">
+<meta property="og:url" content="https://count.co.nz/hourly/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/images/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://count.co.nz/"}, {"@type": "ListItem", "position": 2, "name": "Hourly to salary", "item": "https://count.co.nz/hourly/"}]}</script>
+<style>
+:root{--bg:#F4F4F4;--surface:#FFFFFF;--card:#ECECEC;--border:#DEDEDE;--accent:#2C5C3C;
+--accent-mid:#245030;--accent-light:#E6F0EA;--accent-dim:#5A8C6A;--text:#111;--dim:#333;
+--muted:#777;--ring:rgba(44,92,60,.12)}
+[data-theme="dark"]{--bg:#111;--surface:#1A1A1A;--card:#222;--border:#303030;--accent:#4E8C62;
+--accent-mid:#3D7250;--accent-light:#1A261D;--accent-dim:#4E8C62;--text:#F0F0F0;--dim:#C4C4C4;
+--muted:#808080;--ring:rgba(78,140,98,.2)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);background-image:radial-gradient(900px 480px at 50% -120px,var(--accent-light) 0%,transparent 70%);
+background-repeat:no-repeat;color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;
+font-size:15px;line-height:1.6;min-height:100vh}
+main{max-width:760px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.crumbs{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem}
+.crumbs a{color:var(--muted)}.crumbs a:first-child{font-weight:800;color:var(--accent)}
+h1{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:.35rem}
+.sub{color:var(--muted);margin-bottom:1.5rem}
+h2{font-size:1.05rem;font-weight:700;margin:2.2rem 0 .8rem}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.answer-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem}
+.answer-card.primary{border-color:var(--accent);box-shadow:0 0 0 3px var(--ring)}
+.answer-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:.6rem}
+.answer-big{font-size:1.55rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1}
+.answer-big span{font-size:.8rem;font-weight:600;color:var(--muted)}
+.answer-rows{margin-top:.7rem;font-size:.85rem;color:var(--dim)}
+.answer-rows div{display:flex;justify-content:space-between;padding:.15rem 0;font-variant-numeric:tabular-nums}
+.answer-rows span:first-child{color:var(--muted)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);
+border-radius:12px;overflow:hidden;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.55rem .9rem;border-bottom:1px solid var(--border)}
+th{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--card)}
+td:last-child,th:last-child,td.num,th.num{text-align:right}
+tr:last-child td{border-bottom:none}
+tr.total td{font-weight:700}
+tr.takehome td{color:var(--accent);font-weight:800;background:var(--accent-light)}
+.callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem;color:var(--dim)}
+.rates{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+.rate-chip{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;flex:1;min-width:140px}
+.rate-chip b{display:block;font-size:1.2rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.rate-chip span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.cta{display:inline-block;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);
+color:#fff;font-weight:700;padding:.7rem 1.4rem;border-radius:10px;margin:.5rem 0}
+.cta:hover{text-decoration:none;filter:brightness(1.08)}
+.faq{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.2rem 1.2rem;margin:1rem 0}
+.faq details{border-bottom:1px solid var(--border);padding:.7rem 0}
+.faq details:last-child{border-bottom:none}
+.faq summary{font-weight:600;cursor:pointer;font-size:.92rem}
+.faq p{font-size:.88rem;color:var(--dim);margin-top:.5rem}
+.linkgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.linkgrid a{background:var(--surface);border:1px solid var(--border);border-radius:999px;
+padding:.35rem .9rem;font-size:.85rem;font-weight:600;color:var(--dim)}
+.linkgrid a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.fine{font-size:.78rem;color:var(--muted);margin-top:2rem}
+.hub-band{margin-bottom:2rem}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:.5rem}
+.hub-grid a{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+padding:.5rem .85rem;font-size:.85rem;display:flex;justify-content:space-between;color:var(--dim);font-variant-numeric:tabular-nums}
+.hub-grid a b{color:var(--text)}.hub-grid a span{color:var(--accent);font-weight:600}
+.hub-grid a:hover{border-color:var(--accent);text-decoration:none}
+footer{border-top:1px solid var(--border);margin-top:3rem;padding-top:1.2rem;display:flex;
+justify-content:space-between;flex-wrap:wrap;gap:.8rem;font-size:.8rem;color:var(--muted)}
+footer .brand{font-weight:800;color:var(--accent)}
+footer nav{display:flex;gap:1rem;flex-wrap:wrap}
+@media(max-width:600px){.answer{grid-template-columns:1fr}h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<main>
+<nav class="crumbs"><a href="/">Count.</a> &rsaquo; <span>Hourly to salary</span></nav>
+<h1>Hourly Rate to Yearly Salary in NZ (2026–27)</h1>
+<p class="sub">Each rate assumes 40 hours/week, 52 weeks/year. The gross annual salary is shown on
+the link; the green figure is yearly take-home with 3.5% KiwiSaver (the calculator default).
+On a salary instead? See <a href="/salary/">salary after tax</a>, or use the
+<a href="/">calculator</a> for your exact hours.</p>
+<div class="hub-band"><h2>$23 – $30 an hour</h2><div class="hub-grid"><a href="/hourly/23/"><b>$23/hr &rarr; $47,840</b><span>$38,048/yr</span></a><a href="/hourly/24/"><b>$24/hr &rarr; $49,920</b><span>$39,655/yr</span></a><a href="/hourly/25/"><b>$25/hr &rarr; $52,000</b><span>$41,262/yr</span></a><a href="/hourly/26/"><b>$26/hr &rarr; $54,080</b><span>$42,796/yr</span></a><a href="/hourly/27/"><b>$27/hr &rarr; $56,160</b><span>$44,143/yr</span></a><a href="/hourly/28/"><b>$28/hr &rarr; $58,240</b><span>$45,490/yr</span></a><a href="/hourly/29/"><b>$29/hr &rarr; $60,320</b><span>$46,837/yr</span></a><a href="/hourly/30/"><b>$30/hr &rarr; $62,400</b><span>$48,184/yr</span></a></div></div><div class="hub-band"><h2>$31 – $40 an hour</h2><div class="hub-grid"><a href="/hourly/31/"><b>$31/hr &rarr; $64,480</b><span>$49,530/yr</span></a><a href="/hourly/32/"><b>$32/hr &rarr; $66,560</b><span>$50,877/yr</span></a><a href="/hourly/33/"><b>$33/hr &rarr; $68,640</b><span>$52,224/yr</span></a><a href="/hourly/34/"><b>$34/hr &rarr; $70,720</b><span>$53,571/yr</span></a><a href="/hourly/35/"><b>$35/hr &rarr; $72,800</b><span>$54,918/yr</span></a><a href="/hourly/36/"><b>$36/hr &rarr; $74,880</b><span>$56,264/yr</span></a><a href="/hourly/37/"><b>$37/hr &rarr; $76,960</b><span>$57,611/yr</span></a><a href="/hourly/38/"><b>$38/hr &rarr; $79,040</b><span>$58,930/yr</span></a><a href="/hourly/39/"><b>$39/hr &rarr; $81,120</b><span>$60,214/yr</span></a><a href="/hourly/40/"><b>$40/hr &rarr; $83,200</b><span>$61,499/yr</span></a></div></div><div class="hub-band"><h2>$41 – $50 an hour</h2><div class="hub-grid"><a href="/hourly/41/"><b>$41/hr &rarr; $85,280</b><span>$62,783/yr</span></a><a href="/hourly/42/"><b>$42/hr &rarr; $87,360</b><span>$64,067/yr</span></a><a href="/hourly/43/"><b>$43/hr &rarr; $89,440</b><span>$65,352/yr</span></a><a href="/hourly/44/"><b>$44/hr &rarr; $91,520</b><span>$66,636/yr</span></a><a href="/hourly/45/"><b>$45/hr &rarr; $93,600</b><span>$67,921/yr</span></a><a href="/hourly/46/"><b>$46/hr &rarr; $95,680</b><span>$69,205/yr</span></a><a href="/hourly/47/"><b>$47/hr &rarr; $97,760</b><span>$70,489/yr</span></a><a href="/hourly/48/"><b>$48/hr &rarr; $99,840</b><span>$71,774/yr</span></a><a href="/hourly/49/"><b>$49/hr &rarr; $101,920</b><span>$73,058/yr</span></a><a href="/hourly/50/"><b>$50/hr &rarr; $104,000</b><span>$74,343/yr</span></a></div></div><div class="hub-band"><h2>$51 – $70 an hour</h2><div class="hub-grid"><a href="/hourly/51/"><b>$51/hr &rarr; $106,080</b><span>$75,627/yr</span></a><a href="/hourly/52/"><b>$52/hr &rarr; $108,160</b><span>$76,911/yr</span></a><a href="/hourly/53/"><b>$53/hr &rarr; $110,240</b><span>$78,196/yr</span></a><a href="/hourly/54/"><b>$54/hr &rarr; $112,320</b><span>$79,480/yr</span></a><a href="/hourly/55/"><b>$55/hr &rarr; $114,400</b><span>$80,765/yr</span></a><a href="/hourly/56/"><b>$56/hr &rarr; $116,480</b><span>$82,049/yr</span></a><a href="/hourly/57/"><b>$57/hr &rarr; $118,560</b><span>$83,333/yr</span></a><a href="/hourly/58/"><b>$58/hr &rarr; $120,640</b><span>$84,618/yr</span></a><a href="/hourly/59/"><b>$59/hr &rarr; $122,720</b><span>$85,902/yr</span></a><a href="/hourly/60/"><b>$60/hr &rarr; $124,800</b><span>$87,187/yr</span></a><a href="/hourly/61/"><b>$61/hr &rarr; $126,880</b><span>$88,471/yr</span></a><a href="/hourly/62/"><b>$62/hr &rarr; $128,960</b><span>$89,755/yr</span></a><a href="/hourly/63/"><b>$63/hr &rarr; $131,040</b><span>$91,040/yr</span></a><a href="/hourly/64/"><b>$64/hr &rarr; $133,120</b><span>$92,324/yr</span></a><a href="/hourly/65/"><b>$65/hr &rarr; $135,200</b><span>$93,609/yr</span></a><a href="/hourly/66/"><b>$66/hr &rarr; $137,280</b><span>$94,893/yr</span></a><a href="/hourly/67/"><b>$67/hr &rarr; $139,360</b><span>$96,177/yr</span></a><a href="/hourly/68/"><b>$68/hr &rarr; $141,440</b><span>$97,462/yr</span></a><a href="/hourly/69/"><b>$69/hr &rarr; $143,520</b><span>$98,746/yr</span></a><a href="/hourly/70/"><b>$70/hr &rarr; $145,600</b><span>$100,031/yr</span></a></div></div><div class="hub-band"><h2>$75+ an hour</h2><div class="hub-grid"><a href="/hourly/75/"><b>$75/hr &rarr; $156,000</b><span>$106,453/yr</span></a><a href="/hourly/80/"><b>$80/hr &rarr; $166,400</b><span>$113,045/yr</span></a><a href="/hourly/90/"><b>$90/hr &rarr; $187,200</b><span>$125,821/yr</span></a><a href="/hourly/100/"><b>$100/hr &rarr; $208,000</b><span>$137,781/yr</span></a></div></div>
+<p class="fine">Figures use NZ 2026–27 PAYE rates: tax code M, ACC earners&rsquo; levy of 1.75% (capped at $156,641), no independent earner tax credit. KiwiSaver figures are employee contributions only. Hourly conversions assume 40 hours/week, 52 weeks/year. Rates sourced from <a href="https://www.ird.govt.nz" rel="noopener">IRD</a>. This is general information, not financial advice.</p>
+<footer>
+  <div><span class="brand">Count.</span> &copy; 2023&ndash;2026 Count.co.nz &middot; Free NZ PAYE &amp; salary calculator</div>
+  <nav>
+    <a href="/">Calculator</a>
+    <a href="/salary/">Salary after tax</a>
+    <a href="/hourly/">Hourly to salary</a>
+  </nav>
+</footer>
+</main>
+</body>
+</html>
