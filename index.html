@@ -12,7 +12,6 @@
 <title>PAYE Calculator NZ 2026-27 - Free Take-Home Pay & Salary Calculator | Count.</title>
 <meta name="description" content="Free PAYE calculator for New Zealand. PAYE (Pay As You Earn) is the tax deducted from your wages — enter your salary or hourly rate to see your take-home pay after income tax, ACC, KiwiSaver and student loan. Updated for 2026-27.">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="PAYE, PAYE calculator, PAYE calculator NZ, PAYE meaning, what is PAYE, PAYE rates NZ, PAYE tax NZ, NZ PAYE calculator 2026, NZ salary calculator, take home pay calculator NZ, NZ tax calculator 2026-27, income tax calculator New Zealand, KiwiSaver calculator NZ, net pay calculator NZ, salary after tax New Zealand, NZ wage calculator, payslip calculator NZ, ACC levy calculator, student loan repayment calculator NZ">
 <meta name="author" content="Count.co.nz">
 <link rel="canonical" href="https://count.co.nz/">
 
@@ -22,7 +21,7 @@
 <meta property="og:url" content="https://count.co.nz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Count.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PAYE Calculator NZ 2026-27 - Free Take-Home Pay Calculator | Count.">
 <meta name="twitter:description" content="Work out your NZ take-home pay instantly. See PAYE tax, ACC, KiwiSaver and student loan deductions. Free and updated for 2026-27.">
 
@@ -307,11 +306,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <!-- Social image -->
-<meta property="og:image" content="https://count.co.nz/images/hero.png">
+<meta property="og:image" content="https://count.co.nz/images/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_NZ">
-<meta name="twitter:image" content="https://count.co.nz/images/hero.png">
+<meta name="twitter:image" content="https://count.co.nz/images/og.png">
 <meta name="twitter:site" content="@countconz">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-077CHWJ9XD"></script>
@@ -1030,7 +1029,8 @@
   .footer-links {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: .6rem 1.5rem;
   }
   .footer-link {
     background: none;
@@ -1182,6 +1182,16 @@
     gap: .75rem;
     margin-top: .25rem;
   }
+  a.salary-item { display: block; text-decoration: none; transition: box-shadow .15s; }
+  a.salary-item:hover { box-shadow: 0 0 0 2px var(--accent); }
+  .link-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: .2rem 0 1rem; }
+  .link-chips:last-child { margin-bottom: 0; }
+  .link-chips a {
+    background: var(--card); border-radius: 999px; padding: .32rem .8rem;
+    font-size: .76rem; font-weight: 600; color: var(--dim); text-decoration: none;
+  }
+  .link-chips a:hover { color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
+  .chip-label { font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); margin-bottom: .4rem; }
   .salary-item {
     background: var(--card);
     border-radius: 10px;
@@ -1485,7 +1495,7 @@
             <tr><td>Over $180,000</td><td>39%</td><td>On each dollar above</td></tr>
           </tbody>
         </table>
-        <p style="margin-top:.9rem">Source: <a href="https://www.ird.govt.nz" target="_blank" style="color:var(--accent);font-weight:500">Inland Revenue (IRD)</a>. Rates apply for the 2026-27 tax year.</p>
+        <p style="margin-top:.9rem">Source: <a href="https://www.ird.govt.nz" target="_blank" style="color:var(--accent);font-weight:500">Inland Revenue (IRD)</a>. Rates apply for the 2026-27 tax year. See <a href="/tax-rates/" style="color:var(--accent);font-weight:500">tax rates for previous years</a>.</p>
       </div>
 
       <div class="info-card">
@@ -1503,28 +1513,38 @@
       <div class="info-card">
         <h2>Common salary take-home pay</h2>
         <div class="salary-grid">
-          <div class="salary-item">
+          <a class="salary-item" href="/salary/50000/">
             <div class="salary-gross">$50k</div>
             <div class="salary-net">$39,717</div>
             <div class="salary-pw">~$764/wk</div>
-          </div>
-          <div class="salary-item">
+          </a>
+          <a class="salary-item" href="/salary/70000/">
             <div class="salary-gross">$70k</div>
             <div class="salary-net">$53,105</div>
             <div class="salary-pw">~$1,021/wk</div>
-          </div>
-          <div class="salary-item">
+          </a>
+          <a class="salary-item" href="/salary/100000/">
             <div class="salary-gross">$100k</div>
             <div class="salary-net">$71,873</div>
             <div class="salary-pw">~$1,382/wk</div>
-          </div>
-          <div class="salary-item">
+          </a>
+          <a class="salary-item" href="/salary/150000/">
             <div class="salary-gross">$150k</div>
             <div class="salary-net">$102,748</div>
             <div class="salary-pw">~$1,976/wk</div>
-          </div>
+          </a>
         </div>
-        <p style="margin-top:.8rem;font-size:.72rem">Based on tax code M, 3.5% KiwiSaver, no student loan. Use the calculator above for your exact figures.</p>
+        <p style="margin-top:.8rem;font-size:.72rem">Based on tax code M, 3.5% KiwiSaver, no student loan. See <a href="/salary/" style="color:var(--accent);font-weight:500">every salary from $20,000 to $300,000</a>, or use the calculator above for your exact figures.</p>
+      </div>
+
+      <div class="info-card full" id="pay-tools">
+        <h2>Take-home pay tables and tools</h2>
+        <div class="chip-label">Salary after tax</div>
+        <div class="link-chips"><a href="/salary/40000/">$40,000</a><a href="/salary/45000/">$45,000</a><a href="/salary/50000/">$50,000</a><a href="/salary/55000/">$55,000</a><a href="/salary/60000/">$60,000</a><a href="/salary/65000/">$65,000</a><a href="/salary/70000/">$70,000</a><a href="/salary/75000/">$75,000</a><a href="/salary/80000/">$80,000</a><a href="/salary/90000/">$90,000</a><a href="/salary/100000/">$100,000</a><a href="/salary/120000/">$120,000</a><a href="/salary/150000/">$150,000</a><a href="/salary/200000/">$200,000</a><a href="/salary/">All salaries</a></div>
+        <div class="chip-label">Hourly, weekly and monthly pay</div>
+        <div class="link-chips"><a href="/hourly/25/">$25 an hour</a><a href="/hourly/30/">$30 an hour</a><a href="/hourly/35/">$35 an hour</a><a href="/hourly/40/">$40 an hour</a><a href="/hourly/50/">$50 an hour</a><a href="/hourly/">All hourly rates</a><a href="/weekly/1000/">$1,000 a week</a><a href="/weekly/1500/">$1,500 a week</a><a href="/weekly/">Weekly pay</a><a href="/fortnightly/">Fortnightly pay</a><a href="/monthly/5000/">$5,000 a month</a><a href="/monthly/">Monthly pay</a></div>
+        <div class="chip-label">Calculators and guides</div>
+        <div class="link-chips"><a href="/tax-rates/">NZ tax rates by year</a><a href="/secondary-tax/">Secondary tax</a><a href="/student-loan/">Student loan repayments</a><a href="/kiwisaver/">KiwiSaver rates compared</a><a href="/minimum-wage/">Minimum wage after tax</a><a href="/pay-rise/">Pay rise calculator</a><a href="/bonus-tax/">Bonus &amp; redundancy tax</a><a href="/contractor-tax/">Contractor tax</a><a href="/acc-levy/">ACC earners&rsquo; levy</a><a href="/nz-vs-australia/">NZ vs Australia</a></div>
       </div>
 
       <div class="info-card" id="what-is-paye">
@@ -1578,9 +1598,10 @@
           <li><span class="rate-label">S</span><span class="rate-val">Secondary job, $15,601–$53,500</span></li>
           <li><span class="rate-label">SH</span><span class="rate-val">Secondary job, $53,501–$78,100</span></li>
           <li><span class="rate-label">ST</span><span class="rate-val">Secondary job, $78,101–$180,000</span></li>
+          <li><span class="rate-label">SA</span><span class="rate-val">Secondary job, over $180,000</span></li>
           <li><span class="rate-label">CAE</span><span class="rate-val">Casual agricultural employee</span></li>
         </ul>
-        <p>Most employees use code M for their main job. If you have a student loan, your employer will use M SL. Secondary jobs always use a separate code based on your total expected income for the year.</p>
+        <p>Most employees use code M for their main job. If you have a student loan, your employer will use M SL. Secondary jobs always use a separate code based on your total expected income for the year. See the <a href="/secondary-tax/" style="color:var(--accent);font-weight:500">secondary tax calculator</a>.</p>
       </div>
 
       <div class="info-card">
@@ -1627,6 +1648,9 @@
       <div class="footer-links">
         <a class="footer-link" href="/salary/">Salary after tax</a>
         <a class="footer-link" href="/hourly/">Hourly to salary</a>
+        <a class="footer-link" href="/weekly/">Weekly pay</a>
+        <a class="footer-link" href="/tax-rates/">Tax rates</a>
+        <a class="footer-link" href="#pay-tools">All tools</a>
         <a class="footer-link" href="mailto:hello@count.co.nz">hello@count.co.nz</a>
         <button class="footer-link" onclick="openLegal('disclaimer')">Disclaimer</button>
         <button class="footer-link" onclick="openLegal('privacy')">Privacy</button>

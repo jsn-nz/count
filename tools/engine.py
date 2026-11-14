@@ -58,6 +58,29 @@ def _parse_constants_from_index():
 TAX_YEARS = {
     "2026-27": _parse_constants_from_index(),
     # "2027-28": { ... add literal config here when rates are announced ... },
+
+    # Past years, kept for the /tax-rates/<year>/ archive pages. Brackets are
+    # IRD's statutory rates (Taxable income distribution workbook, "Income Tax
+    # Rates" sheet); ACC rates are GST-inclusive with ACC's published caps.
+    "2025-26": {
+        "brackets": [(15600, 0.105), (53500, 0.175), (78100, 0.30),
+                     (180000, 0.33), (float("inf"), 0.39)],
+        "acc_rate": 0.0167, "acc_cap": 152790,
+        "sl_threshold": 24128, "sl_rate": 0.12, "min_wage": 23.50,
+        "kiwisaver_rates": [3, 4, 6, 8, 10], "kiwisaver_default": 3,
+        "hours_per_week": 40, "weeks_per_year": 52,
+    },
+    # Composite year: thresholds moved on 31 July 2024, so IRD publishes
+    # blended full-year rates.
+    "2024-25": {
+        "brackets": [(14000, 0.105), (15600, 0.1282), (48000, 0.175),
+                     (53500, 0.2164), (70000, 0.30), (78100, 0.3099),
+                     (180000, 0.33), (float("inf"), 0.39)],
+        "acc_rate": 0.0160, "acc_cap": 142283,
+        "sl_threshold": 24128, "sl_rate": 0.12, "min_wage": 23.15,
+        "kiwisaver_rates": [3, 4, 6, 8, 10], "kiwisaver_default": 3,
+        "hours_per_week": 40, "weeks_per_year": 52,
+    },
 }
 
 CURRENT_YEAR = "2026-27"

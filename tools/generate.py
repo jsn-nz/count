@@ -1,21 +1,25 @@
-"""Static page generator for count.co.nz programmatic salary/hourly pages.
+"""Static page generator for count.co.nz.
 
 Run:  python3 tools/generate.py
 
-Emits:
-  /salary/<amount>/index.html   121 pages ($40k-$150k by $1k, $160k-$250k by $10k)
-  /hourly/<rate>/index.html      52 pages ($23-$70 by $1, plus 75/80/90/100)
-  /salary/index.html, /hourly/index.html   hub pages
-  /sitemap.xml                   regenerated with all URLs
+Emits (all figures from tools/engine.py, whose constants are parsed from the
+calculator in index.html — see tools/test_engine.py for the parity proof):
+  /salary/<amount>/       annual salaries
+  /hourly/<rate>/         hourly rates
+  /weekly/<amount>/, /fortnightly/<amount>/, /monthly/<amount>/   pay-period amounts
+  hub pages for each of the above
+  topic pages + /tax-rates/ archive (see tools/topics.py)
+  /sitemap.xml            lastmod only moves when a page's content changes
+                          (hashes kept in tools/lastmod.json)
 
-All figures come from tools/engine.py, whose constants are parsed from the
-calculator in index.html — see tools/test_engine.py for the parity proof.
-Zero client-side JS on these pages except the same 2-line theme bootstrap the
-homepage uses (reads the shared localStorage key so the theme matches on
-click-through).
+Salary/hourly/period pages carry no JS beyond the theme bootstrap and the
+analytics tag; topic pages add a small inline calculator.
 """
 
+import hashlib
+import html as _html
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -33,10 +37,25 @@ e = Engine()
 C = TAX_YEARS[CURRENT_YEAR]
 HPY = e.hours_per_year  # 2080
 
-SALARIES = list(range(40_000, 150_001, 1_000)) + list(range(160_000, 250_001, 10_000))
+SALARIES = (list(range(20_000, 150_001, 1_000)) + list(range(155_000, 250_001, 5_000))
+            + [275_000, 300_000])
 HOURLIES = list(range(23, 71)) + [75, 80, 90, 100]
 
-PERCENTILES_FILE = REPO_ROOT / "data" / "income-percentiles.json"
+# Pay-period pages: gross amount per period -> annualised with the multiplier.
+PERIODS = {
+    "weekly":      {"n": 52, "noun": "week", "adj": "Weekly", "a": "a week",
+                    "amounts": list(range(500, 2_501, 50)) + list(range(2_600, 4_001, 100))},
+    "fortnightly": {"n": 26, "noun": "fortnight", "adj": "Fortnightly", "a": "a fortnight",
+                    "amounts": list(range(1_000, 5_001, 100)) + list(range(5_200, 8_001, 200))},
+    "monthly":     {"n": 12, "noun": "month", "adj": "Monthly", "a": "a month",
+                    "amounts": list(range(2_000, 10_001, 250)) + list(range(10_500, 20_001, 500))},
+}
+
+GA_ID = "G-077CHWJ9XD"   # same property as index.html
+OG_IMAGE = SITE + "/images/og.png"   # 1200x630, built from tools/og.html
+LASTMOD_FILE = REPO_ROOT / "tools" / "lastmod.json"
+
+PERCENTILES_FILE = REPO_ROOT / "data" / "income-percentiles.json"   # built from IRD band counts
 
 
 def pick(variants, seed, salt):
@@ -110,6 +129,24 @@ footer{border-top:1px solid var(--border);margin-top:3rem;padding-top:1.2rem;dis
 justify-content:space-between;flex-wrap:wrap;gap:.8rem;font-size:.8rem;color:var(--muted)}
 footer .brand{font-weight:800;color:var(--accent)}
 footer nav{display:flex;gap:1rem;flex-wrap:wrap}
+main p{margin:.7rem 0}main ul.plain{margin:.7rem 0 .7rem 1.2rem;color:var(--dim);font-size:.92rem}
+main ul.plain li{margin:.3rem 0}
+.tablewrap{overflow-x:auto}
+.calc{background:var(--surface);border:1px solid var(--accent);box-shadow:0 0 0 3px var(--ring);
+border-radius:12px;padding:1.1rem 1.2rem;margin:1.5rem 0}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem}
+.calc label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.calc input[type=number],.calc select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);
+border-radius:8px;padding:.55rem .7rem;font:inherit;font-variant-numeric:tabular-nums}
+.calc input:focus,.calc select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--ring)}
+.calc .check{display:flex;align-items:center;gap:.45rem;font-size:.88rem;color:var(--dim);text-transform:none;letter-spacing:0;font-weight:500;margin-top:1.45rem}
+.calc-out{margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem;font-size:.92rem}
+.calc-out div{display:flex;justify-content:space-between;gap:1rem;padding:.25rem 0;font-variant-numeric:tabular-nums}
+.calc-out div span:first-child{color:var(--muted)}
+.calc-out div.big{font-size:1.15rem;font-weight:800;color:var(--accent)}
+.calc-out div.big span:first-child{color:var(--accent)}
+.calc-note{font-size:.8rem;color:var(--muted);margin-top:.6rem}
+footer{flex-direction:column}
 @media(max-width:600px){.answer{grid-template-columns:1fr}h1{font-size:1.4rem}}
 """.strip()
 
@@ -123,13 +160,35 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">')
 
 
-def shell(*, title, description, canonical, crumbs, jsonld, body):
+GA = ('<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>\n'
+      "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
+      "gtag('js',new Date());gtag('config','%s');</script>" % (GA_ID, GA_ID))
+
+FOOTER_LINKS = [
+    ("Calculator", "/"), ("Salary after tax", "/salary/"), ("Hourly to salary", "/hourly/"),
+    ("Weekly pay", "/weekly/"), ("Fortnightly pay", "/fortnightly/"), ("Monthly pay", "/monthly/"),
+    ("Tax rates", "/tax-rates/"), ("Secondary tax", "/secondary-tax/"),
+    ("Student loan", "/student-loan/"), ("KiwiSaver", "/kiwisaver/"),
+    ("Minimum wage", "/minimum-wage/"), ("Pay rise", "/pay-rise/"),
+    ("Bonus &amp; redundancy tax", "/bonus-tax/"), ("Contractor tax", "/contractor-tax/"),
+    ("ACC levy", "/acc-levy/"), ("NZ vs Australia", "/nz-vs-australia/"),
+]
+
+
+def plain(text):
+    """HTML fragment -> plain text for JSON-LD (search engines don't decode entities there)."""
+    text = _html.unescape(re.sub(r"<[^>]+>", "", text))
+    return text.replace("\u00a0", " ")
+
+
+def shell(*, title, description, canonical, crumbs, jsonld, body, script=""):
     crumb_html = " &rsaquo; ".join(
         '<a href="%s">%s</a>' % (href, label) if href else "<span>%s</span>" % label
         for label, href in crumbs
     )
     ld = "\n".join('<script type="application/ld+json">%s</script>'
                    % json.dumps(b, ensure_ascii=False) for b in jsonld)
+    footer = "\n".join('    <a href="%s">%s</a>' % (href, label) for label, href in FOOTER_LINKS)
     return """<!DOCTYPE html>
 <html lang="en-NZ" data-theme="dark">
 <head>
@@ -144,7 +203,17 @@ def shell(*, title, description, canonical, crumbs, jsonld, body):
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Count.">
+<meta property="og:locale" content="en_NZ">
+<meta property="og:image" content="{og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{description}">
+<meta name="twitter:image" content="{og}">
 <link rel="icon" href="/images/favicon.ico" sizes="any">
+{ga}
 {fonts}
 {ld}
 <style>
@@ -158,17 +227,16 @@ def shell(*, title, description, canonical, crumbs, jsonld, body):
 <footer>
   <div><span class="brand">Count.</span> &copy; 2023&ndash;2026 Count.co.nz &middot; Free NZ PAYE &amp; salary calculator</div>
   <nav>
-    <a href="/">Calculator</a>
-    <a href="/salary/">Salary after tax</a>
-    <a href="/hourly/">Hourly to salary</a>
+{footer}
   </nav>
 </footer>
 </main>
+{script}
 </body>
 </html>
 """.format(theme_js=THEME_JS, title=title, description=description,
-           canonical=canonical, fonts=FONTS, ld=ld, css=CSS,
-           crumb_html=crumb_html, body=body)
+           canonical=canonical, fonts=FONTS, ld=ld, css=CSS, ga=GA, og=OG_IMAGE,
+           crumb_html=crumb_html, body=body, footer=footer, script=script)
 
 
 def breadcrumb_ld(items):
@@ -187,8 +255,8 @@ def faq_ld(faqs):
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {"@type": "Question", "name": q,
-             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            {"@type": "Question", "name": plain(q),
+             "acceptedAnswer": {"@type": "Answer", "text": plain(a)}}
             for q, a in faqs
         ],
     }
@@ -280,27 +348,64 @@ def kiwisaver_table(annual):
             "<tbody>%s</tbody></table>" % "".join(rows))
 
 
-def percentile_block(annual):
+def _load_percentiles():
     if not PERCENTILES_FILE.exists():
+        return None
+    data = json.loads(PERCENTILES_FILE.read_text(encoding="utf-8"))
+    data["cumulative"] = [(float(v), float(p)) for v, p in data["cumulative"]]
+    return data
+
+
+PCT = _load_percentiles()
+
+
+def percentile_of(annual):
+    """% of wage and salary earners at or below this income, or None if out of range."""
+    if not PCT:
+        return None
+    pts = PCT["cumulative"]
+    if annual < pts[0][0] or annual > pts[-1][0]:
+        return None
+    prev_v, prev_p = 0.0, 0.0
+    for v, p in pts:
+        if annual <= v:
+            return prev_p + (p - prev_p) * (annual - prev_v) / (v - prev_v)
+        prev_v, prev_p = v, p
+    return None
+
+
+def percentile_block(annual):
+    pct = percentile_of(annual)
+    if pct is None:
         return ""
-    try:
-        data = json.loads(PERCENTILES_FILE.read_text(encoding="utf-8"))
-        pts = sorted((float(v), float(k)) for k, v in data["percentiles"].items())
-    except Exception:
-        return ""
-    if not pts:
-        return ""
-    if annual <= pts[0][0]:
-        pct = pts[0][1]
-    elif annual >= pts[-1][0]:
-        pct = pts[-1][1]
+    below = int(pct)            # floor: never overstate
+    if below >= 99:
+        line = "more than 99% of"
     else:
-        pct = next(p1 + (p2 - p1) * (annual - v1) / (v2 - v1)
-                   for (v1, p1), (v2, p2) in zip(pts, pts[1:])
-                   if v1 <= annual <= v2)
-    return ("<h2>How does it compare?</h2>\n<div class=\"callout\">A %s income is higher than "
-            "roughly %d%% of individual incomes in New Zealand (%s, Stats NZ).</div>"
-            % (fm0(annual), round(pct), data.get("source_year", "latest available")))
+        line = "about %d%% of" % below
+    top = 100 - below
+    return ("<h2>How does it compare?</h2>\n<div class=\"callout\">Wage or salary income of %s a year is "
+            "higher than %s New Zealand wage and salary earners &mdash; roughly the top %d%%. "
+            "The median earner received about %s.</div>\n<p class=\"fine\" style=\"margin-top:.4rem\">"
+            "Source: <a href=\"%s\" rel=\"noopener\">Inland Revenue wage and salary distributions</a>, "
+            "%s (%s people). That count includes part-time and part-year workers, so full-time "
+            "salaries rank lower against full-time workers alone.</p>"
+            % (fm0(annual), line, max(top, 1), fm0(PCT_MEDIAN), PCT["source_url"],
+               PCT["source_year"], nf(PCT["population"], 0)))
+
+
+def _median():
+    if not PCT:
+        return 0
+    prev_v, prev_p = 0.0, 0.0
+    for v, p in PCT["cumulative"]:
+        if p >= 50:
+            return round((prev_v + (v - prev_v) * (50 - prev_p) / (p - prev_p)) / 100) * 100
+        prev_v, prev_p = v, p
+    return 0
+
+
+PCT_MEDIAN = _median()
 
 
 def faq_block(faqs):
@@ -445,6 +550,15 @@ def nearest(value, options):
     return min(options, key=lambda o: abs(o - value))
 
 
+def _dedup(pairs):
+    seen, out = set(), []
+    for label, href in pairs:
+        if href not in seen:
+            seen.add(href)
+            out.append((label, href))
+    return out
+
+
 def salary_links(a):
     pairs = []
     for delta in (-10_000, -5_000, -1_000, 1_000, 5_000, 10_000):
@@ -452,15 +566,18 @@ def salary_links(a):
         if other in SALARIES and other != a:
             label = "%s%s" % ("&minus;" if delta < 0 else "+", fm0(abs(delta)))
             pairs.append(("%s &middot; %s" % (label, fm0(other)), "/salary/%d/" % other))
+    i = SALARIES.index(a)
+    for j in (i - 1, i + 1):          # sparse ranges: always link the list neighbours
+        if 0 <= j < len(SALARIES):
+            pairs.append((fm0(SALARIES[j]), "/salary/%d/" % SALARIES[j]))
     hr = nearest(a / HPY, HOURLIES)
     pairs.append(("&asymp; $%d/hour" % hr, "/hourly/%d/" % hr))
-    # de-dup preserving order
-    seen, out = set(), []
-    for label, href in pairs:
-        if href not in seen:
-            seen.add(href)
-            out.append((label, href))
-    return out
+    wk = nearest(a / 52, PERIODS["weekly"]["amounts"])
+    pairs.append(("&asymp; %s/week" % fm0(wk), "/weekly/%d/" % wk))
+    mo = nearest(a / 12, PERIODS["monthly"]["amounts"])
+    pairs.append(("&asymp; %s/month" % fm0(mo), "/monthly/%d/" % mo))
+    pairs.append(("Pay rise calculator", "/pay-rise/"))
+    return _dedup(pairs)
 
 
 def hourly_links(r):
@@ -472,12 +589,10 @@ def hourly_links(r):
                           "/hourly/%d/" % other))
     sal = nearest(e.hourly_to_annual(r), SALARIES)
     pairs.append(("&asymp; %s salary" % fm0(sal), "/salary/%d/" % sal))
-    seen, out = set(), []
-    for label, href in pairs:
-        if href not in seen:
-            seen.add(href)
-            out.append((label, href))
-    return out
+    wk = nearest(r * 40, PERIODS["weekly"]["amounts"])
+    pairs.append(("&asymp; %s/week" % fm0(wk), "/weekly/%d/" % wk))
+    pairs.append(("Minimum wage after tax", "/minimum-wage/"))
+    return _dedup(pairs)
 
 
 # ── Pages ────────────────────────────────────────────────────────────────────
@@ -487,7 +602,7 @@ def salary_page(a):
     br = e.breakdown(a, kiwisaver_pct=3.5)
     path = "/salary/%d/" % a
     faqs = salary_faqs(a, seed)
-    title = "%s After Tax NZ (%s) — Take-Home Pay" % (fm0(a), YEAR)
+    title = "%s After Tax NZ (%s): %s/wk | Count." % (fm0(a), YEAR, fm0(br["net"] / 52))
     desc = ("%s after tax in New Zealand (%s): %s a year take-home (%s/week) with 3.5%% KiwiSaver, "
             "after PAYE and ACC. Full breakdown, KiwiSaver and student loan scenarios."
             % (fm0(a), YEAR, fm(br["net"]), fm(br["net"] / 52)))
@@ -508,7 +623,7 @@ def salary_page(a):
 <h2>Effective vs marginal rate</h2>
 {rates}
 <h2>KiwiSaver &amp; student loan scenarios</h2>
-{ks}
+<div class="tablewrap">{ks}</div>
 <h2>Hourly equivalent</h2>
 <div class="callout">{g} a year is <b>{grosshr}</b> an hour before tax at 40 hours/week
 (52 weeks). After PAYE and ACC you keep about <b>{nethr}</b> an hour.</div>
@@ -537,7 +652,7 @@ def hourly_page(r):
     path = "/hourly/%d/" % r
     faqs = hourly_faqs(r, r)
     rl = "$" + nf(r, 0)
-    title = "%s an Hour is How Much a Year in NZ? (%s)" % (rl, YEAR)
+    title = "%s an Hour = %s a Year NZ: %s/wk After Tax" % (rl, fm0(annual), fm0(br["net"] / 52))
     desc = ("%s an hour in New Zealand is %s a year gross (40 hrs/week). Take-home for %s: %s "
             "a year with 3.5%% KiwiSaver after PAYE and ACC. Full breakdown inside."
             % (rl, fm0(annual), YEAR, fm(br["net"])))
@@ -558,7 +673,7 @@ Count. PAYE calculator.</p>
 <h2>Effective vs marginal rate</h2>
 {rates}
 <h2>KiwiSaver &amp; student loan scenarios</h2>
-{ks}
+<div class="tablewrap">{ks}</div>
 <h2>Quick conversions</h2>
 <div class="callout">{rl}/hour &rarr; <b>{d}</b> a day (8 hrs) &middot; <b>{w}</b> a week &middot;
 <b>{f}</b> a fortnight &middot; <b>{m}</b> a month &middot; <b>{gross}</b> a year &mdash; all before tax.</div>
@@ -590,19 +705,20 @@ def hub_grid(items):
 
 
 def salary_hub():
-    bands = [("$40,000 – $60,000", range(40_000, 60_001, 1_000)),
+    bands = [("$20,000 – $39,000", range(20_000, 40_000, 1_000)),
+             ("$40,000 – $60,000", range(40_000, 60_001, 1_000)),
              ("$61,000 – $80,000", range(61_000, 80_001, 1_000)),
              ("$81,000 – $100,000", range(81_000, 100_001, 1_000)),
              ("$101,000 – $125,000", range(101_000, 125_001, 1_000)),
              ("$126,000 – $150,000", range(126_000, 150_001, 1_000)),
-             ("$160,000 – $250,000", range(160_000, 250_001, 10_000))]
+             ("$155,000 – $300,000", [a for a in SALARIES if a > 150_000])]
     sections = []
     for label, rng in bands:
         items = [(fm0(a), fm0(e.breakdown(a, kiwisaver_pct=3.5)["net"]), "/salary/%d/" % a)
                  for a in rng if a in SALARIES]
         sections.append('<div class="hub-band"><h2>%s</h2>%s</div>' % (label, hub_grid(items)))
-    title = "Salary After Tax NZ — Take-Home Pay Tables (%s)" % YEAR
-    desc = ("Take-home pay for every salary from $40,000 to $250,000 in New Zealand, %s tax year. "
+    title = "Salary After Tax NZ (%s): Take-Home Tables | Count." % YEAR
+    desc = ("Take-home pay for every salary from $20,000 to $300,000 in New Zealand, %s tax year. "
             "PAYE, ACC, KiwiSaver and student loan included — pick your salary for the full breakdown." % YEAR)
     body = """<h1>Salary After Tax in New Zealand ({yr})</h1>
 <p class="sub">Pick a salary to see its full take-home breakdown &mdash; PAYE by bracket, ACC,
@@ -630,7 +746,7 @@ def hourly_hub():
                   "/hourly/%d/" % r)
                  for r in rng if r in HOURLIES]
         sections.append('<div class="hub-band"><h2>%s</h2>%s</div>' % (label, hub_grid(items)))
-    title = "Hourly Rate to Salary NZ — After-Tax Tables (%s)" % YEAR
+    title = "Hourly Rate to Salary NZ (%s), After Tax | Count." % YEAR
     desc = ("What $23–$100 an hour is as a yearly salary in New Zealand, and the take-home pay "
             "after PAYE, ACC and KiwiSaver for the %s tax year." % YEAR)
     body = """<h1>Hourly Rate to Yearly Salary in NZ ({yr})</h1>
@@ -646,51 +762,206 @@ On a salary instead? See <a href="/salary/">salary after tax</a>, or use the
                  body=body)
 
 
-# ── Sitemap ──────────────────────────────────────────────────────────────────
+# ── Pay-period pages (/weekly/, /fortnightly/, /monthly/) ───────────────────
 
-def sitemap(urls):
-    entries = ["""  <url>
-    <loc>https://count.co.nz/</loc>
-    <lastmod>2026-06-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>"""]
-    for path, priority in urls:
-        entries.append("""  <url>
-    <loc>%s%s</loc>
-    <lastmod>%s</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>%s</priority>
-  </url>""" % (SITE, path, TODAY, priority))
-    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "\n".join(entries) + "\n</urlset>\n")
+def period_page(kind, amt):
+    P = PERIODS[kind]
+    n, noun, per = P["n"], P["noun"], P["a"]
+    per_t = "a " + noun.title()          # "a Week" for titles/headings
+    annual = amt * n
+    a = e.breakdown(annual)
+    b = e.breakdown(annual, kiwisaver_pct=3.5)
+    g = fm0(amt)
+    path = "/%s/%d/" % (kind, amt)
+    seed = amt // (50 if kind == "weekly" else 100 if kind == "fortnightly" else 250)
+
+    def card(r, label, cls):
+        others = [("Weekly", 52), ("Fortnightly", 26), ("Monthly", 12)]
+        rows = "".join("<div><span>%s</span><span>%s</span></div>" % (lab, fm(r["net"] / k))
+                       for lab, k in others if k != n)
+        return ('<div class="answer-card %s"><div class="answer-label">%s</div>'
+                '<div class="answer-big">%s <span>/ %s</span></div><div class="answer-rows">%s'
+                "<div><span>Yearly</span><span>%s</span></div></div></div>"
+                % (cls, label, fm(r["net"] / n), noun, rows, fm(r["net"])))
+    answer = '<div class="answer">%s\n%s</div>' % (
+        card(b, "With 3.5% KiwiSaver (calculator default)", "primary"),
+        card(a, "PAYE + ACC only (no KiwiSaver)", ""))
+
+    def row(label, v, cls="", neg=True):
+        sign = "&minus;" if neg else ""
+        return ('<tr%s><td>%s</td><td class="num">%s%s</td><td class="num">%s%s</td></tr>'
+                % (' class="%s"' % cls if cls else "", label, sign, fm(v / n), sign, fm(v)))
+    table = ('<table><thead><tr><th>Deduction</th><th class="num">Per %s</th><th class="num">Per year</th>'
+             "</tr></thead><tbody>%s</tbody></table>" % (noun, "".join([
+                 row("Gross pay", annual, neg=False),
+                 row("PAYE income tax", b["paye"]),
+                 row("ACC earners&rsquo; levy %s" % fp(C["acc_rate"], 2), b["acc"]),
+                 row("KiwiSaver (3.5%)", b["ks"]),
+                 row("Take-home pay", b["net"], "takehome", neg=False)])))
+
+    faqs = []
+    faqs.append((pick(["How much tax do I pay on %s %s in NZ?" % (g, per),
+                       "How much PAYE is deducted from %s %s?" % (g, per)], seed, 0),
+                 "On %s %s (%s a year) in %s, PAYE is %s and the ACC earners&rsquo; levy is %s per %s "
+                 "&mdash; %s in total, an effective rate of %s. With 3.5%% KiwiSaver (%s) you take home %s %s."
+                 % (g, per, fm0(annual), YEAR, fm(a["paye"] / n), fm(a["acc"] / n), noun,
+                    fm((a["paye"] + a["acc"]) / n), fp(a["effective"]), fm(b["ks"] / n), fm(b["net"] / n), per)))
+    faqs.append(("What is %s %s as a yearly salary?" % (g, per),
+                 "%s %s is %s a year before tax (%d pay periods). After PAYE and ACC that is %s a year, "
+                 "or %s with 3.5%% KiwiSaver." % (g, per, fm0(annual), n, fm(a["net"]), fm(b["net"]))))
+    if annual > C["sl_threshold"]:
+        sl = e.student_loan(annual)
+        faqs.append(("How much student loan comes out of %s %s?" % (g, per),
+                     "Repayments are 12%% of everything above %s %s (the %s yearly threshold): "
+                     "%s per %s, deducted on tax code M&nbsp;SL."
+                     % (fm(C["sl_threshold"] / n), per, fm0(C["sl_threshold"]), fm(sl / n), noun)))
+    if kind == "weekly":
+        faqs.append(("What hourly rate is %s a week?" % g,
+                     "Over a 40-hour week, %s is %s an hour before tax, and about %s an hour after "
+                     "PAYE and ACC." % (g, fm(amt / 40), fm(a["net"] / 52 / 40))))
+    else:
+        faqs.append(("What is %s %s per week?" % (g, per),
+                     "%s a week before tax, and %s a week after PAYE and ACC (%s with 3.5%% KiwiSaver)."
+                     % (fm(annual / 52), fm(a["net"] / 52), fm(b["net"] / 52))))
+
+    amounts = P["amounts"]
+    i = amounts.index(amt)
+    pairs = [("%s %s" % (fm0(amounts[j]), per), "/%s/%d/" % (kind, amounts[j]))
+             for j in (i - 2, i - 1, i + 1, i + 2) if 0 <= j < len(amounts)]
+    sal = nearest(annual, SALARIES)
+    pairs.append(("&asymp; %s salary" % fm0(sal), "/salary/%d/" % sal))
+    hr = nearest(annual / HPY, HOURLIES)
+    pairs.append(("&asymp; $%d/hour" % hr, "/hourly/%d/" % hr))
+    for other in PERIODS:
+        if other != kind:
+            o = nearest(annual / PERIODS[other]["n"], PERIODS[other]["amounts"])
+            pairs.append(("&asymp; %s %s" % (fm0(o), PERIODS[other]["a"]), "/%s/%d/" % (other, o)))
+
+    title = "%s %s After Tax NZ (%s) | Count." % (g, per_t, YEAR)
+    desc = ("%s %s after tax in New Zealand (%s): %s %s take-home with 3.5%% KiwiSaver, or %s without, "
+            "after PAYE and ACC. Equivalent to a %s salary." % (
+                g, per, YEAR, fm(b["net"] / n), per, fm(a["net"] / n), fm0(annual)))
+    sl_line = ""
+    if annual > C["sl_threshold"]:
+        slb = e.breakdown(annual, kiwisaver_pct=3.5, with_student_loan=True)
+        sl_line = ('<div class="callout">With a student loan (tax code M&nbsp;SL) a further <b>%s</b> per %s '
+                   "is deducted, leaving <b>%s</b> %s with 3.5%% KiwiSaver.</div>"
+                   % (fm(slb["sl"] / n), noun, fm(slb["net"] / n), per))
+    body = """<h1>{g} {per_t} After Tax in New Zealand ({yr})</h1>
+<p class="sub">{g} {per} before tax is <b>{gross}</b> a year. Here&rsquo;s what reaches your bank
+account each {noun} in {yr} on tax code M &mdash; same engine as the Count. PAYE calculator.</p>
+{answer}
+{cta}
+<h2>Where the money goes</h2>
+{table}
+{sl}
+<h2>Effective vs marginal rate</h2>
+{rates}
+<h2>KiwiSaver &amp; student loan scenarios (on {gross}/year)</h2>
+<div class="tablewrap">{ks}</div>
+{pct}
+<h2>FAQs</h2>
+{faq}
+<h2>Compare nearby amounts</h2>
+{links}
+{fine}""".format(
+        g=g, per=per, per_t=per_t, yr=YEAR, gross=fm0(annual), noun=noun, answer=answer,
+        cta=cta(annual), table=table, sl=sl_line, rates=rates_block(annual, seed),
+        ks=kiwisaver_table(annual), pct=percentile_block(annual), faq=faq_block(faqs),
+        links=links_block(_dedup(pairs)),
+        fine=fine_print("Per-period figures are the annual amounts divided evenly; a real payslip "
+                        "can differ by a few cents because payroll rounds each pay. "))
+    crumbs = [("Count.", "/"), ("%s pay after tax" % P["adj"], "/%s/" % kind), (g, None)]
+    ld_crumbs = [("Home", "/"), ("%s pay after tax" % P["adj"], "/%s/" % kind),
+                 ("%s %s after tax" % (g, per), path)]
+    return shell(title=title, description=desc, canonical=SITE + path, crumbs=crumbs,
+                 jsonld=[faq_ld(faqs), breadcrumb_ld(ld_crumbs)], body=body)
+
+
+def period_hub(kind):
+    P = PERIODS[kind]
+    n, per = P["n"], P["a"]
+    items = "".join(
+        '<a href="/%s/%d/"><b>%s</b><span>%s</span></a>'
+        % (kind, amt, fm0(amt), fm0(e.breakdown(amt * n, kiwisaver_pct=3.5)["net"] / n))
+        for amt in P["amounts"])
+    lo, hi = fm0(P["amounts"][0]), fm0(P["amounts"][-1])
+    title = "%s Pay After Tax NZ (%s) | Count." % (P["adj"], YEAR)
+    desc = ("What %s to %s %s is after tax in New Zealand for %s. Take-home pay after PAYE, ACC "
+            "and KiwiSaver for every amount, with a full breakdown." % (lo, hi, per, YEAR))
+    others = " &middot; ".join('<a href="/%s/">%s pay</a>' % (k, PERIODS[k]["adj"])
+                               for k in PERIODS if k != kind)
+    body = """<h1>{adj} Pay After Tax in New Zealand ({yr})</h1>
+<p class="sub">Pick your gross pay {per} to see what you take home. The green figure is take-home
+{per} with 3.5% KiwiSaver (the calculator default). See also {others}, <a href="/salary/">annual
+salaries</a> and <a href="/hourly/">hourly rates</a>, or use the <a href="/">calculator</a> for any amount.</p>
+<div class="hub-grid">{items}</div>
+{fine}""".format(adj=P["adj"], yr=YEAR, per=per, others=others, items=items, fine=fine_print())
+    name = "%s pay after tax" % P["adj"]
+    return shell(title=title, description=desc, canonical=SITE + "/%s/" % kind,
+                 crumbs=[("Count.", "/"), (name, None)],
+                 jsonld=[breadcrumb_ld([("Home", "/"), (name, "/%s/" % kind)])], body=body)
+
+
+# ── Output + sitemap (lastmod only moves when content changes) ───────────────
+
+_PAGES = []   # (path, priority, html)
+
+
+def emit(path, html, priority="0.6"):
+    """Write a page at a site path like /salary/70000/ and register it for the sitemap."""
+    out = REPO_ROOT / path.strip("/") / "index.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(html, encoding="utf-8")
+    _PAGES.append((path, priority, html))
+
+
+def write_sitemap():
+    old = json.loads(LASTMOD_FILE.read_text()) if LASTMOD_FILE.exists() else {}
+    new = {}
+    home = (REPO_ROOT / "index.html").read_text(encoding="utf-8")
+    entries = []
+    for path, priority, html in [("/", "1.0", home)] + _PAGES:
+        h = hashlib.sha256(html.encode("utf-8")).hexdigest()[:16]
+        prev = old.get(path)
+        lastmod = prev["lastmod"] if prev and prev["hash"] == h else TODAY
+        new[path] = {"hash": h, "lastmod": lastmod}
+        entries.append("  <url>\n    <loc>%s%s</loc>\n    <lastmod>%s</lastmod>\n"
+                       "    <priority>%s</priority>\n  </url>" % (SITE, path, lastmod, priority))
+    LASTMOD_FILE.write_text(json.dumps(new, indent=0, sort_keys=True) + "\n")
+    (REPO_ROOT / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries) + "\n</urlset>\n", encoding="utf-8")
+    changed = sorted(p for p in new if new[p]["lastmod"] == TODAY)
+    (REPO_ROOT / "tools" / "changed-urls.txt").write_text(
+        "".join(SITE + p + "\n" for p in changed))
+    return len(entries), len(changed)
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
-    urls = [("/salary/", "0.8"), ("/hourly/", "0.8")]
-
+    emit("/salary/", salary_hub(), "0.8")
+    emit("/hourly/", hourly_hub(), "0.8")
     for a in SALARIES:
-        out = REPO_ROOT / "salary" / str(a) / "index.html"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(salary_page(a), encoding="utf-8")
-        urls.append(("/salary/%d/" % a, "0.6"))
-
+        emit("/salary/%d/" % a, salary_page(a))
     for r in HOURLIES:
-        out = REPO_ROOT / "hourly" / str(r) / "index.html"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(hourly_page(r), encoding="utf-8")
-        urls.append(("/hourly/%d/" % r, "0.6"))
+        emit("/hourly/%d/" % r, hourly_page(r))
+    for kind, P in PERIODS.items():
+        emit("/%s/" % kind, period_hub(kind), "0.8")
+        for amt in P["amounts"]:
+            emit("/%s/%d/" % (kind, amt), period_page(kind, amt), "0.5")
 
-    (REPO_ROOT / "salary" / "index.html").write_text(salary_hub(), encoding="utf-8")
-    (REPO_ROOT / "hourly" / "index.html").write_text(hourly_hub(), encoding="utf-8")
-    (REPO_ROOT / "sitemap.xml").write_text(sitemap(urls), encoding="utf-8")
+    import topics
+    n_topics = topics.build(sys.modules[__name__])
 
-    print("Generated %d salary + %d hourly pages, 2 hubs, sitemap with %d URLs."
-          % (len(SALARIES), len(HOURLIES), len(urls) + 1))
-    if not PERCENTILES_FILE.exists():
+    total, changed = write_sitemap()
+    print("Generated %d salary, %d hourly, %d period pages, %d topic/tax-rate pages; "
+          "sitemap has %d URLs (%d changed today)."
+          % (len(SALARIES), len(HOURLIES), sum(len(P["amounts"]) for P in PERIODS.values()),
+             n_topics, total, changed))
+    if not PCT:
         print("(Percentile block skipped: %s not present.)" % PERCENTILES_FILE.relative_to(REPO_ROOT))
 
 

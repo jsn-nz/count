@@ -1,50 +1,51 @@
-# Count.co.nz - NZ PAYE Tax Calculator
+# Count.co.nz — NZ PAYE & take-home pay calculator
 
-Welcome to the repository for count.co.nz, a web application designed to calculate New Zealand's PAYE tax. The data for this calculator is sourced from [www.ird.govt.nz](https://www.ird.govt.nz).
+Source for [count.co.nz](https://count.co.nz): a free New Zealand PAYE calculator plus a few hundred
+static pages answering "what is $X after tax" for salaries, hourly rates and weekly, fortnightly and
+monthly pay, and calculators for secondary tax, student loans, KiwiSaver, pay rises, bonuses,
+contractors, the ACC levy and NZ vs Australia.
 
-## Features
+Hosted on GitHub Pages from `main`. No build step on the server: generated pages are committed.
 
-- Accurate PAYE calculations based on NZ PAYE tax rates.
-- Interactive charts to visualize tax breakdowns.
-- Responsive design that works on both desktop and mobile devices.
+## Current rates (2026–27 tax year)
 
-## New Zealand Tax Brackets (As of July 31, 2024)
+| Income | Rate |
+| --- | --- |
+| $0 – $15,600 | 10.5% |
+| $15,601 – $53,500 | 17.5% |
+| $53,501 – $78,100 | 30% |
+| $78,101 – $180,000 | 33% |
+| Over $180,000 | 39% |
 
-- $0 to $15,600: 10.5%
-- $15,601 to $53,500: 17.5%
-- $53,501 to $78,100: 30%
-- $78,101 to $180,000: 33%
-- Over $180,000: 39%
-- Source: https://www.ird.govt.nz/pages/campaigns/personal-income-tax-threshold-changes
+ACC earners' levy 1.75% (to $156,641) · KiwiSaver minimum 3.5% · student loan 12% over $24,128 ·
+adult minimum wage $23.95. Previous years: [count.co.nz/tax-rates](https://count.co.nz/tax-rates/).
 
-## PAYE Component Breakdown
+## Layout
 
-- **ACC Levy**: Fixed at 1.46% of your income.
-- **KiwiSaver**: Default rate is 3%, but adjustable.
-- **Student Loan**: 12% repayment on income over $22,828.
+| Path | What |
+| --- | --- |
+| `index.html` | The calculator (single file, vanilla JS + Chart.js). Its tax constants are the source of truth. |
+| `tools/engine.py` | Python tax engine; parses the constants out of `index.html`. Past years are literals here. |
+| `tools/generate.py` | Builds `/salary/`, `/hourly/`, `/weekly/`, `/fortnightly/`, `/monthly/` pages, hubs and `sitemap.xml`. |
+| `tools/topics.py` | Topic calculators and the `/tax-rates/` archive. Non-engine facts and their sources are at the top. |
+| `data/income-percentiles.json` | IRD wage and salary distribution (year to March 2026), for the "how does it compare" block. |
+| `tools/og.html` | Source for the social share image `images/og.png`. |
 
-## Technologies Used
+## Working on it
 
-- **Font**: [Hammersmith One](https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap) from Google Fonts
-- **Frontend Framework**: [Bootstrap 4.5.2](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
-- **Chart Library**: [Chart.js](https://www.chartjs.org/)
-- **JavaScript Libraries**:
-  - [jQuery 3.5.1](https://jquery.com/)
-  - [Popper.js 1.16.0](https://popper.js.org/)
+```sh
+python3 -m http.server 8090          # preview at http://127.0.0.1:8090
+python3 tools/test_engine.py         # engine vs the calculator's real JavaScript
+python3 tools/generate.py            # rebuild every generated page + sitemap
+python3 tools/validate_pages.py      # figures, head tags, JSON-LD, internal links
+python3 tools/indexnow.py            # after deploy: notify Bing of changed URLs
+```
 
-## How to Use
-
-1. Visit [count.co.nz](https://count.co.nz).
-2. Enter your details and income.
-3. View the calculated tax amount and the breakdown of the tax components.
-
-## Acknowledgments
-
-- Data sourced from [Inland Revenue Department New Zealand](https://www.ird.govt.nz).
-- Bootstrap framework from [BootstrapCDN](https://maxcdn.bootstrapcdn.com/).
-- Charting capabilities powered by [Chart.js](https://www.chartjs.org/).
+Each April: update the constants in `index.html` and its static copy, add the old year to
+`TAX_YEARS` in `tools/engine.py`, review the facts at the top of `tools/topics.py`, refresh
+`data/income-percentiles.json` when IRD publishes a new year, update `tools/og.html`, then regenerate.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+MIT — see [LICENSE](LICENSE). General information only, not tax advice; rates from
+[Inland Revenue](https://www.ird.govt.nz), ACC and MBIE.

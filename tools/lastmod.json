@@ -1,0 +1,1558 @@
+{
+"/": {
+"hash": "31030954d687ec72",
+"lastmod": "2026-11-15"
+},
+"/acc-levy/": {
+"hash": "33ef9c96b69bc9b7",
+"lastmod": "2026-11-15"
+},
+"/bonus-tax/": {
+"hash": "2c4a89a46faec6a9",
+"lastmod": "2026-11-15"
+},
+"/contractor-tax/": {
+"hash": "f4441fabbf325b4d",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/": {
+"hash": "807528dbfad0bc87",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1000/": {
+"hash": "831f89acba487b59",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1100/": {
+"hash": "c5e085558504b51c",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1200/": {
+"hash": "5cf9cf18677abfd1",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1300/": {
+"hash": "e44492ea32f77b36",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1400/": {
+"hash": "bd43bea19dcbe1e9",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1500/": {
+"hash": "40f0d0c8594fc027",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1600/": {
+"hash": "dc17ec166702dfa9",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1700/": {
+"hash": "a46ef2b4aba12882",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1800/": {
+"hash": "291e2a92222f6241",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/1900/": {
+"hash": "8c2d85f04a07ed16",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2000/": {
+"hash": "53bb7eb3436db5b8",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2100/": {
+"hash": "c41683e6f082f4a1",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2200/": {
+"hash": "73e81330b2c9812a",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2300/": {
+"hash": "bc1a808dacc35d7e",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2400/": {
+"hash": "1ac4e76ea469bf7d",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2500/": {
+"hash": "044eaea65cff6b8d",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2600/": {
+"hash": "eac0196b3529c0d4",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2700/": {
+"hash": "531dc7aca77bf512",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2800/": {
+"hash": "0676ecec8ce9bc62",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/2900/": {
+"hash": "0ddaee0c1689b578",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3000/": {
+"hash": "944802e0b0c3da63",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3100/": {
+"hash": "0f0c68cb911e2350",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3200/": {
+"hash": "dbfabeda0ffb1603",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3300/": {
+"hash": "9f3ccd0c78ff89d6",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3400/": {
+"hash": "5d6adb266c156d6b",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3500/": {
+"hash": "599a508f07a0bc77",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3600/": {
+"hash": "b2c16dbaf7ae5f43",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3700/": {
+"hash": "99559bcb8028a6a7",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3800/": {
+"hash": "72a549beac5c0c24",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/3900/": {
+"hash": "15576c882d99c9d0",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4000/": {
+"hash": "60c255144f7c6f84",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4100/": {
+"hash": "95e1b2b8b2dc64d0",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4200/": {
+"hash": "de1d4a83cbed42fc",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4300/": {
+"hash": "cec528601a74544c",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4400/": {
+"hash": "b2cc7f4933162242",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4500/": {
+"hash": "d51eb509b7c37138",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4600/": {
+"hash": "22faecc01a918ccc",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4700/": {
+"hash": "66d6afabb0e0f409",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4800/": {
+"hash": "93d32196b8546fab",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/4900/": {
+"hash": "9588f9e8357eb07d",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/5000/": {
+"hash": "fc3a4354db5519a4",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/5200/": {
+"hash": "376c2b61c12bdcfb",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/5400/": {
+"hash": "483558769380226e",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/5600/": {
+"hash": "322afa912256f19b",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/5800/": {
+"hash": "6d6289f284d1f203",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/6000/": {
+"hash": "b394050d1c95f321",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/6200/": {
+"hash": "fd33e061e4e43108",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/6400/": {
+"hash": "7a10695ff449336b",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/6600/": {
+"hash": "9a2767cad208e037",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/6800/": {
+"hash": "e61c0c42450377b8",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/7000/": {
+"hash": "cd7285e3ee4c9ead",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/7200/": {
+"hash": "9a374f08bc6c9691",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/7400/": {
+"hash": "77e943a4f523eebc",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/7600/": {
+"hash": "2f6d317add26890d",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/7800/": {
+"hash": "287a08092c4d5cd6",
+"lastmod": "2026-11-15"
+},
+"/fortnightly/8000/": {
+"hash": "fb4c0b1a5bc4b2da",
+"lastmod": "2026-11-15"
+},
+"/hourly/": {
+"hash": "3ee9610067a5e55f",
+"lastmod": "2026-11-15"
+},
+"/hourly/100/": {
+"hash": "6d308b5d61bc9c7f",
+"lastmod": "2026-11-15"
+},
+"/hourly/23/": {
+"hash": "991774f7a130b3be",
+"lastmod": "2026-11-15"
+},
+"/hourly/24/": {
+"hash": "14d8056529ec679d",
+"lastmod": "2026-11-15"
+},
+"/hourly/25/": {
+"hash": "9f507a21fb05f665",
+"lastmod": "2026-11-15"
+},
+"/hourly/26/": {
+"hash": "e64e6c36fb3560d4",
+"lastmod": "2026-11-15"
+},
+"/hourly/27/": {
+"hash": "57fe7f39b0cebe3b",
+"lastmod": "2026-11-15"
+},
+"/hourly/28/": {
+"hash": "4d390759c31a5f2a",
+"lastmod": "2026-11-15"
+},
+"/hourly/29/": {
+"hash": "fb13611634524796",
+"lastmod": "2026-11-15"
+},
+"/hourly/30/": {
+"hash": "75b1370824787aa4",
+"lastmod": "2026-11-15"
+},
+"/hourly/31/": {
+"hash": "685a19373d739383",
+"lastmod": "2026-11-15"
+},
+"/hourly/32/": {
+"hash": "d1b1298fbdfbe4e2",
+"lastmod": "2026-11-15"
+},
+"/hourly/33/": {
+"hash": "d8a7f1b0e55d8ca1",
+"lastmod": "2026-11-15"
+},
+"/hourly/34/": {
+"hash": "0381f19670b044b9",
+"lastmod": "2026-11-15"
+},
+"/hourly/35/": {
+"hash": "aa8f087f6a71fe0f",
+"lastmod": "2026-11-15"
+},
+"/hourly/36/": {
+"hash": "203caf7b98716fba",
+"lastmod": "2026-11-15"
+},
+"/hourly/37/": {
+"hash": "aa0ec121f8cc6221",
+"lastmod": "2026-11-15"
+},
+"/hourly/38/": {
+"hash": "3ccb1000bc3f1fc5",
+"lastmod": "2026-11-15"
+},
+"/hourly/39/": {
+"hash": "8505958cc44d3cc2",
+"lastmod": "2026-11-15"
+},
+"/hourly/40/": {
+"hash": "03f3170a3409cbca",
+"lastmod": "2026-11-15"
+},
+"/hourly/41/": {
+"hash": "cf1750c8f3f5b446",
+"lastmod": "2026-11-15"
+},
+"/hourly/42/": {
+"hash": "255e6fb37478c50f",
+"lastmod": "2026-11-15"
+},
+"/hourly/43/": {
+"hash": "7448615811468aab",
+"lastmod": "2026-11-15"
+},
+"/hourly/44/": {
+"hash": "400fd3724eb05936",
+"lastmod": "2026-11-15"
+},
+"/hourly/45/": {
+"hash": "ac88a3559b742d8d",
+"lastmod": "2026-11-15"
+},
+"/hourly/46/": {
+"hash": "5bcd8d2eca5c3f8c",
+"lastmod": "2026-11-15"
+},
+"/hourly/47/": {
+"hash": "ed55971b22ce373c",
+"lastmod": "2026-11-15"
+},
+"/hourly/48/": {
+"hash": "e088ba90b15169f4",
+"lastmod": "2026-11-15"
+},
+"/hourly/49/": {
+"hash": "2f5c0c6aafbc3aab",
+"lastmod": "2026-11-15"
+},
+"/hourly/50/": {
+"hash": "abc979e41c6011f4",
+"lastmod": "2026-11-15"
+},
+"/hourly/51/": {
+"hash": "3ce6dd146d3133cd",
+"lastmod": "2026-11-15"
+},
+"/hourly/52/": {
+"hash": "2bf4f3db47708258",
+"lastmod": "2026-11-15"
+},
+"/hourly/53/": {
+"hash": "adfdfe43e981c6dc",
+"lastmod": "2026-11-15"
+},
+"/hourly/54/": {
+"hash": "d6c9c3ce243f22fe",
+"lastmod": "2026-11-15"
+},
+"/hourly/55/": {
+"hash": "fecce371f6b36efe",
+"lastmod": "2026-11-15"
+},
+"/hourly/56/": {
+"hash": "518f27a204111672",
+"lastmod": "2026-11-15"
+},
+"/hourly/57/": {
+"hash": "f78fccb1488811e9",
+"lastmod": "2026-11-15"
+},
+"/hourly/58/": {
+"hash": "543ca3126c7afd5f",
+"lastmod": "2026-11-15"
+},
+"/hourly/59/": {
+"hash": "97c044c4b800c24d",
+"lastmod": "2026-11-15"
+},
+"/hourly/60/": {
+"hash": "48a947c48b3e9261",
+"lastmod": "2026-11-15"
+},
+"/hourly/61/": {
+"hash": "c8dfcc163dd9df5c",
+"lastmod": "2026-11-15"
+},
+"/hourly/62/": {
+"hash": "98fb5c71d634a361",
+"lastmod": "2026-11-15"
+},
+"/hourly/63/": {
+"hash": "227512d73ab13b23",
+"lastmod": "2026-11-15"
+},
+"/hourly/64/": {
+"hash": "5759e510ba0196b7",
+"lastmod": "2026-11-15"
+},
+"/hourly/65/": {
+"hash": "71b9f6edd461ce30",
+"lastmod": "2026-11-15"
+},
+"/hourly/66/": {
+"hash": "946b45a4819568e3",
+"lastmod": "2026-11-15"
+},
+"/hourly/67/": {
+"hash": "17cbdb42e858022e",
+"lastmod": "2026-11-15"
+},
+"/hourly/68/": {
+"hash": "44d9f74f5ab4abcd",
+"lastmod": "2026-11-15"
+},
+"/hourly/69/": {
+"hash": "e46a75eafa125dcc",
+"lastmod": "2026-11-15"
+},
+"/hourly/70/": {
+"hash": "d5566c3f1a09adca",
+"lastmod": "2026-11-15"
+},
+"/hourly/75/": {
+"hash": "7174e05af9c57773",
+"lastmod": "2026-11-15"
+},
+"/hourly/80/": {
+"hash": "f2b3239e324dd8d5",
+"lastmod": "2026-11-15"
+},
+"/hourly/90/": {
+"hash": "46eedef57f1a93e7",
+"lastmod": "2026-11-15"
+},
+"/kiwisaver/": {
+"hash": "c8678e59395ee221",
+"lastmod": "2026-11-15"
+},
+"/minimum-wage/": {
+"hash": "4eea26d0ce844c86",
+"lastmod": "2026-11-15"
+},
+"/monthly/": {
+"hash": "7ce4147423ecf9c3",
+"lastmod": "2026-11-15"
+},
+"/monthly/10000/": {
+"hash": "e35728cf9d2ba8f0",
+"lastmod": "2026-11-15"
+},
+"/monthly/10500/": {
+"hash": "c9c0340af5af8463",
+"lastmod": "2026-11-15"
+},
+"/monthly/11000/": {
+"hash": "38a7a2550a594723",
+"lastmod": "2026-11-15"
+},
+"/monthly/11500/": {
+"hash": "080f69a37d974c70",
+"lastmod": "2026-11-15"
+},
+"/monthly/12000/": {
+"hash": "d0cfa402fe8d303d",
+"lastmod": "2026-11-15"
+},
+"/monthly/12500/": {
+"hash": "8db38f5d10eff7e2",
+"lastmod": "2026-11-15"
+},
+"/monthly/13000/": {
+"hash": "877f57b732a463fb",
+"lastmod": "2026-11-15"
+},
+"/monthly/13500/": {
+"hash": "769a4ad5a198330c",
+"lastmod": "2026-11-15"
+},
+"/monthly/14000/": {
+"hash": "5672c7d5218c205e",
+"lastmod": "2026-11-15"
+},
+"/monthly/14500/": {
+"hash": "f8ee1dd5b1c2b1e4",
+"lastmod": "2026-11-15"
+},
+"/monthly/15000/": {
+"hash": "d2ea2c3a102371c0",
+"lastmod": "2026-11-15"
+},
+"/monthly/15500/": {
+"hash": "578b60d5a300ee45",
+"lastmod": "2026-11-15"
+},
+"/monthly/16000/": {
+"hash": "14b811d3c053c2f5",
+"lastmod": "2026-11-15"
+},
+"/monthly/16500/": {
+"hash": "cf8bc41fd63d7cd8",
+"lastmod": "2026-11-15"
+},
+"/monthly/17000/": {
+"hash": "bd94781ab6449538",
+"lastmod": "2026-11-15"
+},
+"/monthly/17500/": {
+"hash": "b108165f1ea33098",
+"lastmod": "2026-11-15"
+},
+"/monthly/18000/": {
+"hash": "f2ecb80e9899fc6b",
+"lastmod": "2026-11-15"
+},
+"/monthly/18500/": {
+"hash": "ac8c240dbe3ff29e",
+"lastmod": "2026-11-15"
+},
+"/monthly/19000/": {
+"hash": "9cf86f729820ff90",
+"lastmod": "2026-11-15"
+},
+"/monthly/19500/": {
+"hash": "9b33adb2719d9607",
+"lastmod": "2026-11-15"
+},
+"/monthly/2000/": {
+"hash": "410d2db6f4a9053e",
+"lastmod": "2026-11-15"
+},
+"/monthly/20000/": {
+"hash": "c00880e6efe1b2e7",
+"lastmod": "2026-11-15"
+},
+"/monthly/2250/": {
+"hash": "193d49dbb4a778c6",
+"lastmod": "2026-11-15"
+},
+"/monthly/2500/": {
+"hash": "8ef1ac3c6fc79bb8",
+"lastmod": "2026-11-15"
+},
+"/monthly/2750/": {
+"hash": "92ca7887eeb45f0d",
+"lastmod": "2026-11-15"
+},
+"/monthly/3000/": {
+"hash": "431f7da4f7f9a4e5",
+"lastmod": "2026-11-15"
+},
+"/monthly/3250/": {
+"hash": "4464dabc18677199",
+"lastmod": "2026-11-15"
+},
+"/monthly/3500/": {
+"hash": "acf986759ca1af54",
+"lastmod": "2026-11-15"
+},
+"/monthly/3750/": {
+"hash": "7ddb331a1b80f8b5",
+"lastmod": "2026-11-15"
+},
+"/monthly/4000/": {
+"hash": "3ef89d6c85adda59",
+"lastmod": "2026-11-15"
+},
+"/monthly/4250/": {
+"hash": "1874ab1872aedd31",
+"lastmod": "2026-11-15"
+},
+"/monthly/4500/": {
+"hash": "19e0b2a388d271c6",
+"lastmod": "2026-11-15"
+},
+"/monthly/4750/": {
+"hash": "999e49f7801a1d3f",
+"lastmod": "2026-11-15"
+},
+"/monthly/5000/": {
+"hash": "d4271fbf5baf7f6a",
+"lastmod": "2026-11-15"
+},
+"/monthly/5250/": {
+"hash": "b3c5b9685ab25e3d",
+"lastmod": "2026-11-15"
+},
+"/monthly/5500/": {
+"hash": "793c39c108916f61",
+"lastmod": "2026-11-15"
+},
+"/monthly/5750/": {
+"hash": "937c57dfed79c90e",
+"lastmod": "2026-11-15"
+},
+"/monthly/6000/": {
+"hash": "84090682ce458a32",
+"lastmod": "2026-11-15"
+},
+"/monthly/6250/": {
+"hash": "382b943b7308ac6a",
+"lastmod": "2026-11-15"
+},
+"/monthly/6500/": {
+"hash": "2681be4587fe9293",
+"lastmod": "2026-11-15"
+},
+"/monthly/6750/": {
+"hash": "f8659a5c210ed687",
+"lastmod": "2026-11-15"
+},
+"/monthly/7000/": {
+"hash": "3984342a70620cb5",
+"lastmod": "2026-11-15"
+},
+"/monthly/7250/": {
+"hash": "df6f38b441fd5ef9",
+"lastmod": "2026-11-15"
+},
+"/monthly/7500/": {
+"hash": "525d69016213adb8",
+"lastmod": "2026-11-15"
+},
+"/monthly/7750/": {
+"hash": "954dcbcad34d4a85",
+"lastmod": "2026-11-15"
+},
+"/monthly/8000/": {
+"hash": "c2ff6ac04fc9705a",
+"lastmod": "2026-11-15"
+},
+"/monthly/8250/": {
+"hash": "2d6ca817c6e5deda",
+"lastmod": "2026-11-15"
+},
+"/monthly/8500/": {
+"hash": "01efd8c22a9078e7",
+"lastmod": "2026-11-15"
+},
+"/monthly/8750/": {
+"hash": "ff1811eb70511b61",
+"lastmod": "2026-11-15"
+},
+"/monthly/9000/": {
+"hash": "45b6caa5ef389b93",
+"lastmod": "2026-11-15"
+},
+"/monthly/9250/": {
+"hash": "0b03d46f75b0245e",
+"lastmod": "2026-11-15"
+},
+"/monthly/9500/": {
+"hash": "a78cdd8dfa161c7b",
+"lastmod": "2026-11-15"
+},
+"/monthly/9750/": {
+"hash": "54d88d5dec3bfbc9",
+"lastmod": "2026-11-15"
+},
+"/nz-vs-australia/": {
+"hash": "c65f3aa515187cb8",
+"lastmod": "2026-11-15"
+},
+"/pay-rise/": {
+"hash": "a1009249f917a1c7",
+"lastmod": "2026-11-15"
+},
+"/salary/": {
+"hash": "ad310befd0846e21",
+"lastmod": "2026-11-15"
+},
+"/salary/100000/": {
+"hash": "dc166e9a397ae649",
+"lastmod": "2026-11-15"
+},
+"/salary/101000/": {
+"hash": "c546921b4725df06",
+"lastmod": "2026-11-15"
+},
+"/salary/102000/": {
+"hash": "22f371e26b0623fe",
+"lastmod": "2026-11-15"
+},
+"/salary/103000/": {
+"hash": "6baa3e8067c48622",
+"lastmod": "2026-11-15"
+},
+"/salary/104000/": {
+"hash": "d18c4d819913da9e",
+"lastmod": "2026-11-15"
+},
+"/salary/105000/": {
+"hash": "803b6b04bd86ed75",
+"lastmod": "2026-11-15"
+},
+"/salary/106000/": {
+"hash": "7182fd9551f83132",
+"lastmod": "2026-11-15"
+},
+"/salary/107000/": {
+"hash": "40f450d7d3f4577e",
+"lastmod": "2026-11-15"
+},
+"/salary/108000/": {
+"hash": "80bb9ad7cb8cebcb",
+"lastmod": "2026-11-15"
+},
+"/salary/109000/": {
+"hash": "31385cd13e198037",
+"lastmod": "2026-11-15"
+},
+"/salary/110000/": {
+"hash": "e6b559750c9b9880",
+"lastmod": "2026-11-15"
+},
+"/salary/111000/": {
+"hash": "73f800e663c488f0",
+"lastmod": "2026-11-15"
+},
+"/salary/112000/": {
+"hash": "48926496a6a67ab2",
+"lastmod": "2026-11-15"
+},
+"/salary/113000/": {
+"hash": "688b4490e0c8b855",
+"lastmod": "2026-11-15"
+},
+"/salary/114000/": {
+"hash": "452694449f62c912",
+"lastmod": "2026-11-15"
+},
+"/salary/115000/": {
+"hash": "8899d4c05cc520c0",
+"lastmod": "2026-11-15"
+},
+"/salary/116000/": {
+"hash": "a72df1d0559d02f1",
+"lastmod": "2026-11-15"
+},
+"/salary/117000/": {
+"hash": "aa6d4fcef14bdfe6",
+"lastmod": "2026-11-15"
+},
+"/salary/118000/": {
+"hash": "6d23898b8cc993e1",
+"lastmod": "2026-11-15"
+},
+"/salary/119000/": {
+"hash": "538ab5013cf28b6b",
+"lastmod": "2026-11-15"
+},
+"/salary/120000/": {
+"hash": "00a8d3e712d5dd3e",
+"lastmod": "2026-11-15"
+},
+"/salary/121000/": {
+"hash": "015b70aa1e7853e8",
+"lastmod": "2026-11-15"
+},
+"/salary/122000/": {
+"hash": "9c7513736141e221",
+"lastmod": "2026-11-15"
+},
+"/salary/123000/": {
+"hash": "9062e83dc779f1cc",
+"lastmod": "2026-11-15"
+},
+"/salary/124000/": {
+"hash": "7813b10b66ced878",
+"lastmod": "2026-11-15"
+},
+"/salary/125000/": {
+"hash": "fb3747198bdbb90d",
+"lastmod": "2026-11-15"
+},
+"/salary/126000/": {
+"hash": "ddb5484076416b5f",
+"lastmod": "2026-11-15"
+},
+"/salary/127000/": {
+"hash": "5dc9003574b22690",
+"lastmod": "2026-11-15"
+},
+"/salary/128000/": {
+"hash": "2bd9da0d85a051a7",
+"lastmod": "2026-11-15"
+},
+"/salary/129000/": {
+"hash": "7cc60091f6ec9cb9",
+"lastmod": "2026-11-15"
+},
+"/salary/130000/": {
+"hash": "99c64d703dc265ef",
+"lastmod": "2026-11-15"
+},
+"/salary/131000/": {
+"hash": "33790592d6eb3287",
+"lastmod": "2026-11-15"
+},
+"/salary/132000/": {
+"hash": "9246055d3cf70d5f",
+"lastmod": "2026-11-15"
+},
+"/salary/133000/": {
+"hash": "356c51489e5a45b6",
+"lastmod": "2026-11-15"
+},
+"/salary/134000/": {
+"hash": "2b8a3631d59fe37a",
+"lastmod": "2026-11-15"
+},
+"/salary/135000/": {
+"hash": "9e22a5263cec0ea7",
+"lastmod": "2026-11-15"
+},
+"/salary/136000/": {
+"hash": "f7a8d006510173b6",
+"lastmod": "2026-11-15"
+},
+"/salary/137000/": {
+"hash": "abe0e750ef8db24c",
+"lastmod": "2026-11-15"
+},
+"/salary/138000/": {
+"hash": "02c16dae0770c824",
+"lastmod": "2026-11-15"
+},
+"/salary/139000/": {
+"hash": "b5689425ae8571ca",
+"lastmod": "2026-11-15"
+},
+"/salary/140000/": {
+"hash": "a0bbec165c19733b",
+"lastmod": "2026-11-15"
+},
+"/salary/141000/": {
+"hash": "f3f095d8dbce13bd",
+"lastmod": "2026-11-15"
+},
+"/salary/142000/": {
+"hash": "4d2429e3df0f0ee3",
+"lastmod": "2026-11-15"
+},
+"/salary/143000/": {
+"hash": "29d5e3a49133f89b",
+"lastmod": "2026-11-15"
+},
+"/salary/144000/": {
+"hash": "473ed6e522dec5da",
+"lastmod": "2026-11-15"
+},
+"/salary/145000/": {
+"hash": "b28cd358cd90bd5c",
+"lastmod": "2026-11-15"
+},
+"/salary/146000/": {
+"hash": "abf404a5692e943a",
+"lastmod": "2026-11-15"
+},
+"/salary/147000/": {
+"hash": "7b9563e57a852363",
+"lastmod": "2026-11-15"
+},
+"/salary/148000/": {
+"hash": "ce3c408c65778a78",
+"lastmod": "2026-11-15"
+},
+"/salary/149000/": {
+"hash": "8b415b0f938a026a",
+"lastmod": "2026-11-15"
+},
+"/salary/150000/": {
+"hash": "470b2f985e81b3bf",
+"lastmod": "2026-11-15"
+},
+"/salary/155000/": {
+"hash": "762a09d312c7a1e3",
+"lastmod": "2026-11-15"
+},
+"/salary/160000/": {
+"hash": "37668e519b071b4d",
+"lastmod": "2026-11-15"
+},
+"/salary/165000/": {
+"hash": "80a4c0a99680c689",
+"lastmod": "2026-11-15"
+},
+"/salary/170000/": {
+"hash": "a463a700a1035efa",
+"lastmod": "2026-11-15"
+},
+"/salary/175000/": {
+"hash": "f84b3d18542943ae",
+"lastmod": "2026-11-15"
+},
+"/salary/180000/": {
+"hash": "16a362cd2ba82b9d",
+"lastmod": "2026-11-15"
+},
+"/salary/185000/": {
+"hash": "3b5c8dbf98d4629e",
+"lastmod": "2026-11-15"
+},
+"/salary/190000/": {
+"hash": "3f466360539cb887",
+"lastmod": "2026-11-15"
+},
+"/salary/195000/": {
+"hash": "7317572f43a04052",
+"lastmod": "2026-11-15"
+},
+"/salary/20000/": {
+"hash": "b7a1dd6d5102e062",
+"lastmod": "2026-11-15"
+},
+"/salary/200000/": {
+"hash": "cf9e51d7445830fe",
+"lastmod": "2026-11-15"
+},
+"/salary/205000/": {
+"hash": "7591e27ab6f1d462",
+"lastmod": "2026-11-15"
+},
+"/salary/21000/": {
+"hash": "cdd0b794d4337336",
+"lastmod": "2026-11-15"
+},
+"/salary/210000/": {
+"hash": "494bc05d2b124e99",
+"lastmod": "2026-11-15"
+},
+"/salary/215000/": {
+"hash": "bf04e0a959a38962",
+"lastmod": "2026-11-15"
+},
+"/salary/22000/": {
+"hash": "198c615240b8bcad",
+"lastmod": "2026-11-15"
+},
+"/salary/220000/": {
+"hash": "5cfa82406ad2ecdb",
+"lastmod": "2026-11-15"
+},
+"/salary/225000/": {
+"hash": "e0aa518c4497ba50",
+"lastmod": "2026-11-15"
+},
+"/salary/23000/": {
+"hash": "a30ce98f6e8b3a29",
+"lastmod": "2026-11-15"
+},
+"/salary/230000/": {
+"hash": "26a043a3b09ed12d",
+"lastmod": "2026-11-15"
+},
+"/salary/235000/": {
+"hash": "74f853d607f438cc",
+"lastmod": "2026-11-15"
+},
+"/salary/24000/": {
+"hash": "7d987392cae379e0",
+"lastmod": "2026-11-15"
+},
+"/salary/240000/": {
+"hash": "91cb4e49c7d9bba2",
+"lastmod": "2026-11-15"
+},
+"/salary/245000/": {
+"hash": "9fc44a2febc17051",
+"lastmod": "2026-11-15"
+},
+"/salary/25000/": {
+"hash": "f7ec564059c82b47",
+"lastmod": "2026-11-15"
+},
+"/salary/250000/": {
+"hash": "6473032d0ece67ea",
+"lastmod": "2026-11-15"
+},
+"/salary/26000/": {
+"hash": "dc4df2e97c54cae4",
+"lastmod": "2026-11-15"
+},
+"/salary/27000/": {
+"hash": "bf590014f228936d",
+"lastmod": "2026-11-15"
+},
+"/salary/275000/": {
+"hash": "d7059cf7e1db5ba2",
+"lastmod": "2026-11-15"
+},
+"/salary/28000/": {
+"hash": "4d29745bde9064e9",
+"lastmod": "2026-11-15"
+},
+"/salary/29000/": {
+"hash": "ba52e9efa747f98e",
+"lastmod": "2026-11-15"
+},
+"/salary/30000/": {
+"hash": "bee67e1147231d33",
+"lastmod": "2026-11-15"
+},
+"/salary/300000/": {
+"hash": "4132675e940b5c93",
+"lastmod": "2026-11-15"
+},
+"/salary/31000/": {
+"hash": "c9a431f71619b0f1",
+"lastmod": "2026-11-15"
+},
+"/salary/32000/": {
+"hash": "78fefcd9246cb435",
+"lastmod": "2026-11-15"
+},
+"/salary/33000/": {
+"hash": "b16e45e18118bd6f",
+"lastmod": "2026-11-15"
+},
+"/salary/34000/": {
+"hash": "e1423532c752c3f1",
+"lastmod": "2026-11-15"
+},
+"/salary/35000/": {
+"hash": "263aebe1af2df496",
+"lastmod": "2026-11-15"
+},
+"/salary/36000/": {
+"hash": "3f757b1b91e7709f",
+"lastmod": "2026-11-15"
+},
+"/salary/37000/": {
+"hash": "3b650e50d8477f9f",
+"lastmod": "2026-11-15"
+},
+"/salary/38000/": {
+"hash": "b6dbfc95e9c1ef3c",
+"lastmod": "2026-11-15"
+},
+"/salary/39000/": {
+"hash": "e06279a25181eb6b",
+"lastmod": "2026-11-15"
+},
+"/salary/40000/": {
+"hash": "555b23c9c76430c9",
+"lastmod": "2026-11-15"
+},
+"/salary/41000/": {
+"hash": "6661923fc733bb51",
+"lastmod": "2026-11-15"
+},
+"/salary/42000/": {
+"hash": "a479ccf497f47e05",
+"lastmod": "2026-11-15"
+},
+"/salary/43000/": {
+"hash": "50ecd2ff11ba51db",
+"lastmod": "2026-11-15"
+},
+"/salary/44000/": {
+"hash": "bf0162c03b3aad4b",
+"lastmod": "2026-11-15"
+},
+"/salary/45000/": {
+"hash": "3ebab69fd83b071b",
+"lastmod": "2026-11-15"
+},
+"/salary/46000/": {
+"hash": "38d0cca84673548c",
+"lastmod": "2026-11-15"
+},
+"/salary/47000/": {
+"hash": "5aa6a7744624e6e7",
+"lastmod": "2026-11-15"
+},
+"/salary/48000/": {
+"hash": "53f177dea8267c3d",
+"lastmod": "2026-11-15"
+},
+"/salary/49000/": {
+"hash": "162bfbdec27ec4ef",
+"lastmod": "2026-11-15"
+},
+"/salary/50000/": {
+"hash": "9c3c8d5750aef0ce",
+"lastmod": "2026-11-15"
+},
+"/salary/51000/": {
+"hash": "64ab0b35ee18a999",
+"lastmod": "2026-11-15"
+},
+"/salary/52000/": {
+"hash": "ef9cc61bcc6e567b",
+"lastmod": "2026-11-15"
+},
+"/salary/53000/": {
+"hash": "4365eb1f21eabb5e",
+"lastmod": "2026-11-15"
+},
+"/salary/54000/": {
+"hash": "3681c477741e55b2",
+"lastmod": "2026-11-15"
+},
+"/salary/55000/": {
+"hash": "523449de4878b50c",
+"lastmod": "2026-11-15"
+},
+"/salary/56000/": {
+"hash": "bca0cbc398ccd7ad",
+"lastmod": "2026-11-15"
+},
+"/salary/57000/": {
+"hash": "450076fa84c23266",
+"lastmod": "2026-11-15"
+},
+"/salary/58000/": {
+"hash": "a33f7d13ff8aad98",
+"lastmod": "2026-11-15"
+},
+"/salary/59000/": {
+"hash": "4c1ee8c824990485",
+"lastmod": "2026-11-15"
+},
+"/salary/60000/": {
+"hash": "a1279a9ef2004910",
+"lastmod": "2026-11-15"
+},
+"/salary/61000/": {
+"hash": "4c98cec9b6e9021e",
+"lastmod": "2026-11-15"
+},
+"/salary/62000/": {
+"hash": "af91dcbab86a40c1",
+"lastmod": "2026-11-15"
+},
+"/salary/63000/": {
+"hash": "f7f06ea80a366dac",
+"lastmod": "2026-11-15"
+},
+"/salary/64000/": {
+"hash": "ff724db91c598f10",
+"lastmod": "2026-11-15"
+},
+"/salary/65000/": {
+"hash": "4f149c395d7a4732",
+"lastmod": "2026-11-15"
+},
+"/salary/66000/": {
+"hash": "2f11ddbdd0eba900",
+"lastmod": "2026-11-15"
+},
+"/salary/67000/": {
+"hash": "42ae0c56ad546ac4",
+"lastmod": "2026-11-15"
+},
+"/salary/68000/": {
+"hash": "7e8acd682976eb8e",
+"lastmod": "2026-11-15"
+},
+"/salary/69000/": {
+"hash": "fb345c25a53108ae",
+"lastmod": "2026-11-15"
+},
+"/salary/70000/": {
+"hash": "0814e2a48645549b",
+"lastmod": "2026-11-15"
+},
+"/salary/71000/": {
+"hash": "5d110b6cf899a0fe",
+"lastmod": "2026-11-15"
+},
+"/salary/72000/": {
+"hash": "22d45256206664f1",
+"lastmod": "2026-11-15"
+},
+"/salary/73000/": {
+"hash": "fd5b7d244cda78b9",
+"lastmod": "2026-11-15"
+},
+"/salary/74000/": {
+"hash": "bef94979a7c8cadc",
+"lastmod": "2026-11-15"
+},
+"/salary/75000/": {
+"hash": "2eb934ed1779b05b",
+"lastmod": "2026-11-15"
+},
+"/salary/76000/": {
+"hash": "cb24e8da777ca6f5",
+"lastmod": "2026-11-15"
+},
+"/salary/77000/": {
+"hash": "428b18b732d894b2",
+"lastmod": "2026-11-15"
+},
+"/salary/78000/": {
+"hash": "881fc754f80acfce",
+"lastmod": "2026-11-15"
+},
+"/salary/79000/": {
+"hash": "64e2fdf50e3b7d06",
+"lastmod": "2026-11-15"
+},
+"/salary/80000/": {
+"hash": "3663867a305730d6",
+"lastmod": "2026-11-15"
+},
+"/salary/81000/": {
+"hash": "0f7377af539edf51",
+"lastmod": "2026-11-15"
+},
+"/salary/82000/": {
+"hash": "11ff4df67d609fb4",
+"lastmod": "2026-11-15"
+},
+"/salary/83000/": {
+"hash": "6029eae43fbe44bd",
+"lastmod": "2026-11-15"
+},
+"/salary/84000/": {
+"hash": "2b27c3b8add5dca7",
+"lastmod": "2026-11-15"
+},
+"/salary/85000/": {
+"hash": "201c3dd68fc36e40",
+"lastmod": "2026-11-15"
+},
+"/salary/86000/": {
+"hash": "775b61ef950d3a16",
+"lastmod": "2026-11-15"
+},
+"/salary/87000/": {
+"hash": "83e4a895fb65e33d",
+"lastmod": "2026-11-15"
+},
+"/salary/88000/": {
+"hash": "3a446deb0606e3fd",
+"lastmod": "2026-11-15"
+},
+"/salary/89000/": {
+"hash": "549a6c8e96197921",
+"lastmod": "2026-11-15"
+},
+"/salary/90000/": {
+"hash": "b760e29fd609c0c0",
+"lastmod": "2026-11-15"
+},
+"/salary/91000/": {
+"hash": "970c1b2cf45356f3",
+"lastmod": "2026-11-15"
+},
+"/salary/92000/": {
+"hash": "b7704e005a6ae1e5",
+"lastmod": "2026-11-15"
+},
+"/salary/93000/": {
+"hash": "d2fd73218c008cdf",
+"lastmod": "2026-11-15"
+},
+"/salary/94000/": {
+"hash": "64a89d35746a91f8",
+"lastmod": "2026-11-15"
+},
+"/salary/95000/": {
+"hash": "83967ca4b1874c74",
+"lastmod": "2026-11-15"
+},
+"/salary/96000/": {
+"hash": "86e40988b3defdd9",
+"lastmod": "2026-11-15"
+},
+"/salary/97000/": {
+"hash": "ae37ea1d39680ad9",
+"lastmod": "2026-11-15"
+},
+"/salary/98000/": {
+"hash": "f6a9ef3e524a681a",
+"lastmod": "2026-11-15"
+},
+"/salary/99000/": {
+"hash": "bec88a8e18c7a2de",
+"lastmod": "2026-11-15"
+},
+"/secondary-tax/": {
+"hash": "6ae855e575b15603",
+"lastmod": "2026-11-15"
+},
+"/student-loan/": {
+"hash": "a5a0943f4e5ab475",
+"lastmod": "2026-11-15"
+},
+"/tax-rates/": {
+"hash": "f1957624722d7af7",
+"lastmod": "2026-11-15"
+},
+"/tax-rates/2024-25/": {
+"hash": "ad3ae00c73426f5b",
+"lastmod": "2026-11-15"
+},
+"/tax-rates/2025-26/": {
+"hash": "e39f71e0f8f0133f",
+"lastmod": "2026-11-15"
+},
+"/tax-rates/2026-27/": {
+"hash": "84efc799de4f5614",
+"lastmod": "2026-11-15"
+},
+"/weekly/": {
+"hash": "931967fe2d013b20",
+"lastmod": "2026-11-15"
+},
+"/weekly/1000/": {
+"hash": "959df1dd4e79aa7c",
+"lastmod": "2026-11-15"
+},
+"/weekly/1050/": {
+"hash": "7e21d48906e513da",
+"lastmod": "2026-11-15"
+},
+"/weekly/1100/": {
+"hash": "fe4c0f9d08e8c3ea",
+"lastmod": "2026-11-15"
+},
+"/weekly/1150/": {
+"hash": "4ebadc94b3ed4cd8",
+"lastmod": "2026-11-15"
+},
+"/weekly/1200/": {
+"hash": "69daf93e13f5526f",
+"lastmod": "2026-11-15"
+},
+"/weekly/1250/": {
+"hash": "d22832d2a1f24872",
+"lastmod": "2026-11-15"
+},
+"/weekly/1300/": {
+"hash": "c1b0cc4c99516318",
+"lastmod": "2026-11-15"
+},
+"/weekly/1350/": {
+"hash": "942bbe2159afd356",
+"lastmod": "2026-11-15"
+},
+"/weekly/1400/": {
+"hash": "3c5bf41d294dcb28",
+"lastmod": "2026-11-15"
+},
+"/weekly/1450/": {
+"hash": "10a34573d5d717da",
+"lastmod": "2026-11-15"
+},
+"/weekly/1500/": {
+"hash": "41c0060b0f09e6fd",
+"lastmod": "2026-11-15"
+},
+"/weekly/1550/": {
+"hash": "311dd7ccda207566",
+"lastmod": "2026-11-15"
+},
+"/weekly/1600/": {
+"hash": "81195eee95d0ec5a",
+"lastmod": "2026-11-15"
+},
+"/weekly/1650/": {
+"hash": "3b0d99f7bc3798c8",
+"lastmod": "2026-11-15"
+},
+"/weekly/1700/": {
+"hash": "0386210ca490c625",
+"lastmod": "2026-11-15"
+},
+"/weekly/1750/": {
+"hash": "9b84635173400783",
+"lastmod": "2026-11-15"
+},
+"/weekly/1800/": {
+"hash": "d9c2acb7e1193df5",
+"lastmod": "2026-11-15"
+},
+"/weekly/1850/": {
+"hash": "548d616f3bc567b6",
+"lastmod": "2026-11-15"
+},
+"/weekly/1900/": {
+"hash": "27011bccefc4b7e8",
+"lastmod": "2026-11-15"
+},
+"/weekly/1950/": {
+"hash": "07501112139bee3d",
+"lastmod": "2026-11-15"
+},
+"/weekly/2000/": {
+"hash": "25010b24a9452b7c",
+"lastmod": "2026-11-15"
+},
+"/weekly/2050/": {
+"hash": "35e11c14005825e4",
+"lastmod": "2026-11-15"
+},
+"/weekly/2100/": {
+"hash": "ada86104445d8f36",
+"lastmod": "2026-11-15"
+},
+"/weekly/2150/": {
+"hash": "61672dad4cece7ef",
+"lastmod": "2026-11-15"
+},
+"/weekly/2200/": {
+"hash": "3a728df4a0ae4953",
+"lastmod": "2026-11-15"
+},
+"/weekly/2250/": {
+"hash": "f5f57cafab2d62e8",
+"lastmod": "2026-11-15"
+},
+"/weekly/2300/": {
+"hash": "4b029a2571acd217",
+"lastmod": "2026-11-15"
+},
+"/weekly/2350/": {
+"hash": "d440a5ea053cece2",
+"lastmod": "2026-11-15"
+},
+"/weekly/2400/": {
+"hash": "f27b044695a427da",
+"lastmod": "2026-11-15"
+},
+"/weekly/2450/": {
+"hash": "d857dc09001adb51",
+"lastmod": "2026-11-15"
+},
+"/weekly/2500/": {
+"hash": "02a10b743391a341",
+"lastmod": "2026-11-15"
+},
+"/weekly/2600/": {
+"hash": "f267029a0b077e4f",
+"lastmod": "2026-11-15"
+},
+"/weekly/2700/": {
+"hash": "b4a378df1d89d9a4",
+"lastmod": "2026-11-15"
+},
+"/weekly/2800/": {
+"hash": "5733ce919fca4331",
+"lastmod": "2026-11-15"
+},
+"/weekly/2900/": {
+"hash": "45866181ec082a37",
+"lastmod": "2026-11-15"
+},
+"/weekly/3000/": {
+"hash": "aac15226c1c8e2f7",
+"lastmod": "2026-11-15"
+},
+"/weekly/3100/": {
+"hash": "9bf72443ae19916a",
+"lastmod": "2026-11-15"
+},
+"/weekly/3200/": {
+"hash": "e7913c139c7e258f",
+"lastmod": "2026-11-15"
+},
+"/weekly/3300/": {
+"hash": "5d6722a2866cbfc7",
+"lastmod": "2026-11-15"
+},
+"/weekly/3400/": {
+"hash": "67fedf92848c6018",
+"lastmod": "2026-11-15"
+},
+"/weekly/3500/": {
+"hash": "ed8bcd0e03a0f0cb",
+"lastmod": "2026-11-15"
+},
+"/weekly/3600/": {
+"hash": "8e129bf18dec72e7",
+"lastmod": "2026-11-15"
+},
+"/weekly/3700/": {
+"hash": "c58628b4bc798a58",
+"lastmod": "2026-11-15"
+},
+"/weekly/3800/": {
+"hash": "ac5a89aa3daa9c90",
+"lastmod": "2026-11-15"
+},
+"/weekly/3900/": {
+"hash": "e1865556e7fe6f55",
+"lastmod": "2026-11-15"
+},
+"/weekly/4000/": {
+"hash": "810291e174a6f724",
+"lastmod": "2026-11-15"
+},
+"/weekly/500/": {
+"hash": "894fdfbeacc16831",
+"lastmod": "2026-11-15"
+},
+"/weekly/550/": {
+"hash": "83c274d0ec3a94ac",
+"lastmod": "2026-11-15"
+},
+"/weekly/600/": {
+"hash": "1f86ecbfac535645",
+"lastmod": "2026-11-15"
+},
+"/weekly/650/": {
+"hash": "35a0a27483cdbe65",
+"lastmod": "2026-11-15"
+},
+"/weekly/700/": {
+"hash": "b0ec9d158c03225a",
+"lastmod": "2026-11-15"
+},
+"/weekly/750/": {
+"hash": "69d40b689657f097",
+"lastmod": "2026-11-15"
+},
+"/weekly/800/": {
+"hash": "934bdee35c16fd44",
+"lastmod": "2026-11-15"
+},
+"/weekly/850/": {
+"hash": "f0f25743d65953ce",
+"lastmod": "2026-11-15"
+},
+"/weekly/900/": {
+"hash": "1b06d70420f74f3d",
+"lastmod": "2026-11-15"
+},
+"/weekly/950/": {
+"hash": "113f12322c24b1f7",
+"lastmod": "2026-11-15"
+}
+}
