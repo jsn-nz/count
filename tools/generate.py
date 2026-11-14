@@ -164,6 +164,17 @@ GA = ('<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></scri
       "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
       "gtag('js',new Date());gtag('config','%s');</script>" % (GA_ID, GA_ID))
 
+# Analytics events shared by every generated page (same names as index.html):
+#   open_calculator  click on the green "Open ... in the calculator" button
+#   related_click    click on any internal link; to_type is the section it leads to
+# page_type is the first path segment (salary, hourly, weekly, pay-rise, ...).
+EVENTS_JS = ("<script>(function(){var t=location.pathname.split('/')[1]||'home';"
+             "window.cEv=function(n,p){p=p||{};p.page_type=t;if(window.gtag)gtag('event',n,p)};"
+             "document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');"
+             "if(!a)return;var h=a.getAttribute('href');"
+             "if(a.classList.contains('cta'))cEv('open_calculator');"
+             "else if(h.charAt(0)==='/')cEv('related_click',{to_type:h.split('/')[1]||'home'})})})();</script>")
+
 FOOTER_LINKS = [
     ("Calculator", "/"), ("Salary after tax", "/salary/"), ("Hourly to salary", "/hourly/"),
     ("Weekly pay", "/weekly/"), ("Fortnightly pay", "/fortnightly/"), ("Monthly pay", "/monthly/"),
@@ -231,12 +242,13 @@ def shell(*, title, description, canonical, crumbs, jsonld, body, script=""):
   </nav>
 </footer>
 </main>
+{events}
 {script}
 </body>
 </html>
 """.format(theme_js=THEME_JS, title=title, description=description,
            canonical=canonical, fonts=FONTS, ld=ld, css=CSS, ga=GA, og=OG_IMAGE,
-           crumb_html=crumb_html, body=body, footer=footer, script=script)
+           crumb_html=crumb_html, body=body, footer=footer, script=script, events=EVENTS_JS)
 
 
 def breadcrumb_ld(items):

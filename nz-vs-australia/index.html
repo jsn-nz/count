@@ -173,6 +173,7 @@ your own situation.</p>
   </nav>
 </footer>
 </main>
+<script>(function(){var t=location.pathname.split('/')[1]||'home';window.cEv=function(n,p){p=p||{};p.page_type=t;if(window.gtag)gtag('event',n,p)};document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href');if(a.classList.contains('cta'))cEv('open_calculator');else if(h.charAt(0)==='/')cEv('related_click',{to_type:h.split('/')[1]||'home'})})})();</script>
 <script>
 const BR=[[15600,0.105],[53500,0.175],[78100,0.3],[180000,0.33],[Infinity,0.39]],ACC_RATE=0.0175,ACC_CAP=156641,SL_T=24128,SL_R=0.12,MW=23.95;
 function paye(x){let t=0,p=0;for(const[l,r]of BR){if(x<=p)break;t+=(Math.min(x,l)-p)*r;p=l}return t}
@@ -200,7 +201,8 @@ function run(){
     rows.push([conv>=nzNet?'Australia ahead by':'New Zealand ahead by',fn(Math.abs(conv-nzNet))+' / year',1])}
   out(rows);
 }
-document.querySelectorAll('.calc input,.calc select').forEach(el=>{el.addEventListener('input',run);el.addEventListener('change',run)});run();
+let used=false;function touched(){if(!used){used=true;if(window.cEv)cEv('tool_used')}run()}
+document.querySelectorAll('.calc input,.calc select').forEach(el=>{el.addEventListener('input',touched);el.addEventListener('change',touched)});run();
 </script>
 </body>
 </html>

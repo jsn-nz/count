@@ -1804,11 +1804,40 @@ function triggerTransition() {
 }
 
 // ── Render results ────────────────────────────────────────────────────────────
+// ── Analytics events ─────────────────────────────────────────────────────────
+// Only coarse data is sent: an income band, never the figure typed.
+function track(name, params) { if (window.gtag) gtag("event", name, params || {}); }
+function incomeBand(a) {
+  return a < 30000 ? "under_30k" : a < 50000 ? "30k_50k" : a < 70000 ? "50k_70k"
+       : a < 100000 ? "70k_100k" : a < 150000 ? "100k_150k" : "150k_plus";
+}
+let calcTimer, lastCalcKey = "", calcSource = "typed";
+function trackCalculation(r) {
+  clearTimeout(calcTimer);
+  calcTimer = setTimeout(() => {            // wait until typing settles
+    const p = {
+      period: resolvedPeriod(), income_band: incomeBand(r.annual),
+      kiwisaver: state.kiwisaver ? String(state.kiwisaverRate) : "off",
+      student_loan: state.studentLoan ? "yes" : "no",
+      casual: state.casual ? "yes" : "no", source: calcSource,
+    };
+    const key = JSON.stringify(p);
+    if (key === lastCalcKey) return;        // same settings: don't count twice
+    lastCalcKey = key;
+    track("calculation", p);
+  }, 2000);
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest && e.target.closest('a[href^="/"]');
+  if (a) track("related_click", { page_type: "home", to_type: a.getAttribute("href").split("/")[1] || "home" });
+});
+
 function render() {
   const r = calculate();
   const hy = state.hours * 52;
 
   if (!r) return;
+  trackCalculation(r);
 
   // Take-home
   document.getElementById("thWeek").textContent      = fm(r.net / 52);
@@ -2066,6 +2095,7 @@ const LEGAL = {
           <li>Your approximate location (country/city, not address)</li>
           <li>Device type, browser, and screen size</li>
           <li>How you got to the site</li>
+          <li>Which features you use, and a broad income range (for example $50k&ndash;$70k) &mdash; never the figures you type</li>
         </ul>
         <p>None of this can identify you. Google processes it on servers outside NZ, which is allowed under <strong>IPP 11</strong> of the Privacy Act 2020 since Google meets comparable privacy standards.</p>
       </div>
@@ -2101,6 +2131,7 @@ let toastTimer;
     const raw = document.getElementById(id).textContent.replace(/[^0-9.]/g, "");
     navigator.clipboard?.writeText(raw).then(() => {
       const t = document.getElementById("toast");
+      track("copy_result", { field: id === "thWeek" ? "week" : id === "thFortnight" ? "fortnight" : "year" });
       t.textContent = "Copied " + document.getElementById(id).textContent;
       t.classList.add("show");
       clearTimeout(toastTimer);
@@ -2121,6 +2152,7 @@ let toastTimer;
   if (!val || val <= 0) return;
 
   const period = detectPeriod(val);
+  calcSource = "link";                      // arrived via /50000 or ?i= from a salary page
   state.income = val;
   state.period = period;
   document.getElementById("heroIncome").value  = val;

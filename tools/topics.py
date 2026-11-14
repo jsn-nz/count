@@ -156,8 +156,10 @@ def js_base(C):
     )
 
 
-JS_TAIL = ("\ndocument.querySelectorAll('.calc input,.calc select').forEach(el=>{"
-           "el.addEventListener('input',run);el.addEventListener('change',run)});run();")
+# tool_used fires once per page view, the first time a visitor changes an input.
+JS_TAIL = ("\nlet used=false;function touched(){if(!used){used=true;if(window.cEv)cEv('tool_used')}run()}"
+           "\ndocument.querySelectorAll('.calc input,.calc select').forEach(el=>{"
+           "el.addEventListener('input',touched);el.addEventListener('change',touched)});run();")
 
 
 def page(g, path, *, title, desc, h1, sub, body, faqs, js="", crumb=None, parents=(), priority="0.7"):
