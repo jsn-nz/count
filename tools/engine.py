@@ -177,12 +177,12 @@ def nf(x, dp=2):
 
 
 def fm(x, dp=2):
-    """Money, e.g. $39,717.00 — same as fm() on the site."""
+    """Money, e.g. $39,717.00: same as fm() on the site."""
     return "$" + nf(x, dp)
 
 
 def fp(x, dp=1):
-    """Percentage from a fraction, e.g. 0.175 -> 17.5% — same as fp() on the site."""
+    """Percentage from a fraction, e.g. 0.175 -> 17.5%: same as fp() on the site."""
     return nf(x * 100, dp) + "%"
 
 

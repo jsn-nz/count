@@ -1,4 +1,4 @@
-# Count.co.nz — NZ PAYE & take-home pay calculator
+# Count.co.nz: NZ PAYE & take-home pay calculator
 
 Source for [count.co.nz](https://count.co.nz): a free New Zealand PAYE calculator plus a few hundred
 static pages answering "what is $X after tax" for salaries, hourly rates and weekly, fortnightly and
@@ -47,5 +47,5 @@ Each April: update the constants in `index.html` and its static copy, add the ol
 
 ## License
 
-MIT — see [LICENSE](LICENSE). General information only, not tax advice; rates from
+MIT; see [LICENSE](LICENSE). General information only, not tax advice; rates from
 [Inland Revenue](https://www.ird.govt.nz), ACC and MBIE.

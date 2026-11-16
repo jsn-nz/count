@@ -4,8 +4,8 @@
   "description": "Free NZ take-home pay calculator. PAYE tax, ACC, KiwiSaver and student loan deductions.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F4F4F4",
-  "theme_color": "#2C5C3C",
+  "background_color": "#1B1E21",
+  "theme_color": "#2F6B53",
   "icons": [
     { "src": "/images/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/images/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }

@@ -173,7 +173,7 @@ def page(g, path, *, title, desc, h1, sub, body, faqs, js="", crumb=None, parent
 <h2>More NZ pay tools</h2>
 %s
 <p class="fine">Figures use NZ %s rates and thresholds. This is general information, not financial or tax
-advice &mdash; check <a href="https://www.ird.govt.nz" rel="noopener">ird.govt.nz</a> or a tax agent for
+advice. Check <a href="https://www.ird.govt.nz" rel="noopener">ird.govt.nz</a> or a tax agent for
 your own situation.</p>""" % (h1, sub, body, g.faq_block(faqs), g.links_block(related), g.YEAR)
     crumb = crumb or g.plain(h1)
     crumbs = [("Count.", "/")] + [(n, p) for n, p in parents] + [(crumb, None)]
@@ -225,11 +225,11 @@ function run(){
     body = """%s
 <h2>Secondary tax codes for %s</h2>
 <p>Your second job is taxed at a single flat rate, chosen by your <b>total</b> yearly income from all
-sources (both jobs, plus any benefit or NZ Super). Your main job &mdash; the one that pays the most &mdash;
+sources (both jobs, plus any benefit or NZ Super). Your main job (the one that pays the most)
 keeps tax code M.</p>
 %s
 <h2>Is secondary tax higher?</h2>
-<p>No. There is no extra tax for having two jobs &mdash; your total income is taxed exactly as if one
+<p>No. There is no extra tax for having two jobs: your total income is taxed exactly as if one
 employer paid it all. Your main job has already used up the lower tax brackets, so the second job is
 taxed at the rate your top dollars fall into.</p>
 <div class="callout">Example: %s main job + %s second job = %s. That falls in the %s band (%s), so the
@@ -251,7 +251,7 @@ threshold you can ask IRD for a special deduction rate.</p>""" % (
         table(["Code", "Total yearly income", "PAYE rate", "With ACC levy"], rows),
         fm0(main), fm0(second), fm0(total), SECONDARY_CODES[[i for i, (l, _) in enumerate(C["brackets"]) if total <= l][0]],
         fp(e.marginal_rate(total)), fm(flat), fm(true),
-        " &mdash; the same, because the whole second income sits in one bracket." if abs(flat - true) < 0.5
+        ", the same, because the whole second income sits in one bracket." if abs(flat - true) < 0.5
         else ", so about %s is refunded at year end." % fm(flat - true) if flat > true
         else ", so about %s is owed at year end." % fm(true - flat),
         fm0(C["sl_threshold"]))
@@ -301,7 +301,7 @@ function run(){
     body = """%s
 <h2>How repayments work</h2>
 <p>If you have a New Zealand student loan and use a tax code ending in SL, your employer deducts
-<b>12 cents for every dollar you earn above %s a year</b> &mdash; that is %s a week or %s a fortnight
+<b>12 cents for every dollar you earn above %s a year</b>. That is %s a week or %s a fortnight
 before tax. Nothing is deducted in a pay period where you earn less than the threshold.</p>
 <p>Repayments come out of your pay alongside PAYE and go straight to Inland Revenue. While you live in
 New Zealand the loan is interest-free, so every dollar repaid reduces the balance.</p>
@@ -384,7 +384,7 @@ $180,000.</li>
 </ul>
 <h2>Is a higher rate worth it?</h2>
 <p>Going from %s to %s on a $70,000 salary costs you %s a week in take-home pay and adds %s a year to your
-KiwiSaver. Employers only have to match the minimum, so the extra is your money alone &mdash; a good deal
+KiwiSaver. Employers only have to match the minimum, so the extra is your money alone: a good deal
 if you would not otherwise save it, less so if you have high-interest debt to clear first.</p>""" % (
         calc([inp("sal", "Salary (per year)", 70000, "1000"), chk("sl", "Student loan")]),
         table(["Salary", "No KiwiSaver"] + [lab(r) for r in rates], rows),
@@ -396,7 +396,7 @@ if you would not otherwise save it, less so if you have high-interest debt to cl
          "%s of gross pay for employees, matched by at least %s from your employer."
          % (lab(rates[0]), lab(C["kiwisaver_default"]))),
         ("How much is 3.5% KiwiSaver on $70,000?",
-         "%s a year, or %s a week, from your pay &mdash; plus the same again from your employer before tax."
+         "%s a year, or %s a week, from your pay, plus the same again from your employer before tax."
          % (fm(70000 * 0.035), fm(70000 * 0.035 / 52))),
         ("Does KiwiSaver reduce my tax?",
          "No. PAYE and the ACC levy are calculated on your full gross pay; KiwiSaver comes out afterwards."),
@@ -474,7 +474,7 @@ rate. Casual workers paid 8%% holiday pay on top receive it in addition to the m
          "%s gross becomes %s a week after PAYE and the ACC levy, or %s a week with 3.5%% KiwiSaver."
          % (fm(mw * 40), fm(full["net"] / 52), fm(full_ks["net"] / 52))),
         ("What is the minimum wage as a yearly salary?",
-         "%s a year for 40 hours a week, 52 weeks a year &mdash; %s after PAYE and ACC."
+         "%s a year for 40 hours a week, 52 weeks a year, or %s after PAYE and ACC."
          % (fm0(mw * 40 * 52), fm(full["net"]))),
         ("Can a salaried employee be paid below minimum wage?",
          "No. A salary must work out to at least the minimum wage for every hour actually worked in each "
@@ -518,7 +518,7 @@ repayments take a further share of every extra dollar.</p>
 always means more take-home pay.</p>
 <p>What can change is how much of each extra dollar you keep. Between %s and %s you keep about %s cents
 in the dollar after PAYE and ACC; above %s it drops to about %s cents. If you receive Working for Families
-or other income-tested support, those payments can reduce as your income rises &mdash; that is separate
+or other income-tested support, those payments can reduce as your income rises. That is separate
 from PAYE and not included here.</p>
 <h2>Asking for a rise? Know the number</h2>
 <p>Employers talk in gross, bills are paid in net. Use the calculator to turn an offer into dollars per
@@ -542,7 +542,7 @@ week, or compare two salaries side by side on the <a href="/salary/">salary page
         ("How much extra is a rise from $75,000 to $80,000?",
          "%s a year after PAYE and ACC, or %s a week." % (fm(d), fm(d / 52))),
         ("Does KiwiSaver come out of a pay rise?",
-         "Yes. Your contribution is a percentage of gross pay, so it rises with your salary &mdash; as does "
+         "Yes. Your contribution is a percentage of gross pay, so it rises with your salary, as does "
          "your employer&rsquo;s contribution."),
     ]
     page(g, "/pay-rise/",
@@ -588,7 +588,7 @@ Instead of using the normal PAYE tables, your employer:</p>
 <li>takes your regular gross pay for the <b>last four weeks</b> and multiplies it by 13 to estimate a yearly
 income (or the last month multiplied by 12 if you are paid monthly),</li>
 <li>adds the lump sum, and</li>
-<li>taxes the <b>whole lump sum at one flat rate</b> &mdash; the rate for the band that total falls in.</li>
+<li>taxes the <b>whole lump sum at one flat rate</b>, the rate for the band that total falls in.</li>
 </ul>
 %s
 <p>The ACC earners&rsquo; levy (%s) is added while your annualised income is under %s. This calculator uses
@@ -724,7 +724,7 @@ function run(){
 }"""
     body = """%s
 <h2>What the earners&rsquo; levy is</h2>
-<p>The ACC earners&rsquo; levy pays for injuries that happen outside work &mdash; at home, on the road or
+<p>The ACC earners&rsquo; levy pays for injuries that happen outside work: at home, on the road or
 playing sport. Everyone who earns income from work pays it. For employees it is built into PAYE, so it
 does not usually appear as a separate line on a payslip.</p>
 <p>For %s the levy is <b>%s of gross earnings, up to %s</b> a year. The most anyone pays is %s. The rate
@@ -739,7 +739,7 @@ includes GST. It is set to rise again from 1 April 2027.</p>
 <li><b>Working safer levy:</b> a small flat levy paid alongside the work levy.</li>
 <li><b>Motor vehicle levy:</b> collected through vehicle licensing (rego) and petrol.</li>
 </ul>
-<p>Self-employed people and contractors are invoiced by ACC directly &mdash; see
+<p>Self-employed people and contractors are invoiced by ACC directly; see
 <a href="/contractor-tax/">contractor tax</a>.</p>""" % (
         calc([inp("sal", "Salary (per year)", 80000, "1000")]),
         g.YEAR, fp(C["acc_rate"], 2), fm0(C["acc_cap"]), fm(C["acc_cap"] * C["acc_rate"]),
@@ -868,7 +868,7 @@ def tax_year_page(g, y):
     rows, cum = [], 0.0
     for lo, hi, rate in bands(c):
         if hi == float("inf"):
-            rows.append((band_label(lo, hi), fp(rate, 2 if (rate * 1000) % 1 else 1), "&mdash;", "&mdash;"))
+            rows.append((band_label(lo, hi), fp(rate, 2 if (rate * 1000) % 1 else 1), "n/a", "n/a"))
         else:
             t = (hi - lo) * rate
             cum += t
@@ -910,7 +910,7 @@ for the year.</p>
 <div class="linkgrid">{others}<a href="/tax-rates/">All years</a></div>
 <p class="fine">Bracket rates from Inland Revenue; ACC levy rates include GST. General information, not tax advice.</p>""".format(
         yl=yl, s=start, e=start + 1,
-        cur=" &mdash; the current tax year" if current else "",
+        cur=" (the current tax year)" if current else "",
         note=note,
         brackets=table(["Taxable income", "Rate", "Tax on this band", "Cumulative tax"], rows),
         ded=table(["Setting", yl], ded),

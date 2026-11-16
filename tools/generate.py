@@ -3,7 +3,7 @@
 Run:  python3 tools/generate.py
 
 Emits (all figures from tools/engine.py, whose constants are parsed from the
-calculator in index.html — see tools/test_engine.py for the parity proof):
+calculator in index.html; see tools/test_engine.py for the parity proof):
   /salary/<amount>/       annual salaries
   /hourly/<rate>/         hourly rates
   /weekly/<amount>/, /fortnightly/<amount>/, /monthly/<amount>/   pay-period amounts
@@ -52,7 +52,8 @@ PERIODS = {
 }
 
 GA_ID = "G-077CHWJ9XD"   # same property as index.html
-OG_IMAGE = SITE + "/images/og.png"   # 1200x630, built from tools/og.html
+# 1200x630, built from tools/og.html. Bump v when the image changes so link previews refresh.
+OG_IMAGE = SITE + "/images/og.png?v=2"
 LASTMOD_FILE = REPO_ROOT / "tools" / "lastmod.json"
 
 PERCENTILES_FILE = REPO_ROOT / "data" / "income-percentiles.json"   # built from IRD band counts
@@ -66,15 +67,14 @@ def pick(variants, seed, salt):
 # ── Shared shell ─────────────────────────────────────────────────────────────
 
 CSS = """
-:root{--bg:#F4F4F4;--surface:#FFFFFF;--card:#ECECEC;--border:#DEDEDE;--accent:#2C5C3C;
---accent-mid:#245030;--accent-light:#E6F0EA;--accent-dim:#5A8C6A;--text:#111;--dim:#333;
---muted:#777;--ring:rgba(44,92,60,.12)}
-[data-theme="dark"]{--bg:#111;--surface:#1A1A1A;--card:#222;--border:#303030;--accent:#4E8C62;
---accent-mid:#3D7250;--accent-light:#1A261D;--accent-dim:#4E8C62;--text:#F0F0F0;--dim:#C4C4C4;
---muted:#808080;--ring:rgba(78,140,98,.2)}
+:root{--bg:#F3F4F5;--surface:#FFFFFF;--card:#E9ECEE;--border:#D6DADD;--accent:#2F6B53;
+--accent-mid:#2E5E4A;--accent-light:#E6EFEA;--accent-dim:#5C8A75;--text:#14181A;--dim:#333A3D;
+--muted:#6C7478;--ring:rgba(47,107,83,.14)}
+[data-theme="dark"]{--bg:#1B1E21;--surface:#24282C;--card:#2D3237;--border:#3B4148;--accent:#6BA88A;
+--accent-mid:#2E5E4A;--accent-light:#22332B;--accent-dim:#6BA88A;--text:#F2F3F4;--dim:#CDD1D5;
+--muted:#949BA3;--ring:rgba(107,168,138,.22)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);background-image:radial-gradient(900px 480px at 50% -120px,var(--accent-light) 0%,transparent 70%);
-background-repeat:no-repeat;color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;
 font-size:15px;line-height:1.6;min-height:100vh}
 main{max-width:760px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
@@ -84,7 +84,7 @@ h1{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;margi
 .sub{color:var(--muted);margin-bottom:1.5rem}
 h2{font-size:1.05rem;font-weight:700;margin:2.2rem 0 .8rem}
 .answer{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
-.answer-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem}
+.answer-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.2rem}
 .answer-card.primary{border-color:var(--accent);box-shadow:0 0 0 3px var(--ring)}
 .answer-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:.6rem}
 .answer-big{font-size:1.55rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1}
@@ -93,7 +93,7 @@ h2{font-size:1.05rem;font-weight:700;margin:2.2rem 0 .8rem}
 .answer-rows div{display:flex;justify-content:space-between;padding:.15rem 0;font-variant-numeric:tabular-nums}
 .answer-rows span:first-child{color:var(--muted)}
 table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);
-border-radius:12px;overflow:hidden;font-size:.88rem;font-variant-numeric:tabular-nums}
+border-radius:6px;overflow:hidden;font-size:.88rem;font-variant-numeric:tabular-nums}
 th,td{text-align:left;padding:.55rem .9rem;border-bottom:1px solid var(--border)}
 th{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--card)}
 td:last-child,th:last-child,td.num,th.num{text-align:right}
@@ -101,27 +101,27 @@ tr:last-child td{border-bottom:none}
 tr.total td{font-weight:700}
 tr.takehome td{color:var(--accent);font-weight:800;background:var(--accent-light)}
 .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
-border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem;color:var(--dim)}
+border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem;color:var(--dim)}
 .rates{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0}
-.rate-chip{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;flex:1;min-width:140px}
+.rate-chip{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.7rem 1rem;flex:1;min-width:140px}
 .rate-chip b{display:block;font-size:1.2rem;color:var(--accent);font-variant-numeric:tabular-nums}
 .rate-chip span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
-.cta{display:inline-block;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-mid) 100%);
-color:#fff;font-weight:700;padding:.7rem 1.4rem;border-radius:10px;margin:.5rem 0}
+.cta{display:inline-block;background:var(--accent-mid);
+color:#fff;font-weight:700;padding:.7rem 1.4rem;border-radius:6px;margin:.5rem 0}
 .cta:hover{text-decoration:none;filter:brightness(1.08)}
-.faq{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.2rem 1.2rem;margin:1rem 0}
+.faq{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.2rem 1.2rem;margin:1rem 0}
 .faq details{border-bottom:1px solid var(--border);padding:.7rem 0}
 .faq details:last-child{border-bottom:none}
 .faq summary{font-weight:600;cursor:pointer;font-size:.92rem}
 .faq p{font-size:.88rem;color:var(--dim);margin-top:.5rem}
 .linkgrid{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
-.linkgrid a{background:var(--surface);border:1px solid var(--border);border-radius:999px;
+.linkgrid a{background:var(--surface);border:1px solid var(--border);border-radius:6px;
 padding:.35rem .9rem;font-size:.85rem;font-weight:600;color:var(--dim)}
 .linkgrid a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 .fine{font-size:.78rem;color:var(--muted);margin-top:2rem}
 .hub-band{margin-bottom:2rem}
 .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:.5rem}
-.hub-grid a{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+.hub-grid a{background:var(--surface);border:1px solid var(--border);border-radius:6px;
 padding:.5rem .85rem;font-size:.85rem;display:flex;justify-content:space-between;color:var(--dim);font-variant-numeric:tabular-nums}
 .hub-grid a b{color:var(--text)}.hub-grid a span{color:var(--accent);font-weight:600}
 .hub-grid a:hover{border-color:var(--accent);text-decoration:none}
@@ -133,11 +133,11 @@ main p{margin:.7rem 0}main ul.plain{margin:.7rem 0 .7rem 1.2rem;color:var(--dim)
 main ul.plain li{margin:.3rem 0}
 .tablewrap{overflow-x:auto}
 .calc{background:var(--surface);border:1px solid var(--accent);box-shadow:0 0 0 3px var(--ring);
-border-radius:12px;padding:1.1rem 1.2rem;margin:1.5rem 0}
+border-radius:6px;padding:1.1rem 1.2rem;margin:1.5rem 0}
 .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem}
 .calc label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
 .calc input[type=number],.calc select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);
-border-radius:8px;padding:.55rem .7rem;font:inherit;font-variant-numeric:tabular-nums}
+border-radius:4px;padding:.55rem .7rem;font:inherit;font-variant-numeric:tabular-nums}
 .calc input:focus,.calc select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--ring)}
 .calc .check{display:flex;align-items:center;gap:.45rem;font-size:.88rem;color:var(--dim);text-transform:none;letter-spacing:0;font-weight:500;margin-top:1.45rem}
 .calc-out{margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem;font-size:.92rem}
@@ -325,19 +325,19 @@ def rates_block(annual, seed):
                  keep=fp(b["net"] / annual))
     nb = e.next_bracket(annual)
     if nb is None:
-        callout = ("You&rsquo;re in the top tax bracket &mdash; every extra dollar you earn is "
+        callout = ("You&rsquo;re in the top tax bracket, so every extra dollar you earn is "
                    "taxed at 39%% (plus the ACC levy below %s)." % fm0(C["acc_cap"]))
     elif nb[0] == annual:
         callout = ("You&rsquo;re exactly at the top of the %s bracket: your next dollar is taxed at "
-                   "%s. Only income above %s is taxed at the higher rate &mdash; the rest is untouched."
+                   "%s. Only income above %s is taxed at the higher rate; the rest is untouched."
                    % (fp(e.marginal_rate(annual)), fp(nb[1]), fm0(nb[0])))
     else:
         gap = nb[0] - annual
         callout = pick([
             "You&rsquo;re {gap} below the next tax bracket: income above {limit} is taxed at "
             "{rate}. Crossing it only affects the dollars above the line, not your whole salary.",
-            "Earn another {gap} and you cross into the {rate} bracket, which starts at {limit} "
-            "&mdash; but only the income above that threshold is taxed at the higher rate, "
+            "Earn another {gap} and you cross into the {rate} bracket, which starts at {limit}, "
+            "but only the income above that threshold is taxed at the higher rate, "
             "so a pay rise is always worth taking.",
         ], seed, 3).format(gap=fm0(gap), limit=fm0(nb[0]), rate=fp(nb[1]))
     return chips + '\n<div class="callout">%s</div>' % callout
@@ -397,7 +397,7 @@ def percentile_block(annual):
         line = "about %d%% of" % below
     top = 100 - below
     return ("<h2>How does it compare?</h2>\n<div class=\"callout\">Wage or salary income of %s a year is "
-            "higher than %s New Zealand wage and salary earners &mdash; roughly the top %d%%. "
+            "higher than %s New Zealand wage and salary earners, roughly the top %d%%. "
             "The median earner received about %s.</div>\n<p class=\"fine\" style=\"margin-top:.4rem\">"
             "Source: <a href=\"%s\" rel=\"noopener\">Inland Revenue wage and salary distributions</a>, "
             "%s (%s people). That count includes part-time and part-year workers, so full-time "
@@ -456,7 +456,7 @@ def salary_faqs(annual, seed):
     q = pick(["How much tax do I pay on %s a year in NZ?" % g,
               "How much PAYE comes out of a %s salary in New Zealand?" % g,
               "What are the total deductions on %s in NZ?" % g], seed, 0)
-    faqs.append((q, "For %s: PAYE income tax is %s and the ACC earners&rsquo; levy is %s &mdash; %s "
+    faqs.append((q, "For %s: PAYE income tax is %s and the ACC earners&rsquo; levy is %s, %s "
                  "in total, an effective rate of %s. Add 3.5%% KiwiSaver (%s) and total deductions "
                  "are %s a year." % (YEAR, fm(a["paye"]), fm(a["acc"]), fm(a["paye"] + a["acc"]),
                                      fp(a["effective"]), fm(b["ks"]), fm(annual - b["net"]))))
@@ -480,19 +480,19 @@ def salary_faqs(annual, seed):
 
     if 24_000 <= annual <= 70_000:
         faqs.append(("Can I get the independent earner tax credit (IETC) on %s?" % g,
-                     "Possibly &mdash; the IETC is worth up to $520 a year for people earning between "
+                     "Possibly. The IETC is worth up to $520 a year for people earning between "
                      "$24,000 and $70,000 who don&rsquo;t receive Working for Families, a main benefit "
                      "or NZ&nbsp;Super. The figures on this page (and the Count. calculator) exclude "
                      "the IETC, so treat it as a possible bonus on top."))
     elif annual > 180_000:
         faqs.append(("Why is my marginal rate 39%% on %s?" % g,
                      "Income above $180,000 falls in NZ&rsquo;s top tax bracket at 39%%. Only the %s "
-                     "above the threshold is taxed at 39%% &mdash; the rest is taxed at the lower "
+                     "above the threshold is taxed at 39%%; the rest is taxed at the lower "
                      "bracket rates, which is why the effective rate is %s, not 39%%."
                      % (fm0(annual - 180_000), fp(a["effective"]))))
     elif annual > C["acc_cap"]:
         faqs.append(("Does the ACC levy apply to all of %s?" % g,
-                     "No &mdash; the 1.75%% ACC earners&rsquo; levy only applies to the first %s of "
+                     "No. The 1.75%% ACC earners&rsquo; levy only applies to the first %s of "
                      "income, so it&rsquo;s capped at %s a year regardless of how much more you earn."
                      % (fm0(C["acc_cap"]), fm(e.acc(annual)))))
     else:
@@ -539,7 +539,7 @@ def hourly_faqs(rate, seed):
     else:
         faqs.append((pick(["Is %s an hour above minimum wage in NZ?" % r,
                            "How does %s an hour compare to the NZ minimum wage?" % r], seed, 2),
-                     "Yes &mdash; the adult minimum wage is $%s an hour (%s), so %s is %s above it, "
+                     "Yes. The adult minimum wage is $%s an hour (%s), so %s is %s above it, "
                      "about %s more per 40-hour week before tax."
                      % (nf(mw), YEAR, r, fm(rate - mw), fm0((rate - mw) * 40))))
 
@@ -619,7 +619,7 @@ def salary_page(a):
             "after PAYE and ACC. Full breakdown, KiwiSaver and student loan scenarios."
             % (fm0(a), YEAR, fm(br["net"]), fm(br["net"] / 52)))
     intro = pick([
-        "Here&rsquo;s exactly where a %s salary goes in the %s tax year &mdash; every figure below "
+        "Here&rsquo;s exactly where a %s salary goes in the %s tax year. Every figure below "
         "matches the Count. PAYE calculator (tax code M).",
         "A full %s take-home breakdown for a %s salary in New Zealand, using the same engine as "
         "the Count. PAYE calculator (tax code M).",
@@ -675,7 +675,7 @@ def hourly_page(r):
 
     body = """<h1>{rl} an Hour is How Much a Year in NZ?</h1>
 <p class="sub">{rl}/hour at 40 hours a week, 52 weeks a year is <b>{gross}</b> before tax.
-Here&rsquo;s what you actually take home in {yr} (tax code M) &mdash; same engine as the
+Here&rsquo;s what you actually take home in {yr} (tax code M), using the same engine as the
 Count. PAYE calculator.</p>
 {mw}
 {answer}
@@ -688,7 +688,7 @@ Count. PAYE calculator.</p>
 <div class="tablewrap">{ks}</div>
 <h2>Quick conversions</h2>
 <div class="callout">{rl}/hour &rarr; <b>{d}</b> a day (8 hrs) &middot; <b>{w}</b> a week &middot;
-<b>{f}</b> a fortnight &middot; <b>{m}</b> a month &middot; <b>{gross}</b> a year &mdash; all before tax.</div>
+<b>{f}</b> a fortnight &middot; <b>{m}</b> a month &middot; <b>{gross}</b> a year, all before tax.</div>
 {pct}
 <h2>FAQs</h2>
 {faq}
@@ -731,9 +731,9 @@ def salary_hub():
         sections.append('<div class="hub-band"><h2>%s</h2>%s</div>' % (label, hub_grid(items)))
     title = "Salary After Tax NZ (%s): Take-Home Tables | Count." % YEAR
     desc = ("Take-home pay for every salary from $20,000 to $300,000 in New Zealand, %s tax year. "
-            "PAYE, ACC, KiwiSaver and student loan included — pick your salary for the full breakdown." % YEAR)
+            "PAYE, ACC, KiwiSaver and student loan included. Pick your salary for the full breakdown." % YEAR)
     body = """<h1>Salary After Tax in New Zealand ({yr})</h1>
-<p class="sub">Pick a salary to see its full take-home breakdown &mdash; PAYE by bracket, ACC,
+<p class="sub">Pick a salary to see its full take-home breakdown: PAYE by bracket, ACC,
 KiwiSaver scenarios and student loan repayments. Take-home shown with 3.5% KiwiSaver
 (the calculator default). Paid by the hour? See <a href="/hourly/">hourly rates</a>,
 or use the <a href="/">calculator</a> for any amount.</p>
@@ -815,7 +815,7 @@ def period_page(kind, amt):
     faqs.append((pick(["How much tax do I pay on %s %s in NZ?" % (g, per),
                        "How much PAYE is deducted from %s %s?" % (g, per)], seed, 0),
                  "On %s %s (%s a year) in %s, PAYE is %s and the ACC earners&rsquo; levy is %s per %s "
-                 "&mdash; %s in total, an effective rate of %s. With 3.5%% KiwiSaver (%s) you take home %s %s."
+                 "(%s in total), an effective rate of %s. With 3.5%% KiwiSaver (%s) you take home %s %s."
                  % (g, per, fm0(annual), YEAR, fm(a["paye"] / n), fm(a["acc"] / n), noun,
                     fm((a["paye"] + a["acc"]) / n), fp(a["effective"]), fm(b["ks"] / n), fm(b["net"] / n), per)))
     faqs.append(("What is %s %s as a yearly salary?" % (g, per),
@@ -861,7 +861,7 @@ def period_page(kind, amt):
                    % (fm(slb["sl"] / n), noun, fm(slb["net"] / n), per))
     body = """<h1>{g} {per_t} After Tax in New Zealand ({yr})</h1>
 <p class="sub">{g} {per} before tax is <b>{gross}</b> a year. Here&rsquo;s what reaches your bank
-account each {noun} in {yr} on tax code M &mdash; same engine as the Count. PAYE calculator.</p>
+account each {noun} in {yr} on tax code M, using the same engine as the Count. PAYE calculator.</p>
 {answer}
 {cta}
 <h2>Where the money goes</h2>

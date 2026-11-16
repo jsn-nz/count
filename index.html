@@ -10,7 +10,7 @@
   }
 </script>
 <title>PAYE Calculator NZ 2026-27 - Free Take-Home Pay & Salary Calculator | Count.</title>
-<meta name="description" content="Free PAYE calculator for New Zealand. PAYE (Pay As You Earn) is the tax deducted from your wages — enter your salary or hourly rate to see your take-home pay after income tax, ACC, KiwiSaver and student loan. Updated for 2026-27.">
+<meta name="description" content="Free PAYE calculator for New Zealand. PAYE (Pay As You Earn) is the tax deducted from your wages. Enter your salary or hourly rate to see your take-home pay after income tax, ACC, KiwiSaver and student loan. Updated for 2026-27.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Count.co.nz">
 <link rel="canonical" href="https://count.co.nz/">
@@ -79,15 +79,15 @@
           "name": "How is PAYE calculated in New Zealand?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PAYE is calculated on your annual income using progressive tax brackets — each slice of income is taxed at its own rate, from 10.5% up to 39%. For example, on a $60,000 salary: the first $15,600 is taxed at 10.5% ($1,638), the portion from $15,601 to $53,500 at 17.5% ($6,632.50), and the remaining $6,500 at 30% ($1,950), giving total PAYE of $10,220.50 per year, or about $196.55 per week."
+            "text": "PAYE is calculated on your annual income using progressive tax brackets: each slice of income is taxed at its own rate, from 10.5% up to 39%. For example, on a $60,000 salary: the first $15,600 is taxed at 10.5% ($1,638), the portion from $15,601 to $53,500 at 17.5% ($6,632.50), and the remaining $6,500 at 30% ($1,950), giving total PAYE of $10,220.50 per year, or about $196.55 per week."
           }
         },
         {
           "@type": "Question",
-          "name": "Who pays PAYE — the employer or the employee?",
+          "name": "Who pays PAYE: the employer or the employee?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "PAYE comes out of the employee's wages, but the employer is responsible for deducting it, filing employment information with IRD every payday, and paying the deductions to IRD — monthly by the 20th of the following month, or twice a month for large employers. As an employee you don't have to do anything: the correct amount is withheld automatically based on your tax code."
+            "text": "PAYE comes out of the employee's wages, but the employer is responsible for deducting it, filing employment information with IRD every payday, and paying the deductions to IRD, monthly by the 20th of the following month, or twice a month for large employers. As an employee you don't have to do anything: the correct amount is withheld automatically based on your tax code."
           }
         },
         {
@@ -291,8 +291,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 <link rel="manifest" href="/images/site.webmanifest">
-<meta name="theme-color" content="#2C5C3C">
-<meta name="msapplication-TileColor" content="#2C5C3C">
+<meta name="theme-color" content="#2F6B53">
+<meta name="msapplication-TileColor" content="#2F6B53">
 
 <!-- Geo targeting -->
 <meta name="geo.region" content="NZ">
@@ -306,11 +306,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <!-- Social image -->
-<meta property="og:image" content="https://count.co.nz/images/og.png">
+<meta property="og:image" content="https://count.co.nz/images/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_NZ">
-<meta name="twitter:image" content="https://count.co.nz/images/og.png">
+<meta name="twitter:image" content="https://count.co.nz/images/og.png?v=2">
 <meta name="twitter:site" content="@countconz">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-077CHWJ9XD"></script>
@@ -327,49 +327,48 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" defer></script>
 <style>
   :root {
-    --bg:           #F4F4F4;
+    --bg:           #F3F4F5;
     --surface:      #FFFFFF;
-    --card:         #ECECEC;
-    --border:       #DEDEDE;
-    --border-light: #E8E8E8;
-    --accent:       #2C5C3C;
-    --accent-mid:   #245030;
-    --accent-light: #E6F0EA;
-    --accent-dim:   #5A8C6A;
-    --text:         #111111;
-    --dim:          #333333;
-    --muted:        #777777;
-    --faint:        #AAAAAA;
+    --card:         #E9ECEE;
+    --border:       #D6DADD;
+    --border-light: #E3E6E9;
+    --accent:       #2F6B53;
+    --accent-mid:   #2E5E4A;
+    --accent-light: #E6EFEA;
+    --accent-dim:   #5C8A75;
+    --text:         #14181A;
+    --dim:          #333A3D;
+    --muted:        #6C7478;
+    --faint:        #9DA4A8;
     --red:          #C0392B;
     --orange:       #C05C1A;
     --yellow:       #9A7D0A;
     --purple:       #6741B8;
-    --ring:         rgba(44,92,60,.12);
+    --ring:         rgba(47,107,83,.14);
     --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
     --shadow-md:    0 4px 16px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.05);
     --shadow-lg:    0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
   }
 
   [data-theme="dark"] {
-    --bg:           #111111;
-    --surface:      #1A1A1A;
-    --card:         #222222;
-    --border:       #303030;
-    --border-light: #282828;
-    --accent:       #4E8C62;
-    --accent-mid:   #3D7250;
-    --accent-light: #1A261D;
-    --accent-dim:   #4E8C62;
-    --text:         #F0F0F0;
-    --dim:          #C4C4C4;
-    --muted:        #808080;
-    --faint:        #525252;
-    --ring:         rgba(78,140,98,.2);
+    --bg:           #1B1E21;
+    --surface:      #24282C;
+    --card:         #2D3237;
+    --border:       #3B4148;
+    --border-light: #32373D;
+    --accent:       #6BA88A;
+    --accent-mid:   #2E5E4A;
+    --accent-light: #22332B;
+    --accent-dim:   #6BA88A;
+    --text:         #F2F3F4;
+    --dim:          #CDD1D5;
+    --muted:        #949BA3;
+    --faint:        #6A717A;
+    --ring:         rgba(107,168,138,.22);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--bg);
-    background-image: radial-gradient(900px 480px at 50% -120px, var(--accent-light) 0%, transparent 70%);
     background-repeat: no-repeat;
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
@@ -438,7 +437,7 @@
     width: 100%;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 1.75rem;
     box-shadow: var(--shadow-lg), 0 0 0 1px rgba(44,74,53,.05);
     animation: heroFadeUp .5s .12s cubic-bezier(.4,0,.2,1) both;
@@ -448,7 +447,7 @@
     display: flex;
     align-items: center;
     border: 1.5px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     padding: .65rem 1rem;
     gap: .3rem;
     margin-bottom: 1rem;
@@ -489,7 +488,7 @@
     gap: .3rem;
     margin-bottom: 1rem;
     background: var(--card);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: .3rem;
   }
   .hero-tab {
@@ -497,7 +496,7 @@
     background: transparent;
     border: none;
     color: var(--muted);
-    border-radius: 7px;
+    border-radius: 4px;
     padding: .4rem .2rem;
     font-size: .78rem;
     font-weight: 600;
@@ -533,7 +532,7 @@
     gap: .4rem;
     background: var(--card);
     border: 1.5px solid var(--border);
-    border-radius: 9px;
+    border-radius: 6px;
     padding: .55rem .7rem;
     font-size: .8rem;
     font-weight: 500;
@@ -648,10 +647,10 @@
     font-size: .68rem;
     font-weight: 600;
     background: var(--accent-light);
-    border: 1px solid rgba(44,92,60,.18);
+    border: 1px solid rgba(47,107,83,.22);
     color: var(--accent-mid);
     padding: .22rem .65rem;
-    border-radius: 99px;
+    border-radius: 6px;
     letter-spacing: .02em;
   }
 
@@ -672,7 +671,7 @@
   .input-panel {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 1.5rem;
     position: sticky;
     top: 1.5rem;
@@ -702,7 +701,7 @@
     width: 100%;
     background: var(--surface);
     border: 1.5px solid var(--border);
-    border-radius: 11px;
+    border-radius: 6px;
     color: var(--text);
     font-size: 1.6rem;
     font-weight: 700;
@@ -723,7 +722,7 @@
     gap: .25rem;
     margin-bottom: 1.25rem;
     background: var(--card);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: .28rem;
   }
   .period-tab {
@@ -731,7 +730,7 @@
     background: transparent;
     border: none;
     color: var(--muted);
-    border-radius: 7px;
+    border-radius: 4px;
     padding: .38rem .2rem;
     font-size: .74rem;
     font-weight: 600;
@@ -786,7 +785,7 @@
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--dim);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: .28rem .55rem;
     font-size: .82rem;
     font-family: inherit;
@@ -800,7 +799,7 @@
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--dim);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: .28rem .55rem;
     font-size: .82rem;
     font-family: inherit;
@@ -819,7 +818,7 @@
     display: flex;
     background: var(--accent-light);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: .75rem 1rem;
     margin-top: .5rem;
   }
@@ -840,7 +839,7 @@
     color: #8a5a00;
     background: #fef3cd;
     border: 1px solid #f0d080;
-    border-radius: 7px;
+    border-radius: 4px;
     padding: .4rem .7rem;
     margin-top: .4rem;
   }
@@ -862,7 +861,7 @@
     margin-left: auto;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 99px;
+    border-radius: 6px;
     padding: .3rem .65rem;
     font-size: .75rem;
     font-family: inherit;
@@ -880,9 +879,9 @@
   .results-panel { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
 
   .takehome-card {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 100%);
+    background: var(--accent-mid);
     border: 1px solid var(--accent-mid);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 1.5rem 1.6rem;
     box-shadow: var(--shadow-md);
   }
@@ -909,21 +908,11 @@
     letter-spacing: .1em;
     margin-top: .2rem;
   }
-  .th-meta {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,.22);
-    flex-wrap: wrap;
-  }
-  .th-stat-val { font-size: .9rem; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
-  .th-stat-lbl { font-size: .66rem; font-weight: 500; color: rgba(255,255,255,.6); margin-top: .1rem; text-transform: uppercase; letter-spacing: .06em; }
 
   .breakdown-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
   }
@@ -963,7 +952,7 @@
   .chart-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 1.5rem 1.6rem;
     display: flex;
     align-items: center;
@@ -992,7 +981,7 @@
     background: var(--text);
     color: var(--surface);
     padding: .5rem 1.1rem;
-    border-radius: 99px;
+    border-radius: 6px;
     font-size: .78rem;
     font-weight: 500;
     opacity: 0;
@@ -1061,7 +1050,7 @@
   .legal-modal {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     width: 100%;
     max-width: 520px;
     max-height: 80vh;
@@ -1080,7 +1069,7 @@
     position: sticky;
     top: 0;
     background: var(--surface);
-    border-radius: 16px 16px 0 0;
+    border-radius: 8px 8px 0 0;
   }
   .legal-close {
     background: none;
@@ -1123,7 +1112,7 @@
   .info-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 1.4rem 1.5rem;
     box-shadow: var(--shadow-sm);
   }
@@ -1187,14 +1176,14 @@
   .link-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: .2rem 0 1rem; }
   .link-chips:last-child { margin-bottom: 0; }
   .link-chips a {
-    background: var(--card); border-radius: 999px; padding: .32rem .8rem;
+    background: var(--card); border-radius: 6px; padding: .32rem .8rem;
     font-size: .76rem; font-weight: 600; color: var(--dim); text-decoration: none;
   }
   .link-chips a:hover { color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
   .chip-label { font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); margin-bottom: .4rem; }
   .salary-item {
     background: var(--card);
-    border-radius: 10px;
+    border-radius: 6px;
     padding: .75rem;
     text-align: center;
   }
@@ -1215,7 +1204,7 @@
   @media (max-width: 600px) {
     /* Hero */
     .hero-inner { padding: 0 1rem; }
-    .hero-card { padding: 1.25rem; border-radius: 14px; }
+    .hero-card { padding: 1.25rem; border-radius: 8px; }
     .hero-logo { font-size: 2.6rem; }
     #heroIncome { font-size: 1.5rem; }
     .hero-currency { font-size: 1.5rem; }
@@ -1223,14 +1212,14 @@
 
     /* App layout */
     .main-grid { margin: 1rem auto; padding: 0 .75rem; }
-    .input-panel { padding: 1.1rem; border-radius: 12px; }
+    .input-panel { padding: 1.1rem; border-radius: 6px; }
     .results-panel { gap: .75rem; }
 
     /* Income input */
     #incomeInput { font-size: 1.35rem; padding: .65rem .75rem .65rem 1.9rem; }
     .income-prefix { font-size: 1.3rem; left: .7rem; }
 
-    /* Period tabs — bigger tap targets */
+    /* Period tabs: bigger tap targets */
     .period-tabs { padding: .22rem; }
     .period-tab { padding: .48rem .1rem; font-size: .72rem; min-height: 36px; }
 
@@ -1239,14 +1228,11 @@
     .th-amount { font-size: 1.15rem; }
     .th-amount.large { font-size: 1.5rem; }
     .th-period { font-size: .6rem; }
-    .th-meta { gap: 1rem; }
-    .th-stat-val { font-size: .85rem; }
-
-    /* Breakdown table — hide Hour and Fortnight columns to save space */
+    /* Breakdown table: show Week, Fortnight, Month; hide Hour and Year to save space */
     .breakdown-card th:nth-child(2),
     .breakdown-card td:nth-child(2),
-    .breakdown-card th:nth-child(4),
-    .breakdown-card td:nth-child(4) { display: none; }
+    .breakdown-card th:nth-child(6),
+    .breakdown-card td:nth-child(6) { display: none; }
     .breakdown-card th, .breakdown-card td { padding: .55rem .6rem; font-size: .76rem; }
     .breakdown-card td:first-child { font-size: .78rem; }
 
@@ -1412,34 +1398,16 @@
         <div class="section-label">Take-home pay</div>
         <div class="th-grid">
           <div class="th-item">
-            <div class="th-amount" id="thWeek" title="Click to copy">—</div>
+            <div class="th-amount" id="thWeek" title="Click to copy">-</div>
             <div class="th-period">Per week</div>
           </div>
           <div class="th-item">
-            <div class="th-amount large" id="thFortnight" title="Click to copy">—</div>
+            <div class="th-amount large" id="thFortnight" title="Click to copy">-</div>
             <div class="th-period">Per fortnight</div>
           </div>
           <div class="th-item">
-            <div class="th-amount" id="thYear" title="Click to copy">—</div>
+            <div class="th-amount" id="thYear" title="Click to copy">-</div>
             <div class="th-period">Per year</div>
-          </div>
-        </div>
-        <div class="th-meta">
-          <div class="th-stat">
-            <div class="th-stat-val" id="metaEffective">—</div>
-            <div class="th-stat-lbl">Effective tax rate</div>
-          </div>
-          <div class="th-stat">
-            <div class="th-stat-val" id="metaMarginal">—</div>
-            <div class="th-stat-lbl">Marginal rate</div>
-          </div>
-          <div class="th-stat">
-            <div class="th-stat-val" id="metaGrossRatio">—</div>
-            <div class="th-stat-lbl">Take-home / gross</div>
-          </div>
-          <div class="th-stat">
-            <div class="th-stat-val" id="metaHourly">—</div>
-            <div class="th-stat-lbl">Net per hour</div>
           </div>
         </div>
       </div>
@@ -1466,7 +1434,7 @@
         <div class="chart-wrap">
           <canvas id="donutChart" width="180" height="180"></canvas>
           <div class="chart-center">
-            <div class="chart-center-val" id="chartCenterVal">—</div>
+            <div class="chart-center-val" id="chartCenterVal">-</div>
             <div class="chart-center-lbl">take home</div>
           </div>
         </div>
@@ -1549,26 +1517,26 @@
 
       <div class="info-card" id="what-is-paye">
         <h2>What is PAYE?</h2>
-        <p><strong>PAYE stands for Pay As You Earn</strong> — New Zealand's system for collecting income tax and the ACC earners levy directly from salaries and wages before employees receive their pay. Your employer calculates and deducts PAYE each pay period and sends it to Inland Revenue (IRD) on your behalf, which is why most NZ employees never need to file a tax return.</p>
+        <p><strong>PAYE stands for Pay As You Earn</strong>, New Zealand's system for collecting income tax and the ACC earners levy directly from salaries and wages before employees receive their pay. Your employer calculates and deducts PAYE each pay period and sends it to Inland Revenue (IRD) on your behalf, which is why most NZ employees never need to file a tax return.</p>
         <p>NZ uses a progressive tax system, meaning the more you earn, the higher the rate on each additional dollar. You only pay the higher rates on income above each threshold, not on your full salary.</p>
       </div>
 
       <div class="info-card" id="how-paye-is-calculated">
         <h2>How PAYE is calculated</h2>
-        <p>PAYE is worked out on your annual income using progressive brackets — each slice is taxed at its own rate. On a <strong>$60,000 salary</strong>:</p>
+        <p>PAYE is worked out on your annual income using progressive brackets: each slice is taxed at its own rate. On a <strong>$60,000 salary</strong>:</p>
         <ul class="rate-list">
           <li><span class="rate-label">First $15,600 × 10.5%</span><span class="rate-val">$1,638.00</span></li>
           <li><span class="rate-label">$15,601–$53,500 × 17.5%</span><span class="rate-val">$6,632.50</span></li>
           <li><span class="rate-label">$53,501–$60,000 × 30%</span><span class="rate-val">$1,950.00</span></li>
           <li><span class="rate-label">Total PAYE per year</span><span class="rate-val">$10,220.50</span></li>
         </ul>
-        <p>That's about <strong>$196.55 per week</strong> — an effective PAYE rate of 17.0%, well below the 30% marginal rate. ACC, KiwiSaver and student loan deductions apply on top.</p>
+        <p>That's about <strong>$196.55 per week</strong>, an effective PAYE rate of 17.0%, well below the 30% marginal rate. ACC, KiwiSaver and student loan deductions apply on top.</p>
       </div>
 
       <div class="info-card" id="who-pays-paye">
         <h2>Who pays PAYE and when?</h2>
         <p>PAYE comes out of the <strong>employee's</strong> wages, but the <strong>employer</strong> does the work: they withhold the right amount each pay based on your tax code, file employment information with IRD every payday, and pass the deductions on to IRD.</p>
-        <p>Employers pay IRD monthly — by the 20th of the following month — or twice a month for large employers. As an employee you don't have to do anything; it all happens automatically through your payroll.</p>
+        <p>Employers pay IRD monthly, by the 20th of the following month, or twice a month for large employers. As an employee you don't have to do anything; it all happens automatically through your payroll.</p>
       </div>
 
       <div class="info-card">
@@ -1625,7 +1593,7 @@
 
       <div class="info-card">
         <h2>Contractor vs employee tax in NZ</h2>
-        <p><strong>Employees</strong> have PAYE deducted automatically by their employer each pay period. They do not need to file a tax return in most cases — IRD squares it up at year end.</p>
+        <p><strong>Employees</strong> have PAYE deducted automatically by their employer each pay period. They do not need to file a tax return in most cases, as IRD squares it up at year end.</p>
         <p><strong>Self-employed contractors</strong> generally do not have PAYE deducted. Instead they pay <strong>provisional tax</strong> in instalments throughout the year, and file an IR3 tax return. Some contractors on schedular payments have withholding tax deducted at source.</p>
         <p>If you're unsure whether you're an employee or contractor for tax purposes, IRD's employment status tool at <a href="https://www.ird.govt.nz" target="_blank" style="color:var(--accent);font-weight:500">ird.govt.nz</a> can help.</p>
       </div>
@@ -1662,7 +1630,7 @@
 
 </div>
 
-<!-- Legal modal — outside .app so it works from hero too -->
+<!-- Legal modal: outside .app so it works from hero too -->
 <div class="legal-overlay" id="legalOverlay" onclick="closeLegal()">
   <div class="legal-modal" onclick="event.stopPropagation()">
     <div class="legal-header">
@@ -1686,7 +1654,7 @@ function applyTheme(dark) {
   document.getElementById("themeIcon").textContent  = dark ? "○" : "☾";
   document.getElementById("themeLabel").textContent = dark ? "Light" : "Dark";
   if (chartInstance) {
-    chartInstance.data.datasets[0].borderColor = dark ? "#1A1A1A" : "#FFFFFF";
+    chartInstance.data.datasets[0].borderColor = dark ? "#24282C" : "#FFFFFF";
     chartInstance.update("none");
   }
 }
@@ -1778,7 +1746,7 @@ const fp = (n, dp = 1) => nf(n * 100, dp) + "%";
 
 // ── Chart instance ────────────────────────────────────────────────────────────
 let chartInstance = null;
-const COLORS = { paye: "#9E2F27", acc: "#9E4A18", ks: "#836608", sl: "#5B3796", net: "#2C4A35" };
+const COLORS = { paye: "#9E2F27", acc: "#9E4A18", ks: "#836608", sl: "#5B3796", net: "#4E8F72" };
 
 // ── Transition: hero → app ────────────────────────────────────────────────────
 let transitioned = false;
@@ -1844,13 +1812,9 @@ function render() {
   document.getElementById("thFortnight").textContent = fm(r.net / 26);
   document.getElementById("thYear").textContent      = fm(r.net);
 
-  document.getElementById("metaEffective").textContent  = fp((r.paye + r.acc) / r.annual);
-  document.getElementById("metaMarginal").textContent   = fp(marginalRate(r.annual));
-  document.getElementById("metaGrossRatio").textContent = fp(r.net / r.annual);
-  document.getElementById("metaHourly").textContent     = fm(r.net / hy);
   document.getElementById("taxCodeDisplay").textContent = state.studentLoan ? "M SL" : "M";
 
-  // Hours row + min wage warning — always driven from resolved period
+  // Hours row + min wage warning: always driven from resolved period
   const isHourly = resolvedPeriod() === "hour";
   document.getElementById("hoursRow").classList.toggle("visible", isHourly);
   const belowMin = isHourly && state.income > 0 && state.income < MIN_WAGE;
@@ -1889,7 +1853,7 @@ function render() {
       type: "doughnut",
       data: {
         labels,
-        datasets: [{ data: vals, backgroundColor: clrs, borderWidth: 3, borderColor: document.documentElement.getAttribute("data-theme") === "dark" ? "#1A1A1A" : "#FFFFFF", hoverOffset: 5 }]
+        datasets: [{ data: vals, backgroundColor: clrs, borderWidth: 3, borderColor: document.documentElement.getAttribute("data-theme") === "dark" ? "#24282C" : "#FFFFFF", hoverOffset: 5 }]
       },
       options: {
         cutout: "68%",
@@ -2095,7 +2059,7 @@ const LEGAL = {
           <li>Your approximate location (country/city, not address)</li>
           <li>Device type, browser, and screen size</li>
           <li>How you got to the site</li>
-          <li>Which features you use, and a broad income range (for example $50k&ndash;$70k) &mdash; never the figures you type</li>
+          <li>Which features you use, and a broad income range (for example $50k&ndash;$70k), but never the figures you type</li>
         </ul>
         <p>None of this can identify you. Google processes it on servers outside NZ, which is allowed under <strong>IPP 11</strong> of the Privacy Act 2020 since Google meets comparable privacy standards.</p>
       </div>
@@ -2171,7 +2135,7 @@ let toastTimer;
   if (window.Chart) render();
   else document.addEventListener("DOMContentLoaded", render);
 
-  // Restore a clean URL (/50000) after any 404.html redirect. Cosmetic only —
+  // Restore a clean URL (/50000) after any 404.html redirect. Cosmetic only:
   // never let a browser quirk here stop the calculation above.
   try {
     if (location.pathname.replace(/\/+$/, "") !== "/" + val) {

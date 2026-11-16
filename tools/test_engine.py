@@ -3,11 +3,11 @@
 Run:  python3 tools/test_engine.py
 
 Three layers:
-  1. Golden tests — figures observed on the live count.co.nz calculator
+  1. Golden tests: figures observed on the live count.co.nz calculator
      (tax code M, 3.5% KiwiSaver, no student loan).
-  2. Boundary/edge tests — bracket edges, ACC cap, student-loan threshold,
+  2. Boundary/edge tests: bracket edges, ACC cap, student-loan threshold,
      zero/negative/absurd inputs.
-  3. JS parity — extracts the real calculator JavaScript from index.html,
+  3. JS parity: extracts the real calculator JavaScript from index.html,
      executes it with macOS JavaScriptCore (jsc), and asserts the Python
      engine matches it to the cent across a sweep of incomes.
 """
@@ -95,7 +95,7 @@ check("sl at threshold", e.student_loan(t) == 0.0)
 check("sl below threshold", e.student_loan(t - 1) == 0.0)
 check("sl $1000 over", approx(e.student_loan(t + 1000), 120.0))
 
-# Zero / negative / absurd — engine must not blow up or go weird
+# Zero / negative / absurd: engine must not blow up or go weird
 check("paye(0)", e.paye(0) == 0.0)
 check("acc(0)", e.acc(0) == 0.0)
 check("paye(-5000)", e.paye(-5000) == 0.0, "got %r" % e.paye(-5000))
